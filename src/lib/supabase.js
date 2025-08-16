@@ -22,7 +22,7 @@ export const supabase = supabaseUrl && supabaseKey
         signIn: () => Promise.resolve({ data: null, error: null }),
         signOut: () => Promise.resolve({ error: null })
       }
-    } as any
+    } as { global: { fetch: typeof fetch } }
 
 interface AthleteData {
   name: string

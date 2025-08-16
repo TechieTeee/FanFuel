@@ -19,7 +19,7 @@ interface ChilizWalletProps {
 export default function ChilizWallet({ onSupportAthlete }: ChilizWalletProps) {
   const { address, isConnected, chain } = useAccount()
   const [walletInfo, setWalletInfo] = useState<ChilizWalletInfo | null>(null)
-  const [ecosystemInfo, setEcosystemInfo] = useState<any>(null)
+  const [ecosystemInfo, setEcosystemInfo] = useState<unknown>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -99,7 +99,7 @@ export default function ChilizWallet({ onSupportAthlete }: ChilizWalletProps) {
         <div className="text-4xl mb-4">⚠️</div>
         <h3 className="text-xl font-bold text-white mb-2">Switch to Chiliz Chain</h3>
         <p className="text-gray-300 text-sm mb-4">
-          You're on {chain?.name}. Switch to Chiliz Spicy Testnet for SportFi features.
+          You&apos;re on {chain?.name}. Switch to Chiliz Spicy Testnet for SportFi features.
         </p>
         <button className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition-colors">
           Switch to Chiliz

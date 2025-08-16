@@ -23,7 +23,7 @@ const mockAthletes = [
   }
 ]
 
-let mockReactions: any[] = []
+const mockReactions = []
 
 // Chiliz Chain configuration
 const CHILIZ_RPC_URL = process.env.CHILIZ_RPC_URL || 'https://spicy-rpc.chiliz.com/'

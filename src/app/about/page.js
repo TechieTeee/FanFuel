@@ -45,7 +45,7 @@ export default function About() {
           <h2 className="text-3xl font-bold mb-6">The Problem We&apos;re Solving</h2>
           <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
             <p className="text-lg text-gray-800">
-              The $1.7 billion NIL market is concentrated among just 2% of elite athletes, leaving 798,000+ underrepresented student-athletes earning minimal revenue from name, image, and likeness rights.
+              Sports revenue is concentrated among elite leagues while talented athletes across WNBA, Olympics, MLS, women&apos;s soccer, boxing, UFC, and emerging sports face massive pay disparities despite growing followings and achievements.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">

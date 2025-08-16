@@ -26,7 +26,7 @@ export default function UnifiedWallet({
   const chainId = useChainId()
   const { switchChain } = useSwitchChain()
   const [athleteTokens, setAthleteTokens] = useState<AthleteToken[]>([])
-  const [ecosystemInfo, setEcosystemInfo] = useState<any>(null)
+  const [ecosystemInfo, setEcosystemInfo] = useState<unknown>(null)
   const [showChilizDetails, setShowChilizDetails] = useState(false)
   const [loading, setLoading] = useState(false)
 

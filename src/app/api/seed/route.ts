@@ -9,7 +9,7 @@ const seedAthletes = [
     university: 'University of Alabama',
     position: 'Point Guard',
     year: 'Junior',
-    background: 'First-generation college student, pre-med',
+    background: 'First-generation college C, pre-med',
     total_earnings: 15.50,
     fan_count: 8
   },

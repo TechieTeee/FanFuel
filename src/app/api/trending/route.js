@@ -10,11 +10,13 @@ const supabase = createClient(
 const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
 const CACHE_DURATION = 3600000 // 1 hour in milliseconds
 
-// College sports specific keywords for trending detection
-const COLLEGE_SPORTS_KEYWORDS = [
-  'NCAA football', 'college football', 'college basketball', 'NIL deal', 'transfer portal',
-  'college championship', 'college playoff', 'March Madness', 'college recruiting', 'college coach',
-  'college quarterback', 'Division I', 'FBS football', 'college bowl', 'college tournament'
+// Sports keywords for trending detection across all levels
+const SPORTS_KEYWORDS = [
+  'WNBA', 'women\'s basketball', 'Olympics', 'Olympic sports', 'track and field',
+  'MLS soccer', 'women\'s soccer', 'NWSL', 'boxing', 'UFC', 'mixed martial arts',
+  'tennis', 'swimming', 'gymnastics', 'volleyball', 'lacrosse', 'softball',
+  'March Madness', 'college basketball', 'NIL deal', 'college football',
+  'pay equity', 'athlete salary', 'sports revenue', 'athlete endorsement'
 ]
 
 
@@ -32,13 +34,13 @@ export async function GET(req) {
       const cacheAge = new Date().getTime() - new Date(cachedData.cached_at).getTime()
       
       if (cacheAge < CACHE_DURATION) {
-        console.log('Returning cached college sports trending data')
+        console.log('Returning cached sports trending data')
         return NextResponse.json(cachedData.topics)
       }
     }
 
     // Fetch fresh data from Twitter API
-    console.log('Fetching fresh Twitter college sports trending data...')
+    console.log('Fetching fresh Twitter sports trending data...')
     
     const trendingTopics = await fetchTwitterTrending()
     
@@ -54,7 +56,7 @@ export async function GET(req) {
   } catch (error) {
     console.error('Trending API error:', error)
     
-    // Return fallback college sports topics if API fails
+    // Return fallback sports topics if API fails
     const fallbackTopics = [
       {
         topic: 'College Football Playoff',
@@ -81,11 +83,11 @@ export async function GET(req) {
         cached_at: new Date().toISOString()
       },
       {
-        topic: 'March Madness',
+        topic: 'MLS Player Revenue',
         tweet_count: 12203,
         virality_score: 0.78,
         sentiment: 'positive',
-        related_athletes: ['Paige Bueckers', 'JJ Redick'],
+        related_athletes: ['Carlos Vela', 'Giorgio Chiellini'],
         cached_at: new Date().toISOString()
       }
     ]
@@ -97,8 +99,8 @@ export async function GET(req) {
 async function fetchTwitterTrending() {
   const trends = []
   
-  // Search for college sports trending topics only
-  for (const keyword of COLLEGE_SPORTS_KEYWORDS.slice(0, 5)) { // Limit to 5 to conserve API calls
+  // Search for sports trending topics across all levels
+  for (const keyword of SPORTS_KEYWORDS.slice(0, 5)) { // Limit to 5 to conserve API calls
     try {
       const response = await fetch(
         `https://api.twitter.com/2/tweets/search/recent?query=${encodeURIComponent(keyword + ' -RT')}&max_results=10&tweet.fields=created_at,author_id,public_metrics`,

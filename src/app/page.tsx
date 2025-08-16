@@ -168,15 +168,82 @@ Transform every coffee, every meal, every transaction into direct support for at
                   className="max-w-5xl mx-auto space-y-4"
                 >
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    Fuelie isn&apos;t just an AI assistant – he&apos;s a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in emerging champions across Olympic sports, professional leagues, and individual disciplines.
+                    Fuelie isn&apos;t just an AI assistant – he&apos;s a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in emerging champions across Olympic sports, professional leagues, collegiate athletics, and individual disciplines.
                   </p>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when athletes need support most. From Olympic trials to MLS seasons to track meets, he doesn&apos;t just process payments – he provides athletes with unprecedented fan data and revenue streams.
+                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when athletes need support most. From Olympic trials to MLS seasons to March Madness to track meets, he doesn&apos;t just process payments – he provides athletes with unprecedented fan data and revenue streams.
                   </p>
                   <p className="text-lg text-orange-300/90 font-medium">
                     &quot;Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker. Every athlete gets the data they need to build their brand.&quot; - Fuelie
                   </p>
                 </motion.div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Pay Disparity Section */}
+          <section className="py-24 px-6">
+            <div className="container mx-auto">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="bg-gradient-to-br from-red-900/80 to-orange-800/60 backdrop-blur-2xl rounded-3xl p-16 border border-red-700/50 shadow-2xl"
+              >
+                <motion.h2 
+                  initial={{ y: 50, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                  className="text-5xl md:text-7xl font-black text-center mb-8 text-white uppercase tracking-wider"
+                >
+                  ⚖️ THE DISPARITY CRISIS
+                </motion.h2>
+                <motion.p 
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-xl md:text-2xl text-yellow-300 text-center mb-16 max-w-6xl mx-auto font-semibold"
+                >
+                  Talented athletes across sports face shocking revenue inequality while elite leagues hoard billions
+                </motion.p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <motion.div 
+                    initial={{ y: 100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="text-center bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20"
+                  >
+                    <h3 className="text-2xl font-bold text-red-300 mb-4">WNBA vs NBA</h3>
+                    <p className="text-white/90 text-lg leading-relaxed">WNBA max salary: $230K. NBA average: $8.5M. Same sport, 37x pay gap.</p>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ y: 100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="text-center bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20"
+                  >
+                    <h3 className="text-2xl font-bold text-red-300 mb-4">Women&apos;s Soccer</h3>
+                    <p className="text-white/90 text-lg leading-relaxed">World Cup winners earned less than men&apos;s team that didn&apos;t qualify. Pure injustice.</p>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ y: 100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="text-center bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20"
+                  >
+                    <h3 className="text-2xl font-bold text-red-300 mb-4">Olympic Athletes</h3>
+                    <p className="text-white/90 text-lg leading-relaxed">Track stars with millions of followers work multiple jobs. Zero consistent income despite elite performance.</p>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ y: 100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="text-center bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20"
+                  >
+                    <h3 className="text-2xl font-bold text-red-300 mb-4">MLS Growth</h3>
+                    <p className="text-white/90 text-lg leading-relaxed">Fastest-growing US sport but most players earn under $100K while European counterparts make millions.</p>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
           </section>
@@ -203,7 +270,7 @@ Transform every coffee, every meal, every transaction into direct support for at
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-xl md:text-2xl text-[#ef4444] text-center mb-16 max-w-4xl mx-auto font-semibold"
               >
-                While billions flow through collegiate sports, the student athletes who give everything get nothing.
+                While billions flow through professional sports, the athletes who give everything face massive pay disparities.
               </motion.p>
               <div className="grid md:grid-cols-3 gap-8">
                 <motion.div 
@@ -218,8 +285,8 @@ Transform every coffee, every meal, every transaction into direct support for at
                       <span className="text-8xl drop-shadow-2xl">📈</span>
                     </div>
                   </div>
-                  <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">📈 $1.7B Monopolized</h3>
-                  <p className="text-gray-200 leading-relaxed text-lg font-medium">A massive market completely dominated by 2% of elite athletes. Meanwhile, 798,000+ talented student-athletes fight for scraps. <span className="text-red-400 font-bold">This ends now.</span></p>
+                  <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">📈 Billions Monopolized</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">A massive market completely dominated by elite leagues. Meanwhile, talented WNBA, Olympic, MLS, collegiate, and emerging athletes fight for scraps. <span className="text-red-400 font-bold">This ends now.</span></p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -234,7 +301,7 @@ Transform every coffee, every meal, every transaction into direct support for at
                     </div>
                   </div>
                   <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">💰 $7T Wasted Power</h3>
-                  <p className="text-gray-200 leading-relaxed text-lg font-medium">Every single day, passionate fans spend TRILLIONS on coffee, gas, groceries, and life. <span className="text-orange-400 font-bold">None of it reaches the student athletes they love.</span> Pure wasted potential.</p>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">Every single day, passionate fans spend TRILLIONS on coffee, gas, groceries, and life. <span className="text-orange-400 font-bold">None of it reaches the athletes they love.</span> Pure wasted potential.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}

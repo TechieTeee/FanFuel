@@ -126,7 +126,7 @@ export const demoAthletes = [
       '2024 Olympic Team Member',
       'World Championship Silver Medalist',
       '3x National Champion',
-      'NCAA Scholarship Recipient'
+      'Olympic Training Center Athlete'
     ],
     total_earnings: 892.40,
     fan_count: 3670,
@@ -144,7 +144,7 @@ export const demoAthletes = [
     achievements: [
       'WTA Tour Winner (1 title)',
       'ITF Circuit Champion (5 titles)',
-      'Former NCAA Division I Champion',
+      'Former National Champion',
       'Bilingual Sports Ambassador'
     ],
     total_earnings: 1445.60,

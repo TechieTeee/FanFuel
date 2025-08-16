@@ -12,7 +12,7 @@ interface FlowActionsProps {
 export default function FlowActions({ userAddress, showAchievements = true }: FlowActionsProps) {
   const [availableActions, setAvailableActions] = useState<FlowAction[]>([])
   const [completedActions, setCompletedActions] = useState<FlowAction[]>([])
-  const [recentRewards, setRecentRewards] = useState<any[]>([])
+  const [recentRewards, setRecentRewards] = useState<unknown[]>([])
   const [showRewardsModal, setShowRewardsModal] = useState(false)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function FlowActions({ userAddress, showAchievements = true }: Fl
   // Handle action completion and reward distribution
   const handleActionCompleted = useCallback(async (
     action: FlowAction,
-    context: any
+    context: unknown
   ) => {
     if (!userAddress) return
 
