@@ -24,7 +24,7 @@ export default function TestWallet() {
       }
     } catch (error) {
       console.error('Wallet connection error:', error)
-      alert(`Connection failed: ${error.message}`)
+      alert(`Connection failed: ${error instanceof Error ? error.message : "Unknown error"}`)
     }
   }
 

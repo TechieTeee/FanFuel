@@ -6,9 +6,9 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount, useBalance, useChainId, useSwitchChain } from 'wagmi'
 import { chilizChain } from '../../lib/wagmi'
 import { 
-  getFanAthleteTokens, 
-  getChilizEcosystemInfo,
-  type AthleteToken 
+  getAthleteTokens, 
+  getEcosystemStats,
+   
 } from '../../lib/chiliz'
 
 interface UnifiedWalletProps {
@@ -53,8 +53,8 @@ export default function UnifiedWallet({
     setLoading(true)
     try {
       const [tokensResult, ecosystemResult] = await Promise.all([
-        getFanAthleteTokens(address),
-        getChilizEcosystemInfo()
+        getAthleteTokens(address),
+        getEcosystemStats()
       ])
       
       if (tokensResult.success && tokensResult.tokens) {
