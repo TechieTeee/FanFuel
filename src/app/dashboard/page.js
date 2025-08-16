@@ -216,7 +216,7 @@ export default function Dashboard() {
                           </span>
                           <span className="text-gray-500 text-sm">{comment.source}</span>
                         </div>
-                        <p className="text-gray-800 mb-3">"{comment.text}"</p>
+                        <p className="text-gray-800 mb-3">&ldquo;{comment.text}&rdquo;</p>
                         <p className="text-sm text-gray-600">
                           Targeting: <strong>{athlete?.name}</strong> ({athlete?.sport})
                         </p>

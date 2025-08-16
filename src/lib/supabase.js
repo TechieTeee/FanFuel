@@ -8,7 +8,7 @@ if (!supabaseUrl || !supabaseKey) {
   
   // Mock client for development/demo
   export const supabase = {
-    from: (table) => ({
+    from: () => ({
       select: () => ({ data: [], error: null }),
       insert: () => ({ data: null, error: null }),
       update: () => ({ data: null, error: null }),
