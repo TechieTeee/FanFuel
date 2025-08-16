@@ -163,3 +163,9 @@ export async function executeFlowActions(
 
 // Export singleton instance
 export const flowActionManager = new FlowActionManager()
+
+// Additional exports for compatibility
+export const flowActionsService = flowActionManager
+export const triggerAthleteSupport = (athleteId, amount) => flowActionManager.executeAction('user', 'first_support', { athleteId, amount })
+export const triggerViralReaction = (content) => flowActionManager.executeAction('user', 'viral_moment', { content })
+export const executeActionRewards = (actionId, context) => flowActionManager.executeAction('user', actionId, context)

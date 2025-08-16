@@ -1,11 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-// Create Supabase client or mock for development
-export const supabase = supabaseUrl && supabaseKey 
-  ? createClient(supabaseUrl, supabaseKey)
+// Initialize Supabase client or mock for demo
+export const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ? createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   : {
       from: () => ({
         select: () => Promise.resolve({ data: [], error: null }),
@@ -14,7 +11,8 @@ export const supabase = supabaseUrl && supabaseKey
         delete: () => Promise.resolve({ data: null, error: null }),
         eq: () => ({
           select: () => Promise.resolve({ data: [], error: null }),
-          single: () => Promise.resolve({ data: null, error: null })
+          update: () => Promise.resolve({ data: null, error: null }),
+          delete: () => Promise.resolve({ data: null, error: null })
         })
       }),
       auth: {
@@ -22,57 +20,47 @@ export const supabase = supabaseUrl && supabaseKey
         signIn: () => Promise.resolve({ data: null, error: null }),
         signOut: () => Promise.resolve({ error: null })
       }
-    } as { global: { fetch: typeof fetch } }
+    }
 
-interface AthleteData {
-  name: string
-  sport: string
-  university?: string
-  position?: string
-  year?: string
-  background?: string
-}
-
-interface ReactionData {
-  athlete_id: string
-  reaction_type: string
-  amount: number
-}
-
-// Database helper functions
-export const createAthlete = async (athleteData: AthleteData) => {
-  const { data, error } = await supabase
-    .from('athletes')
-    .insert(athleteData)
-    .select()
-  
-  return { data, error }
-}
-
-export const getAthletes = async () => {
+// Demo functions for athlete data
+export async function getAthletes() {
   const { data, error } = await supabase
     .from('athletes')
     .select('*')
-    .order('created_at', { ascending: false })
-  
-  return { data, error }
+
+  if (error) {
+    console.error('Error fetching athletes:', error)
+    return []
+  }
+
+  return data || []
 }
 
-export const createCommentaryReaction = async (reactionData: ReactionData) => {
+export async function getAthleteById(id) {
   const { data, error } = await supabase
-    .from('commentary_reactions')
-    .insert(reactionData)
-    .select()
-  
-  return { data, error }
-}
-
-export const getCommentaryReactions = async (athleteId: string) => {
-  const { data, error } = await supabase
-    .from('commentary_reactions')
+    .from('athletes')
     .select('*')
-    .eq('athlete_id', athleteId)
-    .order('created_at', { ascending: false })
-  
-  return { data, error }
+    .eq('id', id)
+    .single()
+
+  if (error) {
+    console.error('Error fetching athlete:', error)
+    return null
+  }
+
+  return data
+}
+
+export async function updateAthleteEarnings(id, earnings) {
+  const { data, error } = await supabase
+    .from('athletes')
+    .update({ total_earnings: earnings })
+    .eq('id', id)
+
+  if (error) {
+    console.error('Error updating athlete earnings:', error)
+    return false
+  }
+
+  return true
 }

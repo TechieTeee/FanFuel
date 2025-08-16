@@ -286,7 +286,7 @@ Transform every coffee, every meal, every transaction into direct support for at
                     </div>
                   </div>
                   <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">📈 Billions Monopolized</h3>
-                  <p className="text-gray-200 leading-relaxed text-lg font-medium">A massive market completely dominated by elite leagues. Meanwhile, talented WNBA, Olympic, MLS, collegiate, and emerging athletes fight for scraps. <span className="text-red-400 font-bold">This ends now.</span></p>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">A massive market completely dominated by elite leagues. Meanwhile, UFC fighters, boxers, league soccer players, talented WNBA, Olympic, MLS, collegiate, and emerging athletes fight for scraps. <span className="text-red-400 font-bold">This ends now.</span></p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
