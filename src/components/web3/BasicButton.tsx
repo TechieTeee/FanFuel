@@ -15,7 +15,7 @@ export default function BasicButton() {
         alert('Please install MetaMask')
       }
     } catch (error) {
-      alert(`Connection failed: ${error.message}`)
+      alert(`Connection failed: ${error instanceof Error ? error.message : 'Unknown error'}`)
     }
   }
 

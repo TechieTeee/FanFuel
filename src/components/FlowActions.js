@@ -28,8 +28,8 @@ export default function FlowActions({ userAddress, showAchievements = true }) {
 
   // Handle action completion and reward distribution
   const handleActionCompleted = useCallback(async (
-    action: FlowAction,
-    context: unknown
+    action,
+    context
   ) => {
     if (!userAddress) return
 
@@ -49,7 +49,7 @@ export default function FlowActions({ userAddress, showAchievements = true }) {
     }
   }, [userAddress, loadUserActions])
 
-  const getActionIcon = useMemo(() => (type: string) => {
+  const getActionIcon = useMemo(() => (type) => {
     switch (type) {
       case 'champion_support': return '🏆'
       case 'viral_reaction': return '🔥'
@@ -59,7 +59,7 @@ export default function FlowActions({ userAddress, showAchievements = true }) {
     }
   }, [])
 
-  const getRarityColor = useMemo(() => (rarity: string) => {
+  const getRarityColor = useMemo(() => (rarity) => {
     switch (rarity) {
       case 'Legendary': return 'from-yellow-500 to-amber-600'
       case 'Epic': return 'from-purple-500 to-indigo-600'

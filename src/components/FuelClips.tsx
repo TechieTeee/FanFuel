@@ -147,7 +147,7 @@ export default function FuelClips({ className = '' }: FuelClipsProps) {
               <label className="block text-sm font-bold text-white mb-2">Video Type</label>
               <select 
                 value={requestForm.requestType}
-                onChange={(e) => setRequestForm({...requestForm, requestType: e.target.value})}
+                onChange={(e) => setRequestForm({...requestForm, requestType: e.target.value as 'birthday' | 'motivation' | 'congratulations' | 'custom'})}
                 className="w-full bg-gray-800 text-white rounded-lg p-3 border border-gray-700 focus:border-purple-500"
               >
                 <option value="birthday">Birthday Message - $75</option>
