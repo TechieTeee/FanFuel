@@ -192,12 +192,12 @@ export class LayerZeroService {
   // Get supported chains for LayerZero
   getSupportedChains(): Array<{ id: number; name: string; endpointId: number }> {
     return [
-      { id: 1, name: 'Ethereum', endpointId: LAYERZERO_ENDPOINTS.ETHEREUM },
-      { id: 137, name: 'Polygon', endpointId: LAYERZERO_ENDPOINTS.POLYGON },
-      { id: 42161, name: 'Arbitrum', endpointId: LAYERZERO_ENDPOINTS.ARBITRUM },
-      { id: 10, name: 'Optimism', endpointId: LAYERZERO_ENDPOINTS.OPTIMISM },
-      { id: 8453, name: 'Base', endpointId: LAYERZERO_ENDPOINTS.BASE },
-      { id: 88882, name: 'Chiliz', endpointId: LAYERZERO_ENDPOINTS.CHILIZ },
+      { id: 1, name: 'Ethereum', endpointId: LAYERZERO_ENDPOINTS.ETHEREUM_MAINNET },
+      { id: 137, name: 'Polygon', endpointId: LAYERZERO_ENDPOINTS.POLYGON_MAINNET },
+      { id: 42161, name: 'Arbitrum', endpointId: LAYERZERO_ENDPOINTS.ARBITRUM_MAINNET },
+      { id: 10, name: 'Optimism', endpointId: LAYERZERO_ENDPOINTS.OPTIMISM_MAINNET },
+      { id: 8453, name: 'Base', endpointId: LAYERZERO_ENDPOINTS.BASE_MAINNET },
+      { id: 88882, name: 'Chiliz', endpointId: LAYERZERO_ENDPOINTS.CHILIZ_TESTNET },
     ]
   }
 

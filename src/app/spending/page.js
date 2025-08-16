@@ -175,7 +175,7 @@ export default function Spending() {
             </div>
             <div className="text-center">
               <Image
-                src={getFuelieImage()}
+                src={getFuelieImage}
                 alt="Fuelie Mascot"
                 width={120}
                 height={120}
@@ -360,38 +360,8 @@ export default function Spending() {
                   {/* Performance Stats */}
                   <div className="bg-gray-800/50 rounded-lg p-3 mb-4 border border-gray-600/30">
                     <p className="text-xs text-gray-400 font-bold mb-2 uppercase tracking-wide">📊 Recent Performance</p>
-                    <div className="grid grid-cols-3 gap-3 text-center">
-                      {athlete.sport === 'Basketball' ? (
-                        <>
-                          <div>
-                            <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_performance.points}</p>
-                            <p className="text-xs text-gray-400">Points</p>
-                          </div>
-                          <div>
-                            <p className="text-lg font-black text-[#10b981]">{athlete.recent_performance.assists}</p>
-                            <p className="text-xs text-gray-400">Assists</p>
-                          </div>
-                          <div>
-                            <p className="text-lg font-black text-purple-400">{athlete.recent_performance.rebounds}</p>
-                            <p className="text-xs text-gray-400">Rebounds</p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div>
-                            <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_performance.receptions}</p>
-                            <p className="text-xs text-gray-400">Catches</p>
-                          </div>
-                          <div>
-                            <p className="text-lg font-black text-[#10b981]">{athlete.recent_performance.yards}</p>
-                            <p className="text-xs text-gray-400">Yards</p>
-                          </div>
-                          <div>
-                            <p className="text-lg font-black text-purple-400">{athlete.recent_performance.touchdowns}</p>
-                            <p className="text-xs text-gray-400">TDs</p>
-                          </div>
-                        </>
-                      )}
+                    <div className="text-center">
+                      <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_game}</p>
                     </div>
                   </div>
                   <div className="flex space-x-3">
