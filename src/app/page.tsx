@@ -5,7 +5,11 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { TrendingUp, Smartphone, RotateCcw, BellRing, Cpu, Network, Sparkles } from 'lucide-react'
+import { IconProps } from 'lucide-react'
 import AnimatedBackground from '../components/AnimatedBackground'
+import HeroCarousel from '../components/HeroCarousel'
+import TypewriterText from '../components/TypewriterText'
 import SmoothScroll from '../components/SmoothScroll'
 import CustomCursor from '../components/CustomCursor'
 import MagneticButton from '../components/MagneticButton'
@@ -41,7 +45,7 @@ export default function Home() {
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl"
+          className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-8 py-4 bg-black/80 backdrop-blur-md border border-gray-800/50 rounded-xl shadow-2xl"
         >
           <div className="flex items-center justify-between space-x-8">
             <div className="flex items-center space-x-3">
@@ -57,13 +61,13 @@ export default function Home() {
                   className="rounded-full"
                 />
               </motion.div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-white">
                 FanFuel
               </span>
             </div>
             <MagneticButton 
               href="/dashboard"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               Launch App
             </MagneticButton>
@@ -75,133 +79,108 @@ export default function Home() {
           <motion.div 
             ref={heroRef}
             style={{ y, opacity }}
-            className="flex flex-col items-center justify-center min-h-screen px-6 text-center"
+            className="relative flex items-center justify-center min-h-screen px-6"
           >
-            {/* Hero Background Images */}
-            <div className="absolute inset-0 -z-10 overflow-hidden">
-              <motion.div 
-                initial={{ scale: 1.2, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.1 }}
-                transition={{ duration: 2 }}
-                className="absolute top-20 left-10 w-32 h-32 rounded-full overflow-hidden"
+            <HeroCarousel />
+            
+            <div className="relative z-10 text-center max-w-5xl mx-auto">
+              <motion.h1 
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+                className="text-8xl md:text-9xl font-black mb-8 leading-none tracking-tight"
               >
-                <Image
-                  src="/pexels-cottonbro-5740517.jpg"
-                  alt="Sports Background"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-              <motion.div 
-                initial={{ scale: 1.2, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.1 }}
-                transition={{ duration: 2, delay: 0.3 }}
-                className="absolute top-32 right-20 w-24 h-24 rounded-full overflow-hidden"
+                <span className="block text-white drop-shadow-2xl mb-4">
+                  FUEL
+                </span>
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.2 }}
+                  className="block bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-xl"
+                >
+                  <TypewriterText 
+                    words={['GREATNESS', 'DREAMS', 'CHAMPIONS', 'VICTORY', 'PASSION']}
+                    className=""
+                  />
+                </motion.div>
+              </motion.h1>
+
+              <motion.p 
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 1.5 }}
+                className="text-2xl md:text-3xl text-white/90 mb-12 max-w-4xl mx-auto font-light leading-tight drop-shadow-lg tracking-wide"
               >
-                <Image
-                  src="/pexels-pixabay-163439.jpg"
-                  alt="Sports Background"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
+                Every purchase. Every moment. Every athlete.
+              </motion.p>
+
               <motion.div 
-                initial={{ scale: 1.2, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.1 }}
-                transition={{ duration: 2, delay: 0.6 }}
-                className="absolute bottom-40 left-1/4 w-28 h-28 rounded-full overflow-hidden"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 1.8 }}
+                className="flex flex-col sm:flex-row gap-6 justify-center"
               >
-                <Image
-                  src="/pexels-football-wife-577822-1618169.jpg"
-                  alt="Sports Background"
-                  fill
-                  className="object-cover"
-                />
+                <MagneticButton 
+                  href="/dashboard"
+                  className="bg-white text-black px-12 py-6 rounded-none text-xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 uppercase tracking-wider"
+                >
+                  FUEL NOW
+                </MagneticButton>
               </motion.div>
             </div>
-
-            <motion.div 
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="mb-8"
-            >
-              <motion.div
-                animate={{ 
-                  y: [0, -20, 0],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut'
-                }}
-              >
-                <Image
-                  src="/fuelie-waving.png"
-                  alt="Fuelie Mascot Waving"
-                  width={250}
-                  height={250}
-                  className="drop-shadow-2xl"
-                />
-              </motion.div>
-            </motion.div>
-
-            <motion.h1 
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="text-7xl md:text-8xl font-black mb-6 leading-none"
-            >
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Where Fans
-              </span>
-              <motion.span 
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 1.3 }}
-                className="block bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"
-              >
-                Fuel
-              </motion.span>
-              <span className="block bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
-                the Future
-              </span>
-            </motion.h1>
-
-            <motion.p 
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 1.4 }}
-              className="text-2xl text-gray-700 mb-12 max-w-4xl mx-auto font-light leading-relaxed"
-            >
-              Transform your everyday purchases into athlete support. Every tap, swipe, and purchase automatically 
-              sends a percentage to your chosen athletes, plus get alerts to provide extra support during critical moments.
-            </motion.p>
-
-            <motion.div 
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 1.6 }}
-              className="flex flex-col sm:flex-row gap-6"
-            >
-              <MagneticButton 
-                href="/dashboard"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-5 rounded-full text-xl font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105"
-              >
-                Start Supporting Athletes
-              </MagneticButton>
-              <MagneticButton 
-                href="/about"
-                className="bg-white/20 backdrop-blur-md text-gray-800 px-10 py-5 rounded-full text-xl font-semibold border-2 border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105"
-              >
-                Learn More
-              </MagneticButton>
-            </motion.div>
           </motion.div>
 
-          {/* Problem Statement */}
-          <section className="py-32 px-6">
+          {/* Meet Fuelie Section */}
+          <section className="py-20 px-6 relative">
+            <div className="container mx-auto text-center">
+              <motion.div 
+                initial={{ y: 100, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="flex flex-col items-center"
+              >
+                <motion.div
+                  animate={{ 
+                    y: [0, -8, 0]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut'
+                  }}
+                  className="mb-8"
+                >
+                  <Image
+                    src="/fuelie-waving.png"
+                    alt="Meet Fuelie"
+                    width={150}
+                    height={150}
+                    className="drop-shadow-2xl opacity-90"
+                  />
+                </motion.div>
+                <motion.h2 
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-4xl font-bold text-white mb-4"
+                >
+                  Meet Fuelie
+                </motion.h2>
+                <motion.p 
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="text-xl text-gray-300 max-w-2xl mx-auto"
+                >
+                  Your guide to seamless athlete support
+                </motion.p>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Stats Section */}
+          <section className="py-24 px-6">
             <motion.div 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -212,9 +191,9 @@ export default function Home() {
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
+                className="text-5xl md:text-6xl font-black text-center mb-16 text-white uppercase tracking-wider"
               >
-                The Challenge
+                THE REALITY
               </motion.h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <motion.div 
@@ -222,78 +201,84 @@ export default function Home() {
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.1 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-white/10 backdrop-blur-lg p-10 rounded-3xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className="group bg-gray-900/50 backdrop-blur-lg p-10 rounded-2xl border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer hover:border-orange-500/30"
                 >
                   <div className="relative mb-6">
-                    <Image
-                      src="/pexels-yankrukov-8199172.jpg"
-                      alt="NIL Market"
-                      width={80}
-                      height={80}
-                      className="rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                    <div className="w-20 h-20 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src="/icons/chart.png"
+                        alt="Growth Chart 3D Icon"
+                        width={80}
+                        height={80}
+                        className="drop-shadow-2xl"
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">$1.7B NIL Market</h3>
-                  <p className="text-gray-600 leading-relaxed">Concentrated among 2% of elite athletes, leaving 798,000+ underrepresented student-athletes with minimal NIL revenue.</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white">$1.7B NIL Market</h3>
+                  <p className="text-gray-300 leading-relaxed">Concentrated among 2% of elite athletes, leaving 798,000+ underrepresented student-athletes with minimal NIL revenue.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-white/10 backdrop-blur-lg p-10 rounded-3xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className="group bg-gray-900/50 backdrop-blur-lg p-10 rounded-2xl border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer hover:border-orange-500/30"
                 >
                   <div className="relative mb-6">
-                    <Image
-                      src="/pexels-karolina-grabowska-8106658.jpg"
-                      alt="Daily Spending"
-                      width={80}
-                      height={80}
-                      className="rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                    <div className="w-20 h-20 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src="/icons/mobile.png"
+                        alt="Mobile Phone 3D Icon"
+                        width={80}
+                        height={80}
+                        className="drop-shadow-2xl"
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">$7T Daily Spending</h3>
-                  <p className="text-gray-600 leading-relaxed">Fans spend trillions on everyday purchases but none of this supports their favorite athletes directly.</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white">$7T Daily Spending</h3>
+                  <p className="text-gray-300 leading-relaxed">Fans spend trillions on everyday purchases but none of this supports their favorite athletes directly.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-white/10 backdrop-blur-lg p-10 rounded-3xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className="group bg-gray-900/50 backdrop-blur-lg p-10 rounded-2xl border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer hover:border-orange-500/30"
                 >
                   <div className="relative mb-6">
-                    <Image
-                      src="/pexels-cottonbro-7335859.jpg"
-                      alt="Fan Frustration"
-                      width={80}
-                      height={80}
-                      className="rounded-2xl object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                    <div className="w-20 h-20 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src="/icons/bell.png"
+                        alt="Notification Bell 3D Icon"
+                        width={80}
+                        height={80}
+                        className="drop-shadow-2xl"
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">Fan Frustration</h3>
-                  <p className="text-gray-600 leading-relaxed">Fans want to financially support athletes but current methods are complex, limited, and disconnected from daily life.</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white">Fan Frustration</h3>
+                  <p className="text-gray-300 leading-relaxed">Fans want to financially support athletes but current methods are complex, limited, and disconnected from daily life.</p>
                 </motion.div>
               </div>
             </motion.div>
           </section>
 
           {/* How It Works */}
-          <section className="py-32 px-6">
+          <section className="py-24 px-6">
             <div className="container mx-auto">
               <motion.div 
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-2xl rounded-[3rem] p-16 border border-white/20 shadow-2xl"
+                className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-2xl rounded-3xl p-16 border border-gray-700/50 shadow-2xl"
               >
                 <motion.h2 
                   initial={{ y: 50, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8 }}
-                  className="text-6xl font-bold text-center mb-20 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
+                  className="text-5xl md:text-6xl font-black text-center mb-16 text-white uppercase tracking-wider"
                 >
-                  How FanFuel Works
+                  PURE PERFORMANCE
                 </motion.h2>
                 <div className="grid md:grid-cols-4 gap-10">
                   <motion.div 
@@ -305,21 +290,22 @@ export default function Home() {
                   >
                     <div className="relative mb-8">
                       <motion.div 
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                        className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:shadow-2xl"
+                        whileHover={{ scale: 1.1, rotateY: 15 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
+                        style={{ transformStyle: 'preserve-3d' }}
                       >
                         <Image
-                          src="/pexels-cottonbro-5740794.jpg"
-                          alt="Choose Athletes"
-                          width={48}
-                          height={48}
-                          className="rounded-2xl object-cover"
+                          src="/icons/magic.png"
+                          alt="Magic 3D Icon"
+                          width={96}
+                          height={96}
+                          className="drop-shadow-2xl"
                         />
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-gray-800">Choose Your Athletes</h4>
-                    <p className="text-gray-600 leading-relaxed">Select your favorite underrepresented athletes to support through your everyday spending</p>
+                    <h4 className="text-xl font-bold mb-4 text-white">Choose Athletes</h4>
+                    <p className="text-gray-300 leading-relaxed">Select underrepresented athletes to support through everyday spending</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -330,21 +316,22 @@ export default function Home() {
                   >
                     <div className="relative mb-8">
                       <motion.div 
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                        className="w-24 h-24 bg-gradient-to-br from-green-500 to-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:shadow-2xl"
+                        whileHover={{ scale: 1.1, rotateY: 15 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
+                        style={{ transformStyle: 'preserve-3d' }}
                       >
                         <Image
-                          src="/pexels-ketut-subiyanto-4720517.jpg"
-                          alt="Tap to Pay"
-                          width={48}
-                          height={48}
-                          className="rounded-2xl object-cover"
+                          src="/icons/mobile.png"
+                          alt="Mobile Payment 3D Icon"
+                          width={96}
+                          height={96}
+                          className="drop-shadow-2xl"
                         />
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-gray-800">Tap-to-Pay Daily</h4>
-                    <p className="text-gray-600 leading-relaxed">Use FanFuel for everyday purchases - coffee, gas, groceries, anything you buy</p>
+                    <h4 className="text-xl font-bold mb-4 text-white">Tap-to-Pay</h4>
+                    <p className="text-gray-300 leading-relaxed">Use FanFuel for everyday purchases - coffee, gas, groceries, anything</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -355,21 +342,22 @@ export default function Home() {
                   >
                     <div className="relative mb-8">
                       <motion.div 
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                        className="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:shadow-2xl"
+                        whileHover={{ scale: 1.1, rotateY: 15 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
+                        style={{ transformStyle: 'preserve-3d' }}
                       >
                         <Image
-                          src="/pexels-tima-miroshnichenko-5750821.jpg"
-                          alt="Auto Split"
-                          width={48}
-                          height={48}
-                          className="rounded-2xl object-cover"
+                          src="/icons/cube.png"
+                          alt="Automation Cube 3D Icon"
+                          width={96}
+                          height={96}
+                          className="drop-shadow-2xl"
                         />
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-gray-800">Auto-Split Revenue</h4>
-                    <p className="text-gray-600 leading-relaxed">A percentage of every purchase automatically goes to your chosen athletes via blockchain</p>
+                    <h4 className="text-xl font-bold mb-4 text-white">Auto-Split</h4>
+                    <p className="text-gray-300 leading-relaxed">Percentage of every purchase automatically goes to your athletes via blockchain</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -380,37 +368,38 @@ export default function Home() {
                   >
                     <div className="relative mb-8">
                       <motion.div 
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                        className="w-24 h-24 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:shadow-2xl"
+                        whileHover={{ scale: 1.1, rotateY: 15 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
+                        style={{ transformStyle: 'preserve-3d' }}
                       >
                         <Image
-                          src="/pexels-mikhail-nilov-8455986.jpg"
-                          alt="Critical Alerts"
-                          width={48}
-                          height={48}
-                          className="rounded-2xl object-cover"
+                          src="/icons/bell.png"
+                          alt="Alert Bell 3D Icon"
+                          width={96}
+                          height={96}
+                          className="drop-shadow-2xl"
                         />
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-gray-800">Critical Moment Alerts</h4>
-                    <p className="text-gray-600 leading-relaxed">AI detects when athletes face criticism and suggests extra support opportunities</p>
+                    <h4 className="text-xl font-bold mb-4 text-white">Smart Alerts</h4>
+                    <p className="text-gray-300 leading-relaxed">AI detects critical moments and suggests extra support opportunities</p>
                   </motion.div>
                 </div>
               </motion.div>
             </div>
           </section>
 
-          {/* Blockchain Partners */}
-          <section className="py-32 px-6">
+          {/* Infrastructure */}
+          <section className="py-20 px-6">
             <div className="container mx-auto text-center">
               <motion.h2 
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="text-5xl font-bold mb-20 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
+                className="text-4xl font-black mb-12 text-center text-white uppercase tracking-wider"
               >
-                Powered by Leading Blockchain Partners
+                POWERED BY CHAMPIONS
               </motion.h2>
               <div className="grid md:grid-cols-3 gap-10">
                 <motion.div 
@@ -418,45 +407,63 @@ export default function Home() {
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.1 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-gradient-to-br from-red-500/10 to-orange-500/10 backdrop-blur-lg p-10 rounded-3xl border border-red-200/30 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className="group bg-gray-900/50 backdrop-blur-lg p-10 rounded-2xl border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer hover:border-red-500/50"
                 >
                   <div className="relative mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <span className="text-3xl font-bold text-white">C</span>
+                    <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src="/icons/computer.png"
+                        alt="Computer 3D Icon"
+                        width={80}
+                        height={80}
+                        className="drop-shadow-2xl"
+                      />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">Chiliz Chain</h3>
-                  <p className="text-gray-600 leading-relaxed">SportFi foundation with 2M+ sports fans and EVM compatibility</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white">Chiliz Chain</h3>
+                  <p className="text-gray-300 leading-relaxed">SportFi foundation with 2M+ sports fans and EVM compatibility</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-lg p-10 rounded-3xl border border-blue-200/30 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className="group bg-gray-900/50 backdrop-blur-lg p-10 rounded-2xl border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer hover:border-blue-500/50"
                 >
                   <div className="relative mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <span className="text-3xl font-bold text-white">L</span>
+                    <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src="/icons/wifi.png"
+                        alt="Network 3D Icon"
+                        width={80}
+                        height={80}
+                        className="drop-shadow-2xl"
+                      />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">LayerZero</h3>
-                  <p className="text-gray-600 leading-relaxed">Omnichain infrastructure enabling cross-chain NFT bridging</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white">LayerZero</h3>
+                  <p className="text-gray-300 leading-relaxed">Omnichain infrastructure enabling cross-chain NFT bridging</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group bg-gradient-to-br from-green-500/10 to-teal-500/10 backdrop-blur-lg p-10 rounded-3xl border border-green-200/30 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  className="group bg-gray-900/50 backdrop-blur-lg p-10 rounded-2xl border border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer hover:border-green-500/50"
                 >
                   <div className="relative mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <span className="text-3xl font-bold text-white">F</span>
+                    <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Image
+                        src="/icons/cube.png"
+                        alt="Flow Cube 3D Icon"
+                        width={80}
+                        height={80}
+                        className="drop-shadow-2xl"
+                      />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">Flow</h3>
-                  <p className="text-gray-600 leading-relaxed">Consumer-grade UX with mainstream adoption focus</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white">Flow</h3>
+                  <p className="text-gray-300 leading-relaxed">Consumer-grade UX with mainstream adoption focus</p>
                 </motion.div>
               </div>
             </div>
@@ -506,7 +513,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-sm text-gray-400"
             >
-              Built for ETHGlobal NY 2025 Hackathon
+              Built for Fans, and those who build the future
             </motion.p>
           </div>
         </footer>
