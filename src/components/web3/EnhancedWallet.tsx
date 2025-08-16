@@ -55,7 +55,7 @@ export default function EnhancedWallet() {
         alert('Please install MetaMask')
       }
     } catch (error) {
-      alert(`Connection failed: ${error.message}`)
+      alert(`Connection failed: ${error instanceof Error ? error.message : "Unknown error"}`)
     }
   }
 
@@ -71,7 +71,7 @@ export default function EnhancedWallet() {
       }
     } catch (error) {
       console.error('Chain switch failed:', error)
-      alert(`Failed to switch chain: ${error.message}`)
+      alert(`Failed to switch chain: ${error instanceof Error ? error.message : "Unknown error"}`)
     }
   }
 
