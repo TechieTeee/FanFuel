@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { 
   flowActionsService, 
   triggerAthleteSupport, 
@@ -6,7 +6,7 @@ import {
   executeActionRewards 
 } from '@/lib/flow-actions'
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   try {
     const body = await req.json()
     const { action, userAddress, ...params } = body
@@ -25,19 +25,19 @@ export async function POST(req: NextRequest) {
         let triggeredActions = []
         
         if (actionType === 'athlete_support') {
-          triggeredActions = await triggerAthleteSupport(
+          triggeredActions = [await triggerAthleteSupport(
             userAddress,
             athleteId,
             athleteName,
             reactionAmount,
             viralityScore
-          )
+          )]
         } else if (actionType === 'viral_reaction') {
-          triggeredActions = await triggerViralReaction(
+          triggeredActions = [await triggerViralReaction(
             userAddress,
             viralityScore,
             athleteId
-          )
+          )]
         }
         
         return NextResponse.json({
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET(req) {
   const { searchParams } = new URL(req.url)
   const userAddress = searchParams.get('userAddress')
 

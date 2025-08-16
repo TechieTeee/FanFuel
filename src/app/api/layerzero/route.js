@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { ethers } from 'ethers'
 import { createLayerZeroService, bridgeAthleteTokens, syncFanIdentityAcrossChains } from '@/lib/layerzero'
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   try {
     const body = await req.json()
     const { action, ...params } = body
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         const { srcChainId, destChainId, payload } = params
         const service = createLayerZeroService(provider)
         
-        const fees = await service.estimateCrossChainFees(srcChainId, destChainId, payload)
+        const fees = await service.estimateCrossChainFees(srcChainId, destChainId, payload, params.gasLimit || 200000)
         
         return NextResponse.json({
           success: true,

@@ -12,34 +12,13 @@ export const LAYERZERO_ENDPOINTS = {
   BASE_MAINNET: 30184,
   FLOW_TESTNET: 181,
   CHILIZ_TESTNET: 88882,
-} as const
+}
 
 // LayerZero OFT (Omnichain Fungible Token) interface
-export interface OFTConfig {
-  name: string
-  symbol: string
-  decimals: number
-  totalSupply: string
-  owner: string
-}
 
 // Cross-chain message structure
-export interface CrossChainMessage {
-  srcChainId: number
-  destChainId: number
-  payload: string
-  gasLimit: number
-  adapterParams: string
-}
 
 // Fan token bridge configuration
-export interface FanTokenBridge {
-  sourceChain: number
-  destChain: number
-  tokenAddress: string
-  amount: string
-  recipient: string
-}
 
 export class LayerZeroService {
   private provider: ethers.Provider
