@@ -1,7 +1,16 @@
+'use client'
+
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
 import { demoAthletes } from '../../../data/demo-athletes';
 import { demoCommentary } from '../../../data/demo-commentary';
 import FlowActions from '../../components/FlowActions';
+import CustomCursor from '../../components/CustomCursor';
+import AnimatedBackground from '../../components/AnimatedBackground';
+import HoverNavigation from '../../components/HoverNavigation.js';
+import MinimalWallet from '../../components/web3/MinimalWallet';
 import { triggerAthleteSupport, triggerViralReaction, executeActionRewards } from '../../lib/flow-actions';
 
 export default function Alerts() {

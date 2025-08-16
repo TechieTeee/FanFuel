@@ -1,7 +1,17 @@
+'use client'
+
 import React, { useState, useCallback, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
 import { demoAthletes } from '../../../data/demo-athletes';
 import { demoTransactions } from '../../../data/demo-transactions';
 import FlowActions from '../../components/FlowActions';
+import CustomCursor from '../../components/CustomCursor';
+import AnimatedBackground from '../../components/AnimatedBackground';
+import HoverNavigation from '../../components/HoverNavigation.js';
+import EnhancedWallet from '../../components/web3/EnhancedWallet';
+import TransactionFlow from '../../components/TransactionFlow';
 import { triggerAthleteSupport, executeActionRewards } from '../../lib/flow-actions';
 
 export default function Spending() {
@@ -9,6 +19,14 @@ export default function Spending() {
   const [showTransactionFlow, setShowTransactionFlow] = useState(false)
   const [currentTransaction, setCurrentTransaction] = useState(null)
   const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
+
+  // Use demo athletes as mock data
+  const mockAthletes = demoAthletes
+
+  const executeTransaction = useCallback(async (transaction) => {
+    console.log('Executing transaction:', transaction)
+    setShowTransactionFlow(false)
+  }, [])
 
   const getFuelieImage = useMemo(() => {
     switch(fuelieState) {
