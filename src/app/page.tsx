@@ -168,13 +168,13 @@ Transform every coffee, every meal, every transaction into direct support for at
                   className="max-w-5xl mx-auto space-y-4"
                 >
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    Fuelie isn't just an AI assistant – he's a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in emerging champions across Olympic sports, professional leagues, and individual disciplines.
+                    Fuelie isn&apos;t just an AI assistant – he&apos;s a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in emerging champions across Olympic sports, professional leagues, and individual disciplines.
                   </p>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when athletes need support most. From Olympic trials to MLS seasons to track meets, he doesn't just process payments – he provides athletes with unprecedented fan data and revenue streams.
+                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when athletes need support most. From Olympic trials to MLS seasons to track meets, he doesn&apos;t just process payments – he provides athletes with unprecedented fan data and revenue streams.
                   </p>
                   <p className="text-lg text-orange-300/90 font-medium">
-                    "Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker. Every athlete gets the data they need to build their brand." - Fuelie
+                    &quot;Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker. Every athlete gets the data they need to build their brand.&quot; - Fuelie
                   </p>
                 </motion.div>
               </motion.div>
@@ -339,7 +339,7 @@ Transform every coffee, every meal, every transaction into direct support for at
                       </motion.div>
                     </div>
                     <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">3. See Your Impact</h4>
-                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Track your contributions and see the difference you're making.</p>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Track your contributions and see the difference you&apos;re making.</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}

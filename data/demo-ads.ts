@@ -88,10 +88,19 @@ export const demoAds: DemoAd[] = [
 
 // Function to get ads relevant to user's supported athletes
 export function getRelevantAds(supportedAthletes: string[], maxAds = 2): DemoAd[] {
-  const userSports = supportedAthletes.map(id => {
-    const athlete = demoAthletes.find(a => a.id === id)
-    return athlete?.sport?.toLowerCase() || ''
-  })
+  // Simple mapping of athlete IDs to sports to avoid circular dependency
+  const athleteSports: Record<string, string> = {
+    '1': 'track',
+    '2': 'soccer', 
+    '3': 'swimming',
+    '4': 'basketball',
+    '5': 'basketball',
+    '6': 'soccer',
+    '7': 'gymnastics',
+    '8': 'tennis'
+  }
+  
+  const userSports = supportedAthletes.map(id => athleteSports[id] || '').filter(Boolean)
   
   const relevantAds = demoAds.filter(ad => 
     ad.targetAudience.includes('all') || 

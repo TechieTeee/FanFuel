@@ -1,13 +1,13 @@
 
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
 
-const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN!
+const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
 const CACHE_DURATION = 3600000 // 1 hour in milliseconds
 
 // College sports specific keywords for trending detection
@@ -17,16 +17,8 @@ const COLLEGE_SPORTS_KEYWORDS = [
   'college quarterback', 'Division I', 'FBS football', 'college bowl', 'college tournament'
 ]
 
-interface TrendingTopic {
-  topic: string
-  tweet_count: number
-  virality_score: number
-  sentiment: 'positive' | 'negative' | 'neutral'
-  related_athletes: string[]
-  cached_at: string
-}
 
-export async function GET(req: NextRequest) {
+export async function GET(req) {
   try {
     // Check cache first
     const { data: cachedData, error: cacheError } = await supabase
@@ -102,7 +94,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-async function fetchTwitterTrending(): Promise<TrendingTopic[]> {
+async function fetchTwitterTrending() {
   const trends = []
   
   // Search for college sports trending topics only
@@ -127,7 +119,7 @@ async function fetchTwitterTrending(): Promise<TrendingTopic[]> {
       
       if (data.data && data.data.length > 0) {
         // Calculate virality score based on engagement metrics
-        const avgEngagement = data.data.reduce((sum: number, tweet: any) => {
+        const avgEngagement = data.data.reduce((sum, tweet) => {
           const metrics = tweet.public_metrics || {}
           return sum + (metrics.retweet_count || 0) + (metrics.like_count || 0) + (metrics.reply_count || 0)
         }, 0) / data.data.length
@@ -155,7 +147,7 @@ async function fetchTwitterTrending(): Promise<TrendingTopic[]> {
   return trends.sort((a, b) => b.virality_score - a.virality_score)
 }
 
-function analyzeCollegeSportsSentiment(topic: string, tweets: any[]): 'positive' | 'negative' | 'neutral' {
+function analyzeCollegeSportsSentiment(topic, tweets) {
   const positiveWords = ['win', 'victory', 'champion', 'success', 'great', 'amazing', 'record', 'playoff', 'championship', 'recruit']
   const negativeWords = ['loss', 'fail', 'injury', 'scandal', 'controversy', 'suspended', 'transfer', 'fired', 'quit']
   
@@ -177,8 +169,8 @@ function analyzeCollegeSportsSentiment(topic: string, tweets: any[]): 'positive'
   return 'neutral'
 }
 
-function extractCollegeAthleteNames(tweets: any[]): string[] {
-  const athleteNames = new Set<string>()
+function extractCollegeAthleteNames(tweets) {
+  const athleteNames = new Set()
   
   tweets.forEach(tweet => {
     const text = tweet.text || ''
