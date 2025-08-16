@@ -1,20 +1,12 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from 'framer-motion'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import MinimalWallet from '../../components/web3/MinimalWallet'
-import AnimatedBackground from '../../components/AnimatedBackground'
-import CustomCursor from '../../components/CustomCursor'
-import HoverNavigation from '../../components/HoverNavigation'
+import { demoAthletes } from '../../../data/demo-athletes';
+import { demoCommentary } from '../../../data/demo-commentary';
 
 export default function Alerts() {
   const [fuelieState, setFuelieState] = useState('waving')
   const [ncaaData, setNcaaData] = useState({ rankings: [], games: [] })
   const [loading, setLoading] = useState(true)
-  
+  const [commentary, setCommentary] = useState([])
+
   useEffect(() => {
     const fetchNCAAData = async () => {
       try {
@@ -47,59 +39,27 @@ export default function Alerts() {
     
     fetchNCAAData()
   }, [])
-  
-  // Enhanced mock data with real context
-  const mockAthletes = [
-    {
-      id: '1',
-      name: 'Sarah Johnson',
-      sport: 'Basketball',
-      university: 'University of Alabama',
-      position: 'Point Guard',
-      year: 'Junior',
-      background: 'First-generation college student, pre-med',
-      total_earnings: 15.50,
-      fan_count: 8,
-      monthly_from_purchases: 12.30,
-      recent_game: 'vs Auburn - 18 pts, 7 ast'
-    },
-    {
-      id: '2', 
-      name: 'Marcus Williams',
-      sport: 'Football',
-      university: 'University of Oregon',
-      position: 'Wide Receiver',
-      year: 'Sophomore',
-      background: 'From underserved community, business major',
-      total_earnings: 287.50,
-      fan_count: 45,
-      monthly_from_purchases: 245.20,
-      recent_game: 'vs USC - 8 rec, 127 yds, 2 TD'
-    }
-  ]
 
-  const mockCommentary = [
-    {
-      id: '1',
-      text: 'This point guard is completely overrated and making too many turnovers in crucial moments',
-      athlete_id: '1',
-      sentiment: 'negative',
-      intensity: 0.8,
-      virality_score: 0.75,
-      source: 'Social Media Discussion',
-      created_at: '2025-01-16T10:30:00Z'
-    },
-    {
-      id: '2',
-      text: 'Williams needs to step up his game if this team wants any chance at success',
-      athlete_id: '2', 
-      sentiment: 'negative',
-      intensity: 0.6,
-      virality_score: 0.45,
-      source: 'Sports Forum',
-      created_at: '2025-01-16T09:15:00Z'
+  useEffect(() => {
+    const fetchCommentary = async () => {
+      const analyzedCommentary = await Promise.all(
+        demoCommentary.map(async (comment) => {
+          const response = await fetch('/api/gemini', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: comment.text }),
+          })
+          const analysis = await response.json()
+          return { ...comment, ...analysis }
+        })
+      )
+      setCommentary(analyzedCommentary)
     }
-  ]
+
+    fetchCommentary()
+  }, [])
 
   const getFuelieImage = () => {
     switch(fuelieState) {
@@ -228,6 +188,51 @@ export default function Alerts() {
           )}
         </motion.div>
 
+        {/* NCAA Games */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50 max-w-5xl mx-auto mb-12"
+        >
+          <h2 className="text-3xl font-black text-white uppercase tracking-wider mb-6 text-center">🏈 Upcoming Games</h2>
+          {loading ? (
+            <div className="text-center text-gray-400">Loading games...</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {ncaaData.games?.slice(0, 3).map((game, index) => (
+                <div key={index} className="text-center bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
+                  <p className="text-lg font-semibold text-white">{game.awayTeam.school} @ {game.homeTeam.school}</p>
+                  <p className="text-sm text-gray-400">{new Date(game.startDate).toLocaleDateString()}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </motion.div>
+
+        {/* NCAA Rankings */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50 max-w-5xl mx-auto mb-12"
+        >
+          <h2 className="text-3xl font-black text-white uppercase tracking-wider mb-6 text-center">🏆 AP Top 5 Football Rankings</h2>
+          {loading ? (
+            <div className="text-center text-gray-400">Loading rankings...</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {ncaaData.rankings?.slice(0, 5).map((ranking, index) => (
+                <div key={index} className="text-center bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
+                  <p className="text-2xl font-black text-[#f59e0b]">#{ranking.rank}</p>
+                  <p className="text-lg font-semibold text-white">{ranking.school}</p>
+                  <p className="text-sm text-gray-400">({ranking.record})</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </motion.div>
+
         {/* Commentary Feed */}
         <motion.div 
           initial={{ y: 100, opacity: 0 }}
@@ -244,8 +249,8 @@ export default function Alerts() {
           </div>
           
           <div className="space-y-6">
-            {mockCommentary.map((comment, index) => {
-              const athlete = mockAthletes.find(a => a.id === comment.athlete_id)
+            {commentary.map((comment, index) => {
+              const athlete = demoAthletes.find(a => a.id === comment.athlete_id)
               return (
                 <motion.div 
                   key={comment.id} 
@@ -286,7 +291,7 @@ export default function Alerts() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 2)}
-                        className="bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm"
+                        className={`bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 2 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         👏 Clap $2
                       </motion.button>
@@ -294,7 +299,7 @@ export default function Alerts() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 5)}
-                        className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm"
+                        className={`bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 5 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         🔥 Fire $5
                       </motion.button>
@@ -302,7 +307,7 @@ export default function Alerts() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 10)}
-                        className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm"
+                        className={`bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 10 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         💎 Gem $10
                       </motion.button>
@@ -312,7 +317,7 @@ export default function Alerts() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 15)}
-                        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm"
+                        className={`bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 15 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         💪 Strong $15
                       </motion.button>
@@ -320,7 +325,7 @@ export default function Alerts() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 25)}
-                        className="bg-gradient-to-r from-yellow-600 to-yellow-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm"
+                        className={`bg-gradient-to-r from-yellow-600 to-yellow-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 25 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         🏆 Legend $25
                       </motion.button>
@@ -328,7 +333,7 @@ export default function Alerts() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 50)}
-                        className="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm"
+                        className={`bg-gradient-to-r from-pink-600 to-pink-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 50 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         👑 King $50
                       </motion.button>
@@ -336,6 +341,19 @@ export default function Alerts() {
                     <p className="text-xs text-gray-400 mt-3 font-medium">
                       💰 Your reaction appears publicly with payment amount • 🏆 100% goes to {athlete?.name}
                     </p>
+                  </div>
+
+                  {/* Recommended Athletes */}
+                  <div className="border-t border-gray-600/50 pt-6 mt-6">
+                    <h4 className="font-black mb-4 text-white uppercase tracking-wide">🔥 You might also like:</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      {demoAthletes.filter(a => a.sport === athlete?.sport && a.id !== athlete?.id).map(recommendedAthlete => (
+                        <div key={recommendedAthlete.id} className="bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
+                          <p className="font-bold text-white">{recommendedAthlete.name}</p>
+                          <p className="text-sm text-gray-400">{recommendedAthlete.sport} - {recommendedAthlete.university}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               )

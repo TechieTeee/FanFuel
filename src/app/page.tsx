@@ -36,11 +36,11 @@ export default function Home() {
   }, [])
 
   return (
-    // <SmoothScroll>
+    <SmoothScroll>
       <div ref={containerRef} className="relative min-h-screen overflow-hidden">
 <CustomCursor />
         <AnimatedBackground />
-        {/* <HoverNavigation /> */}
+        <HoverNavigation />
         
         {/* Unified Web3 Connect - Upper Right */}
         <motion.div 
@@ -478,6 +478,6 @@ export default function Home() {
           </div>
         </footer>
       </div>
-    // </SmoothScroll>
+    </SmoothScroll>
   )
 }

@@ -1,100 +1,10 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from 'framer-motion'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import AnimatedBackground from '../../components/AnimatedBackground'
-import CustomCursor from '../../components/CustomCursor'
-import HoverNavigation from '../../components/HoverNavigation'
-import MinimalWallet from '../../components/web3/MinimalWallet'
+import { demoAthletes } from '../../../data/demo-athletes';
+import { demoTransactions } from '../../../data/demo-transactions';
 
 export default function Spending() {
   const [fuelieState, setFuelieState] = useState('waving')
-  
-  // Enhanced mock data with real school references
-  const mockAthletes = [
-    {
-      id: '1',
-      name: 'Sarah Johnson',
-      sport: 'Basketball',
-      university: 'University of Alabama',
-      position: 'Point Guard',
-      year: 'Junior',
-      background: 'First-generation college student, pre-med',
-      total_earnings: 15.50,
-      fan_count: 8,
-      monthly_from_purchases: 12.30,
-      recent_performance: { points: 18, assists: 7, rebounds: 5 }
-    },
-    {
-      id: '2', 
-      name: 'Marcus Williams',
-      sport: 'Football',
-      university: 'University of Oregon',
-      position: 'Wide Receiver',
-      year: 'Sophomore',
-      background: 'From underserved community, business major',
-      total_earnings: 287.50,
-      fan_count: 45,
-      monthly_from_purchases: 245.20,
-      recent_performance: { receptions: 8, yards: 127, touchdowns: 2 }
-    }
-  ]
-
-  const mockTransactions = [
-    {
-      id: '1',
-      merchant: 'Starbucks Coffee',
-      amount: 12.75,
-      athlete_portion: 0.64,
-      athlete_id: '1',
-      timestamp: '2025-01-16T08:45:00Z',
-      location: 'Downtown Campus',
-      category: 'Food & Drink'
-    },
-    {
-      id: '2',
-      merchant: 'Shell Gas Station',
-      amount: 45.20,
-      athlete_portion: 2.26,
-      athlete_id: '2',
-      timestamp: '2025-01-16T07:30:00Z',
-      location: 'Highway 101',
-      category: 'Gas & Transportation'
-    },
-    {
-      id: '3',
-      merchant: 'Amazon Prime',
-      amount: 23.99,
-      athlete_portion: 1.20,
-      athlete_id: '1',
-      timestamp: '2025-01-15T19:22:00Z',
-      location: 'Online Purchase',
-      category: 'Shopping'
-    },
-    {
-      id: '4',
-      merchant: 'Chipotle Mexican Grill',
-      amount: 16.50,
-      athlete_portion: 0.83,
-      athlete_id: '2',
-      timestamp: '2025-01-15T12:15:00Z',
-      location: 'University District',
-      category: 'Food & Drink'
-    },
-    {
-      id: '5',
-      merchant: 'Target',
-      amount: 67.83,
-      athlete_portion: 3.39,
-      athlete_id: '1',
-      timestamp: '2025-01-14T16:45:00Z',
-      location: 'Westside Mall',
-      category: 'Shopping'
-    }
-  ]
+  const [showTransactionFlow, setShowTransactionFlow] = useState(false)
+  const [currentTransaction, setCurrentTransaction] = useState(null)
 
   const getFuelieImage = () => {
     switch(fuelieState) {
@@ -164,7 +74,7 @@ export default function Spending() {
           <Link href="/alerts" className="text-[#ef4444] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
             📺 FuelFeed
           </Link>
-<MinimalWallet />
+<EnhancedWallet />
         </div>
       </motion.header>
 
@@ -476,8 +386,8 @@ export default function Spending() {
           >
             <h2 className="text-3xl font-black mb-8 text-white uppercase tracking-wider text-center">📈 Fuel History</h2>
             <div className="space-y-4 max-h-96 overflow-y-auto">
-              {mockTransactions.map((transaction, index) => {
-                const athlete = mockAthletes.find(a => a.id === transaction.athlete_id)
+              {demoTransactions.map((transaction, index) => {
+                const athlete = demoAthletes.find(a => a.id === transaction.athlete_id)
                 const percentage = ((transaction.athlete_portion / transaction.amount) * 100).toFixed(1)
                 return (
                   <motion.div 
@@ -600,11 +510,19 @@ export default function Spending() {
           <div className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50">
             <h3 className="text-xl font-bold text-white mb-4 text-center">💰 SportFi Wallet</h3>
             <div className="flex justify-center">
-    <MinimalWallet />
+    <EnhancedWallet />
 
             </div>
           </div>
         </motion.div>
+
+        {/* Transaction Flow Modal */}
+        <TransactionFlow
+          isOpen={showTransactionFlow}
+          onClose={() => setShowTransactionFlow(false)}
+          transaction={currentTransaction}
+          onConfirm={executeTransaction}
+        />
 
       </div>
     </div>
