@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(rm:*)",
-      "WebFetch(domain:ncaa-api.henrygd.me)"
+      "WebFetch(domain:ncaa-api.henrygd.me)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []
