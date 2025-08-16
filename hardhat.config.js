@@ -19,6 +19,24 @@ module.exports = {
       chainId: 88882,
       gasPrice: 'auto'
     },
+    sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || `https://ethereum-sepolia.publicnode.com`,
+      accounts: process.env.CHILIZ_PRIVATE_KEY ? [process.env.CHILIZ_PRIVATE_KEY] : [],
+      chainId: 11155111,
+      gasPrice: 'auto'
+    },
+    arbitrumSepolia: {
+      url: process.env.ARBITRUM_SEPOLIA_RPC_URL || `https://sepolia-rollup.arbitrum.io/rpc`,
+      accounts: process.env.CHILIZ_PRIVATE_KEY ? [process.env.CHILIZ_PRIVATE_KEY] : [],
+      chainId: 421614,
+      gasPrice: 'auto'
+    },
+    baseSepolia: {
+      url: process.env.BASE_SEPOLIA_RPC_URL || `https://sepolia.base.org`,
+      accounts: process.env.CHILIZ_PRIVATE_KEY ? [process.env.CHILIZ_PRIVATE_KEY] : [],
+      chainId: 84532,
+      gasPrice: 'auto'
+    },
     hardhat: {
       chainId: 1337
     }
