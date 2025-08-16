@@ -1,17 +1,4 @@
-export interface DemoAd {
-  id: string
-  title: string
-  description: string
-  cta: string
-  image: string
-  brand: string
-  category: 'sports-gear' | 'nutrition' | 'training' | 'lifestyle' | 'tech'
-  targetAudience: string[]
-  backgroundColor: string
-  textColor: string
-}
-
-export const demoAds: DemoAd[] = [
+export const demoAds = [
   {
     id: 'ad-1',
     title: 'Fuel Your Training',
@@ -87,9 +74,9 @@ export const demoAds: DemoAd[] = [
 ]
 
 // Function to get ads relevant to user's supported athletes
-export function getRelevantAds(supportedAthletes: string[], maxAds = 2): DemoAd[] {
+export function getRelevantAds(supportedAthletes, maxAds = 2) {
   // Simple mapping of athlete IDs to sports to avoid circular dependency
-  const athleteSports: Record<string, string> = {
+  const athleteSports = {
     '1': 'track',
     '2': 'soccer', 
     '3': 'swimming',

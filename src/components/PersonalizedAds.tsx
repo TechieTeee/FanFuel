@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { demoAds, getRelevantAds, DemoAd } from '../../data/demo-ads'
+import { demoAds, getRelevantAds } from '../../data/demo-ads.js'
 import { demoAthletes } from '../../data/demo-athletes'
 
 interface PersonalizedAdsProps {
