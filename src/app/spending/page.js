@@ -12,6 +12,9 @@ import AnimatedBackground from '../../components/AnimatedBackground';
 import HoverNavigation from '../../components/HoverNavigation.js';
 import EnhancedWallet from '../../components/web3/EnhancedWallet';
 import TransactionFlow from '../../components/TransactionFlow';
+import PersonalizedAds from '../../components/PersonalizedAds';
+import AthleteInsights from '../../components/AthleteInsights';
+import FuelClips from '../../components/FuelClips';
 import { triggerAthleteSupport, executeActionRewards } from '../../lib/flow-actions';
 
 export default function Spending() {
@@ -520,18 +523,40 @@ export default function Spending() {
           </div>
         </motion.div>
 
-        {/* Enhanced Wallet Integration */}
+        {/* FuelClips - Premium Video Messages */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="max-w-6xl mx-auto mt-12"
+        >
+          <FuelClips />
+        </motion.div>
+
+        {/* Monetization Features Grid */}
         <motion.div 
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="max-w-md mx-auto mt-12"
+          className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-12"
         >
+          {/* Personalized Ads */}
+          <PersonalizedAds supportedAthletes={['1', '2', '3']} maxAds={3} />
+          
+          {/* Enhanced Wallet Integration */}
           <div className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50">
             <h3 className="text-xl font-bold text-white mb-4 text-center">💰 SportFi Wallet</h3>
-            <div className="flex justify-center">
-    <EnhancedWallet />
-
+            <div className="flex justify-center mb-4">
+              <EnhancedWallet />
+            </div>
+            <div className="text-center">
+              <p className="text-xs text-gray-400 mb-2">💡 Platform Revenue Streams:</p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <span className="text-[#10b981]">3% Transaction Fees</span>
+                <span className="text-[#f59e0b]">Targeted Advertising</span>
+                <span className="text-purple-400">Premium Analytics</span>
+                <span className="text-blue-400">Video Messages</span>
+              </div>
             </div>
           </div>
         </motion.div>

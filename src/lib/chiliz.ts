@@ -199,8 +199,17 @@ export const supportAthleteOnChiliz = async (
     }
 
     const amountWei = ethers.parseEther(amount)
-    const athleteShare = amountWei * BigInt(80) / BigInt(100) // 80% to athlete
-    const platformFee = amountWei - athleteShare // 20% platform fee
+    const platformFee = amountWei * BigInt(3) / BigInt(100) // 3% platform fee for operations
+    const athleteShare = amountWei - platformFee // 97% goes directly to athlete
+    
+    // Platform fee breakdown for transparency
+    const feeBreakdown = {
+      total_amount: amount,
+      athlete_share: ethers.formatEther(athleteShare),
+      platform_fee: ethers.formatEther(platformFee),
+      fee_percentage: '3%',
+      fee_purpose: 'Platform operations, athlete insights, payment processing'
+    }
 
     // For demo: simulate transaction
     const mockTxHash = `0x${Date.now().toString(16)}${Math.random().toString(16).slice(2)}`
@@ -249,7 +258,11 @@ export const supportAthleteOnChiliz = async (
     return {
       success: true,
       transactionHash: mockTxHash,
-      athleteShare: ethers.formatEther(athleteShare)
+      athleteShare: ethers.formatEther(athleteShare),
+      platformFee: ethers.formatEther(platformFee),
+      feeBreakdown,
+      totalAmount: amount,
+      message: `Sent $${amount} to ${athlete.name} - ${feeBreakdown.athlete_share} direct to athlete, ${feeBreakdown.platform_fee} platform fee`
     }
   } catch (error) {
     console.error('Failed to support athlete on Chiliz:', error)
