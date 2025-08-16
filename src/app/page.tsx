@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import AnimatedBackground from '../components/AnimatedBackground'
 import HeroCarousel from '../components/HeroCarousel'
 import TypewriterText from '../components/TypewriterText'
@@ -38,6 +39,62 @@ export default function Home() {
         <CustomCursor />
         <AnimatedBackground />
         
+        {/* Web3 Connect Button - Upper Right */}
+        <motion.div 
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="fixed top-6 right-6 z-50"
+        >
+          <ConnectButton.Custom>
+            {({
+              account,
+              chain,
+              openAccountModal,
+              openChainModal,
+              openConnectModal,
+              mounted,
+            }) => {
+              const ready = mounted
+              const connected = ready && account && chain
+
+              return (
+                <div
+                  {...(!ready && {
+                    'aria-hidden': true,
+                    style: {
+                      opacity: 0,
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                    },
+                  })}
+                >
+                  {(() => {
+                    if (!connected) {
+                      return (
+                        <button
+                          onClick={openConnectModal}
+                          className="bg-black/80 backdrop-blur-md border border-[#f59e0b]/50 text-white px-6 py-3 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:border-[#f59e0b]"
+                        >
+                          🔗 Connect
+                        </button>
+                      )
+                    }
+
+                    return (
+                      <button
+                        onClick={openAccountModal}
+                        className="bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-6 py-3 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                      >
+                        🏆 {account.displayName}
+                      </button>
+                    )
+                  })()}
+                </div>
+              )
+            }}
+          </ConnectButton.Custom>
+        </motion.div>
 
         {/* Hero Section */}
         <main className="relative min-h-screen">

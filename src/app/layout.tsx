@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+import { Web3Provider } from '../providers/Web3Provider'
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,7 +44,9 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} antialiased`}
         style={{ cursor: 'none' }}
       >
-        {children}
+        <Web3Provider>
+          {children}
+        </Web3Provider>
       </body>
     </html>
   );
