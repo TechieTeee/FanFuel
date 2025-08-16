@@ -236,3 +236,7 @@ backup-*
 .parcel-cache/
 .eslintcache
 .stylelintcache
+
+# Strategy Docs
+FanFuel_Grounding_Doc.md
+FanFuel_PRD.md
