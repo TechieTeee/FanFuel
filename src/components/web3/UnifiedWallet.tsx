@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount, useBalance, useChainId, useSwitchChain } from 'wagmi'
-import { chilizChain } from '@/lib/wagmi'
+import { chilizChain } from '../../lib/wagmi'
 import { 
   getFanAthleteTokens, 
   getChilizEcosystemInfo,
   type AthleteToken 
-} from '@/lib/chiliz'
+} from '../../lib/chiliz'
 
 interface UnifiedWalletProps {
   showBalance?: boolean
@@ -30,10 +30,13 @@ export default function UnifiedWallet({
   const [showChilizDetails, setShowChilizDetails] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  // Get CHZ balance
+  // Get CHZ balance only when connected and on Chiliz chain
   const { data: chzBalance } = useBalance({
     address: address,
     chainId: chilizChain.id,
+    query: {
+      enabled: isConnected && address !== undefined && chainId === chilizChain.id
+    }
   })
 
   const isOnChilizChain = chainId === chilizChain.id

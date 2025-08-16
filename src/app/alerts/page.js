@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from 'framer-motion'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import UnifiedWallet from '../../components/web3/UnifiedWallet'
+import MinimalWallet from '../../components/web3/MinimalWallet'
 import AnimatedBackground from '../../components/AnimatedBackground'
 import CustomCursor from '../../components/CustomCursor'
 import HoverNavigation from '../../components/HoverNavigation'
@@ -144,7 +144,7 @@ export default function Alerts() {
           <Link href="/spending" className="text-[#f59e0b] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
             ⛽ FuelStation
           </Link>
-          <UnifiedWallet showBalance={true} showTokens={false} compact={true} />
+<MinimalWallet />
         </div>
       </motion.header>
 

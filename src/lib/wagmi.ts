@@ -1,8 +1,9 @@
 'use client'
 
-import { getDefaultConfig } from '@rainbow-me/rainbowkit'
+import { createConfig, http } from 'wagmi'
 import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains'
 import { defineChain } from 'viem'
+import { injected, metaMask, coinbaseWallet } from 'wagmi/connectors'
 
 // Define Chiliz Chain configuration
 export const chilizChain = defineChain({
@@ -28,9 +29,20 @@ export const chilizChain = defineChain({
   testnet: true,
 })
 
-export const config = getDefaultConfig({
-  appName: 'FanFuel',
-  projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'YOUR_PROJECT_ID',
+export const config = createConfig({
   chains: [mainnet, polygon, optimism, arbitrum, base, chilizChain],
-  ssr: true,
+  connectors: [
+    injected(),
+    metaMask(),
+    coinbaseWallet({ appName: 'FanFuel' }),
+  ],
+  transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+    [optimism.id]: http(),
+    [arbitrum.id]: http(),
+    [base.id]: http(),
+    [chilizChain.id]: http('https://spicy-rpc.chiliz.com/'),
+  },
+  ssr: false,
 })

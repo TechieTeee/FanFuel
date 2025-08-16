@@ -5,14 +5,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from 'framer-motion'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { useAccount } from 'wagmi'
 import AnimatedBackground from '../../components/AnimatedBackground'
 import CustomCursor from '../../components/CustomCursor'
 import HoverNavigation from '../../components/HoverNavigation'
-import UnifiedWallet from '../../components/web3/UnifiedWallet'
+import MinimalWallet from '../../components/web3/MinimalWallet'
 
 export default function Spending() {
-  const { address, isConnected } = useAccount()
   const [fuelieState, setFuelieState] = useState('waving')
   
   // Enhanced mock data with real school references
@@ -110,10 +108,8 @@ export default function Spending() {
   }
 
   const handleSupportAthlete = async (athleteId, amount) => {
-    if (!isConnected || !address) {
-      alert('Please connect your wallet first')
-      return
-    }
+    // For demo purposes, simulate wallet connection check
+    const mockAddress = '0x1234567890123456789012345678901234567890'
 
     setFuelieState('eyes-closed')
     
@@ -128,7 +124,7 @@ export default function Spending() {
           action: 'support_athlete',
           athleteId,
           amount: amount.toString(),
-          fanAddress: address
+          fanAddress: mockAddress
         })
       })
 
@@ -168,7 +164,7 @@ export default function Spending() {
           <Link href="/alerts" className="text-[#ef4444] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
             📺 FuelFeed
           </Link>
-          <UnifiedWallet showBalance={true} showTokens={false} compact={true} />
+<MinimalWallet />
         </div>
       </motion.header>
 
@@ -604,7 +600,8 @@ export default function Spending() {
           <div className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50">
             <h3 className="text-xl font-bold text-white mb-4 text-center">💰 SportFi Wallet</h3>
             <div className="flex justify-center">
-              <UnifiedWallet showBalance={true} showTokens={true} compact={false} />
+    <MinimalWallet />
+
             </div>
           </div>
         </motion.div>

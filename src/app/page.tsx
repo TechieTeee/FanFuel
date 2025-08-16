@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import UnifiedWallet from '../components/web3/UnifiedWallet'
+import BasicButton from '../components/web3/BasicButton'
 import AnimatedBackground from '../components/AnimatedBackground'
 import HeroCarousel from '../components/HeroCarousel'
 import TypewriterText from '../components/TypewriterText'
@@ -36,11 +36,11 @@ export default function Home() {
   }, [])
 
   return (
-    <SmoothScroll>
+    // <SmoothScroll>
       <div ref={containerRef} className="relative min-h-screen overflow-hidden">
-        <CustomCursor />
+<CustomCursor />
         <AnimatedBackground />
-        <HoverNavigation />
+        {/* <HoverNavigation /> */}
         
         {/* Unified Web3 Connect - Upper Right */}
         <motion.div 
@@ -49,7 +49,7 @@ export default function Home() {
           transition={{ duration: 0.8, delay: 1 }}
           className="fixed top-6 right-6 z-40"
         >
-          <UnifiedWallet showBalance={true} showTokens={false} compact={true} />
+          <BasicButton />
         </motion.div>
 
         {/* Hero Section */}
@@ -478,6 +478,6 @@ export default function Home() {
           </div>
         </footer>
       </div>
-    </SmoothScroll>
+    // </SmoothScroll>
   )
 }
