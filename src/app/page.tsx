@@ -12,6 +12,7 @@ import TypewriterText from '../components/TypewriterText'
 import SmoothScroll from '../components/SmoothScroll'
 import CustomCursor from '../components/CustomCursor'
 import MagneticButton from '../components/MagneticButton'
+import HoverNavigation from '../components/HoverNavigation.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -38,6 +39,7 @@ export default function Home() {
       <div ref={containerRef} className="relative min-h-screen overflow-hidden">
         <CustomCursor />
         <AnimatedBackground />
+        <HoverNavigation />
         
         {/* Web3 Connect Button - Upper Right */}
         <motion.div 
@@ -142,7 +144,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 1.7 }}
                 className="text-lg md:text-xl text-[#f59e0b]/90 mb-12 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg"
               >
-                Transform every coffee, every meal, every transaction into direct support for underrepresented athletes. This is how legends are born.
+                Transform every coffee, every meal, every transaction into direct support for underrepresented student athletes. This is how legends are born.
               </motion.p>
 
               <motion.div 
@@ -152,7 +154,7 @@ export default function Home() {
                 className="flex flex-col sm:flex-row gap-6 justify-center"
               >
                 <MagneticButton 
-                  href="/dashboard"
+                  href="/spending"
                   className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-16 py-6 rounded-xl text-xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 uppercase tracking-wider border-2 border-[#f59e0b] hover:border-white"
                 >
                   ⚡ IGNITE GREATNESS
@@ -493,10 +495,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="flex justify-center mb-8"
             >
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-              >
+              <div>
                 <Image
                   src="/FanFuel_Logo.png"
                   alt="FanFuel Logo"
@@ -504,7 +503,7 @@ export default function Home() {
                   height={200}
                   className="rounded-full drop-shadow-xl"
                 />
-              </motion.div>
+              </div>
             </motion.div>
             <motion.p 
               initial={{ y: 30, opacity: 0 }}

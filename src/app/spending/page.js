@@ -1,0 +1,536 @@
+'use client'
+
+import { useState } from 'react'
+import Image from "next/image"
+import Link from "next/link"
+import { motion } from 'framer-motion'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+import AnimatedBackground from '../../components/AnimatedBackground'
+import CustomCursor from '../../components/CustomCursor'
+import HoverNavigation from '../../components/HoverNavigation'
+
+export default function Spending() {
+  const [fuelieState, setFuelieState] = useState('waving')
+  
+  // Mock data for demo
+  const mockAthletes = [
+    {
+      id: '1',
+      name: 'Sarah Johnson',
+      sport: 'Basketball',
+      university: 'State University',
+      position: 'Point Guard',
+      year: 'Junior',
+      background: 'First-generation college student, pre-med',
+      total_earnings: 15.50,
+      fan_count: 8,
+      monthly_from_purchases: 12.30
+    },
+    {
+      id: '2', 
+      name: 'Marcus Williams',
+      sport: 'Football',
+      university: 'Tech College',
+      position: 'Wide Receiver',
+      year: 'Sophomore',
+      background: 'From underserved community, business major',
+      total_earnings: 287.50,
+      fan_count: 45,
+      monthly_from_purchases: 245.20
+    }
+  ]
+
+  const mockTransactions = [
+    {
+      id: '1',
+      merchant: 'Starbucks Coffee',
+      amount: 12.75,
+      athlete_portion: 0.64,
+      athlete_id: '1',
+      timestamp: '2025-01-16T08:45:00Z',
+      location: 'Downtown Campus',
+      category: 'Food & Drink'
+    },
+    {
+      id: '2',
+      merchant: 'Shell Gas Station',
+      amount: 45.20,
+      athlete_portion: 2.26,
+      athlete_id: '2',
+      timestamp: '2025-01-16T07:30:00Z',
+      location: 'Highway 101',
+      category: 'Gas & Transportation'
+    },
+    {
+      id: '3',
+      merchant: 'Amazon Prime',
+      amount: 23.99,
+      athlete_portion: 1.20,
+      athlete_id: '1',
+      timestamp: '2025-01-15T19:22:00Z',
+      location: 'Online Purchase',
+      category: 'Shopping'
+    },
+    {
+      id: '4',
+      merchant: 'Chipotle Mexican Grill',
+      amount: 16.50,
+      athlete_portion: 0.83,
+      athlete_id: '2',
+      timestamp: '2025-01-15T12:15:00Z',
+      location: 'University District',
+      category: 'Food & Drink'
+    },
+    {
+      id: '5',
+      merchant: 'Target',
+      amount: 67.83,
+      athlete_portion: 3.39,
+      athlete_id: '1',
+      timestamp: '2025-01-14T16:45:00Z',
+      location: 'Westside Mall',
+      category: 'Shopping'
+    }
+  ]
+
+  const getFuelieImage = () => {
+    switch(fuelieState) {
+      case 'eyes-closed':
+        return '/fuelie-eyes-closed.png'
+      case 'sitting':
+        return '/fuelie-sitting.png'
+      default:
+        return '/fuelie-waving.png'
+    }
+  }
+
+  const handleSupportAthlete = (athleteId, amount) => {
+    setFuelieState('eyes-closed')
+    
+    // Simulate processing
+    setTimeout(() => {
+      setFuelieState('sitting')
+      alert(`Successfully sent $${amount} support to athlete!`)
+    }, 2000)
+  }
+
+  return (
+    <div className="relative min-h-screen bg-black overflow-hidden">
+      <CustomCursor />
+      <AnimatedBackground />
+      <HoverNavigation />
+
+      {/* Header */}
+      <motion.header 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-50 px-6 py-6 flex items-center justify-between"
+      >
+        <Link href="/" className="flex items-center space-x-3">
+          <span className="text-3xl font-black text-white bg-gradient-to-r from-[#f59e0b] to-white bg-clip-text text-transparent">
+            FanFuel
+          </span>
+        </Link>
+        <div className="flex items-center space-x-6">
+          <Link href="/alerts" className="text-[#ef4444] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
+            🚨 Alerts
+          </Link>
+          <ConnectButton />
+        </div>
+      </motion.header>
+
+      <div className="relative z-10 container mx-auto px-6 py-8">
+        
+        {/* Page Title */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-5xl md:text-6xl font-black text-white uppercase tracking-wider mb-4">
+            💳 Payment Engine
+          </h1>
+          <p className="text-xl text-[#f59e0b] font-semibold">
+            Transform every purchase into athlete fuel
+          </p>
+        </motion.div>
+
+        {/* Tap-to-Pay Status */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="bg-gradient-to-r from-[#10b981] to-[#059669] rounded-2xl shadow-2xl p-8 mb-12 text-white border border-[#10b981]/30 backdrop-blur-lg max-w-4xl mx-auto"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-black mb-3 uppercase tracking-wider">💳 ENGINE STATUS: ACTIVE</h2>
+              <p className="text-green-100 mb-6 text-lg font-medium">Every purchase automatically fuels your champions!</p>
+              <div className="grid grid-cols-3 gap-4">
+                <motion.div 
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black/30 rounded-xl p-4 border border-white/20"
+                >
+                  <p className="text-sm text-green-200 font-medium">This Month</p>
+                  <p className="text-2xl font-black text-white">$45.80</p>
+                  <p className="text-xs text-green-300 font-medium">🏆 to champions</p>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black/30 rounded-xl p-4 border border-white/20"
+                >
+                  <p className="text-sm text-green-200 font-medium">Fuel Strikes</p>
+                  <p className="text-2xl font-black text-white">127</p>
+                  <p className="text-xs text-green-300 font-medium">⚡ this month</p>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black/30 rounded-xl p-4 border border-white/20"
+                >
+                  <p className="text-sm text-green-200 font-medium">Impact Radius</p>
+                  <p className="text-2xl font-black text-white">2</p>
+                  <p className="text-xs text-green-300 font-medium">🚀 athletes fueled</p>
+                </motion.div>
+              </div>
+            </div>
+            <div className="text-center">
+              <Image
+                src={getFuelieImage()}
+                alt="Fuelie Mascot"
+                width={80}
+                height={80}
+                className="rounded-full mb-2"
+              />
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-[#10b981] px-6 py-3 rounded-xl font-black hover:bg-gray-100 shadow-xl uppercase tracking-wide"
+              >
+                📈 View Battle Log
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Stats Overview */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="grid md:grid-cols-4 gap-6 mb-12 max-w-6xl mx-auto"
+        >
+          <motion.div 
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 text-center"
+          >
+            <div className="text-4xl mb-3">📊</div>
+            <p className="text-2xl font-black text-[#10b981]">127</p>
+            <p className="text-sm text-gray-300 font-medium">Total Transactions</p>
+          </motion.div>
+          <motion.div 
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 text-center"
+          >
+            <div className="text-4xl mb-3">💰</div>
+            <p className="text-2xl font-black text-[#f59e0b]">$1,247.83</p>
+            <p className="text-sm text-gray-300 font-medium">Total Spent</p>
+          </motion.div>
+          <motion.div 
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 text-center"
+          >
+            <div className="text-4xl mb-3">🚀</div>
+            <p className="text-2xl font-black text-[#10b981]">$62.39</p>
+            <p className="text-sm text-gray-300 font-medium">Athlete Fuel</p>
+          </motion.div>
+          <motion.div 
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 text-center"
+          >
+            <div className="text-4xl mb-3">⚡</div>
+            <p className="text-2xl font-black text-[#f59e0b]">5.0%</p>
+            <p className="text-sm text-gray-300 font-medium">Avg. Impact Rate</p>
+          </motion.div>
+        </motion.div>
+
+        {/* Charts Section */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="grid md:grid-cols-2 gap-8 mb-12 max-w-6xl mx-auto"
+        >
+          {/* Spending Chart */}
+          <div className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50">
+            <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 text-center">📈 Weekly Fuel Impact</h3>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-300 font-medium">Monday</span>
+                <div className="flex-1 mx-4 bg-gray-700/50 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-[#10b981] to-[#059669] h-3 rounded-full" style={{width: '85%'}}></div>
+                </div>
+                <span className="text-[#10b981] font-bold">$8.50</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-300 font-medium">Tuesday</span>
+                <div className="flex-1 mx-4 bg-gray-700/50 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] h-3 rounded-full" style={{width: '65%'}}></div>
+                </div>
+                <span className="text-[#f59e0b] font-bold">$6.20</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-300 font-medium">Wednesday</span>
+                <div className="flex-1 mx-4 bg-gray-700/50 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-[#10b981] to-[#059669] h-3 rounded-full" style={{width: '95%'}}></div>
+                </div>
+                <span className="text-[#10b981] font-bold">$9.80</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-300 font-medium">Thursday</span>
+                <div className="flex-1 mx-4 bg-gray-700/50 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-purple-600 to-purple-700 h-3 rounded-full" style={{width: '120%'}}></div>
+                </div>
+                <span className="text-purple-400 font-bold">$12.40</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-300 font-medium">Friday</span>
+                <div className="flex-1 mx-4 bg-gray-700/50 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] h-3 rounded-full" style={{width: '75%'}}></div>
+                </div>
+                <span className="text-[#f59e0b] font-bold">$7.30</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Category Breakdown */}
+          <div className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50">
+            <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 text-center">🎯 Fuel Categories</h3>
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-300 font-medium flex items-center">
+                    ☕ Food & Drink
+                  </span>
+                  <span className="text-[#10b981] font-bold">$18.45</span>
+                </div>
+                <div className="w-full bg-gray-700/50 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-[#10b981] to-[#059669] h-2 rounded-full" style={{width: '40%'}}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-300 font-medium flex items-center">
+                    🛒 Shopping
+                  </span>
+                  <span className="text-[#f59e0b] font-bold">$15.67</span>
+                </div>
+                <div className="w-full bg-gray-700/50 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] h-2 rounded-full" style={{width: '35%'}}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-300 font-medium flex items-center">
+                    ⛽ Gas & Transport
+                  </span>
+                  <span className="text-purple-400 font-bold">$11.27</span>
+                </div>
+                <div className="w-full bg-gray-700/50 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-purple-600 to-purple-700 h-2 rounded-full" style={{width: '25%'}}></div>
+                </div>
+              </div>
+              <div className="border-t border-gray-600/50 pt-4 mt-6">
+                <div className="text-center">
+                  <p className="text-lg font-black text-white mb-2">🏆 Total Impact This Month</p>
+                  <p className="text-3xl font-black text-[#10b981]">$45.39</p>
+                  <p className="text-sm text-gray-400 font-medium">across 2 champions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          
+          {/* Athletes List */}
+          <motion.div 
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50"
+          >
+            <h2 className="text-3xl font-black mb-8 text-white uppercase tracking-wider text-center">🏆 Your Champions</h2>
+            <div className="space-y-6">
+              {mockAthletes.map((athlete, index) => (
+                <motion.div 
+                  key={athlete.id} 
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  className="bg-black/50 border border-gray-700/50 rounded-xl p-6 hover:shadow-2xl transition-all duration-300 hover:border-[#f59e0b]/50"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="font-black text-xl text-white mb-1">{athlete.name}</h3>
+                      <p className="text-[#f59e0b] font-semibold">{athlete.sport} • {athlete.university}</p>
+                      <p className="text-sm text-gray-300">{athlete.position} • {athlete.year}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-black text-2xl text-[#10b981]">${athlete.total_earnings}</p>
+                      <p className="text-xs text-gray-400 font-medium">🔥 {athlete.fan_count} fans</p>
+                      <p className="text-xs text-[#f59e0b] font-bold">${athlete.monthly_from_purchases}/mo fuel</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-300 mb-4 leading-relaxed">{athlete.background}</p>
+                  <div className="flex space-x-3">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleSupportAthlete(athlete.id, 5)}
+                      className="flex-1 bg-gradient-to-r from-[#10b981] to-[#059669] text-white py-3 rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold uppercase tracking-wide"
+                    >
+                      💳 Set as Main
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleSupportAthlete(athlete.id, 10)}
+                      className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-6 py-3 rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold"
+                    >
+                      ⚡ +$10
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Transaction History */}
+          <motion.div 
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50"
+          >
+            <h2 className="text-3xl font-black mb-8 text-white uppercase tracking-wider text-center">📈 Fuel History</h2>
+            <div className="space-y-4 max-h-96 overflow-y-auto">
+              {mockTransactions.map((transaction, index) => {
+                const athlete = mockAthletes.find(a => a.id === transaction.athlete_id)
+                const percentage = ((transaction.athlete_portion / transaction.amount) * 100).toFixed(1)
+                return (
+                  <motion.div 
+                    key={transaction.id}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                    whileHover={{ scale: 1.01, y: -2 }}
+                    className="bg-black/50 border border-gray-700/50 rounded-xl p-5 hover:border-[#f59e0b]/50 transition-all duration-300"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-3 mb-2">
+                          <h3 className="font-bold text-white text-lg">{transaction.merchant}</h3>
+                          <span className="bg-gray-700/50 text-gray-300 px-2 py-1 rounded-full text-xs font-medium">
+                            {transaction.category}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-400 mb-1">{transaction.location}</p>
+                        <p className="text-xs text-gray-500 font-medium">
+                          {new Date(transaction.timestamp).toLocaleDateString()} • {new Date(transaction.timestamp).toLocaleTimeString()}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-black text-white mb-1">${transaction.amount}</p>
+                        <p className="text-sm text-[#10b981] font-bold">+${transaction.athlete_portion} ({percentage}%)</p>
+                        <p className="text-xs text-[#f59e0b] font-medium">→ {athlete?.name}</p>
+                      </div>
+                    </div>
+                    <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-600/30">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-gray-400 font-medium">💪 Athlete Impact</span>
+                        <span className="text-[#10b981] font-bold">${transaction.athlete_portion}</span>
+                      </div>
+                      <div className="w-full bg-gray-700/50 rounded-full h-2 mt-2">
+                        <div 
+                          className="bg-gradient-to-r from-[#10b981] to-[#059669] h-2 rounded-full transition-all duration-500"
+                          style={{ width: `${percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Crypto Rewards Section */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-purple-500/30 max-w-6xl mx-auto mt-12"
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-black text-white uppercase tracking-wider mb-4">🎁 Crypto Rewards</h2>
+            <p className="text-xl text-purple-300 font-semibold">Earn tokens for every dollar you fuel</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <motion.div 
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-black/50 rounded-xl p-6 border border-purple-500/30 text-center"
+            >
+              <div className="text-5xl mb-4">🪙</div>
+              <h3 className="text-2xl font-black text-white mb-2">FUEL Tokens</h3>
+              <p className="text-3xl font-black text-purple-400 mb-2">2,547</p>
+              <p className="text-sm text-gray-300 font-medium">1 FUEL = $1 spent</p>
+              <div className="mt-4 bg-purple-900/30 rounded-lg p-3">
+                <p className="text-xs text-purple-300 font-bold">💎 This Month: +127 FUEL</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-black/50 rounded-xl p-6 border border-blue-500/30 text-center"
+            >
+              <div className="text-5xl mb-4">⚡</div>
+              <h3 className="text-2xl font-black text-white mb-2">Impact NFTs</h3>
+              <p className="text-3xl font-black text-blue-400 mb-2">7</p>
+              <p className="text-sm text-gray-300 font-medium">Milestone rewards earned</p>
+              <div className="mt-4 bg-blue-900/30 rounded-lg p-3">
+                <p className="text-xs text-blue-300 font-bold">🏆 Next: 100 transactions</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-black/50 rounded-xl p-6 border border-[#f59e0b]/30 text-center"
+            >
+              <div className="text-5xl mb-4">🚀</div>
+              <h3 className="text-2xl font-black text-white mb-2">Multiplier</h3>
+              <p className="text-3xl font-black text-[#f59e0b] mb-2">2.4x</p>
+              <p className="text-sm text-gray-300 font-medium">Champion loyalty bonus</p>
+              <div className="mt-4 bg-orange-900/30 rounded-lg p-3">
+                <p className="text-xs text-orange-300 font-bold">🔥 Level 5 Supporter</p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl font-black hover:shadow-xl transition-all duration-300 uppercase tracking-wide"
+            >
+              🏆 Claim Rewards
+            </motion.button>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
