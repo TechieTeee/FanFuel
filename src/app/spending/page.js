@@ -5,12 +5,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from 'framer-motion'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { useAccount } from 'wagmi'
 import AnimatedBackground from '../../components/AnimatedBackground'
 import CustomCursor from '../../components/CustomCursor'
 import HoverNavigation from '../../components/HoverNavigation'
 import ChilizWallet from '../../components/web3/ChilizWallet'
 
 export default function Spending() {
+  const { address, isConnected } = useAccount()
   const [fuelieState, setFuelieState] = useState('waving')
   
   // Enhanced mock data with real school references
@@ -107,14 +109,41 @@ export default function Spending() {
     }
   }
 
-  const handleSupportAthlete = (athleteId, amount) => {
+  const handleSupportAthlete = async (athleteId, amount) => {
+    if (!isConnected || !address) {
+      alert('Please connect your wallet first')
+      return
+    }
+
     setFuelieState('eyes-closed')
     
-    // Simulate processing
-    setTimeout(() => {
-      setFuelieState('sitting')
-      alert(`Successfully sent $${amount} support to athlete!`)
-    }, 2000)
+    try {
+      // Call Chiliz API to process athlete support
+      const response = await fetch('/api/chiliz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'support_athlete',
+          athleteId,
+          amount: amount.toString(),
+          fanAddress: address
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setFuelieState('sitting')
+        alert(`🏆 Successfully sent ${result.athleteShare} CHZ to athlete!\nTx: ${result.transactionHash?.slice(0, 10)}...`)
+      } else {
+        throw new Error(result.error || 'Transaction failed')
+      }
+    } catch (error) {
+      setFuelieState('waving')
+      alert(`❌ Failed to support athlete: ${error.message}`)
+    }
   }
 
   return (

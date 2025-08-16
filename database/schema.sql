@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS athletes (
   total_earnings DECIMAL DEFAULT 0,
   fan_count INTEGER DEFAULT 0,
   profile_image TEXT,
+  chiliz_token_address TEXT,
+  token_symbol TEXT,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );
