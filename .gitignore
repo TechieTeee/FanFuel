@@ -32,10 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-
+.env.local
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+FanFuel_Grounding_Doc.md
+FanFuel_PRD.md

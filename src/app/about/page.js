@@ -36,7 +36,7 @@ export default function About() {
           />
           <h1 className="text-4xl font-bold text-gray-900 mb-6">About FanFuel</h1>
           <p className="text-xl text-gray-600">
-            The first commentary-to-revenue platform transforming sports criticism into athlete prosperity
+            The first tap-to-pay platform transforming everyday purchases into athlete prosperity
           </p>
         </div>
 

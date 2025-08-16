@@ -17,8 +17,9 @@ export default function Dashboard() {
       position: 'Point Guard',
       year: 'Junior',
       background: 'First-generation college student, pre-med',
-      total_earnings: 0,
-      fan_count: 0
+      total_earnings: 15.50,
+      fan_count: 8,
+      monthly_from_purchases: 12.30
     },
     {
       id: '2', 
@@ -28,8 +29,9 @@ export default function Dashboard() {
       position: 'Wide Receiver',
       year: 'Sophomore',
       background: 'From underserved community, business major',
-      total_earnings: 125,
-      fan_count: 23
+      total_earnings: 287.50,
+      fan_count: 45,
+      monthly_from_purchases: 245.20
     }
   ]
 
@@ -112,6 +114,45 @@ export default function Dashboard() {
       </header>
 
       <div className="container mx-auto px-6 py-8">
+        {/* Tap-to-Pay Status */}
+        <div className="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl shadow-lg p-6 mb-8 text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold mb-2">💳 FanFuel Payments Active</h2>
+              <p className="text-green-100 mb-4">Your everyday purchases are supporting athletes!</p>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-white/20 rounded-lg p-3">
+                  <p className="text-sm text-green-100">This Month</p>
+                  <p className="text-xl font-bold">$45.80</p>
+                  <p className="text-xs text-green-200">to athletes</p>
+                </div>
+                <div className="bg-white/20 rounded-lg p-3">
+                  <p className="text-sm text-green-100">Purchases</p>
+                  <p className="text-xl font-bold">127</p>
+                  <p className="text-xs text-green-200">this month</p>
+                </div>
+                <div className="bg-white/20 rounded-lg p-3">
+                  <p className="text-sm text-green-100">Impact</p>
+                  <p className="text-xl font-bold">2</p>
+                  <p className="text-xs text-green-200">athletes supported</p>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <Image
+                src={getFuelieImage()}
+                alt="Fuelie Mascot"
+                width={80}
+                height={80}
+                className="rounded-full mb-2"
+              />
+              <button className="bg-white text-green-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100">
+                View Transactions
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8">
           
           {/* Athletes List */}
@@ -129,15 +170,24 @@ export default function Dashboard() {
                     <div className="text-right">
                       <p className="font-bold text-green-600">${athlete.total_earnings}</p>
                       <p className="text-xs text-gray-500">{athlete.fan_count} fans</p>
+                      <p className="text-xs text-blue-500">${athlete.monthly_from_purchases}/mo from purchases</p>
                     </div>
                   </div>
                   <p className="text-sm text-gray-600 mb-3">{athlete.background}</p>
-                  <button
-                    onClick={() => handleSupportAthlete(athlete.id, 10)}
-                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Quick Support $10
-                  </button>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleSupportAthlete(athlete.id, 5)}
+                      className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+                    >
+                      💳 Set as Payment Athlete
+                    </button>
+                    <button
+                      onClick={() => handleSupportAthlete(athlete.id, 10)}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      +$10
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -146,7 +196,7 @@ export default function Dashboard() {
           {/* Commentary Feed */}
           <div className="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">Live Commentary Feed</h2>
+              <h2 className="text-2xl font-bold">Critical Moment Alerts</h2>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                 <span className="text-sm text-gray-600">Live Analysis</span>
