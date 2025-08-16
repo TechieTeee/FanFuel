@@ -2,17 +2,12 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { flowActionsService, type FlowAction, executeActionRewards } from '../lib/flow-actions'
+import { flowActionsService, executeActionRewards } from '../lib/flow-actions'
 
-interface FlowActionsProps {
-  userAddress?: string
-  showAchievements?: boolean
-}
-
-export default function FlowActions({ userAddress, showAchievements = true }: FlowActionsProps) {
-  const [availableActions, setAvailableActions] = useState<FlowAction[]>([])
-  const [completedActions, setCompletedActions] = useState<FlowAction[]>([])
-  const [recentRewards, setRecentRewards] = useState<unknown[]>([])
+export default function FlowActions({ userAddress, showAchievements = true }) {
+  const [availableActions, setAvailableActions] = useState([])
+  const [completedActions, setCompletedActions] = useState([])
+  const [recentRewards, setRecentRewards] = useState([])
   const [showRewardsModal, setShowRewardsModal] = useState(false)
 
   useEffect(() => {
@@ -25,7 +20,7 @@ export default function FlowActions({ userAddress, showAchievements = true }: Fl
     if (!userAddress) return
 
     const available = flowActionsService.getAvailableActions(userAddress)
-    const completed = flowActionsService.getUserActions(userAddress)
+    const completed = flowActionsService.getCompletedActions(userAddress)
     
     setAvailableActions(available)
     setCompletedActions(completed)
