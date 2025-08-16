@@ -98,7 +98,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 1.7 }}
                 className="text-lg md:text-xl text-[#f59e0b]/90 mb-12 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg"
               >
-                Transform every coffee, every meal, every transaction into direct support for underrepresented student athletes. This is how legends are born.
+Transform every coffee, every meal, every transaction into direct support for athletes who need it most - from Olympic hopefuls to rising MLS stars to track champions. This is how legends are born.
               </motion.p>
 
               <motion.div 
@@ -168,13 +168,13 @@ export default function Home() {
                   className="max-w-5xl mx-auto space-y-4"
                 >
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    Fuelie isn't just an AI assistant – he's a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in underrepresented champions.
+                    Fuelie isn't just an AI assistant – he's a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in emerging champions across Olympic sports, professional leagues, and individual disciplines.
                   </p>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when your favorite athletes need support most. He doesn't just process payments – he orchestrates a movement that turns everyday fans into kingmakers.
+                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when athletes need support most. From Olympic trials to MLS seasons to track meets, he doesn't just process payments – he provides athletes with unprecedented fan data and revenue streams.
                   </p>
                   <p className="text-lg text-orange-300/90 font-medium">
-                    "Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker." - Fuelie
+                    "Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker. Every athlete gets the data they need to build their brand." - Fuelie
                   </p>
                 </motion.div>
               </motion.div>

@@ -12,6 +12,7 @@ import AnimatedBackground from '../../components/AnimatedBackground';
 import HoverNavigation from '../../components/HoverNavigation.js';
 import MinimalWallet from '../../components/web3/MinimalWallet';
 import { triggerAthleteSupport, triggerViralReaction, executeActionRewards } from '../../lib/flow-actions';
+import PersonalizedAds from '../../components/PersonalizedAds';
 
 export default function Alerts() {
   const [fuelieState, setFuelieState] = useState('waving')
@@ -168,7 +169,7 @@ export default function Alerts() {
           </p>
         </motion.div>
 
-        {/* NCAA News Ticker */}
+        {/* Live Sports News Ticker */}
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -177,7 +178,7 @@ export default function Alerts() {
         >
           <div className="bg-[#ef4444]/30 px-6 py-2 border-b border-[#ef4444]/30">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-black text-white uppercase tracking-wider">📺 Live NCAA Feed</h3>
+              <h3 className="text-lg font-black text-white uppercase tracking-wider">📺 Live Sports Feed</h3>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-[#ef4444] rounded-full animate-pulse"></div>
                 <span className="text-xs text-[#f59e0b] font-bold uppercase">Breaking</span>
@@ -187,9 +188,9 @@ export default function Alerts() {
           
           {loading ? (
             <div className="p-4 text-center">
-              <span className="text-gray-400 font-medium">⏳ Loading live NCAA data...</span>
+              <span className="text-gray-400 font-medium">⏳ Loading live sports data...</span>
             </div>
-          ) : ncaaData.rankings.length > 0 || true ? (
+          ) : (
             <div className="relative h-12 overflow-hidden">
               <motion.div
                 animate={{ x: [1200, -2400] }}
@@ -201,21 +202,21 @@ export default function Alerts() {
                 className="absolute flex items-center h-full space-x-8 whitespace-nowrap"
               >
 {[
-                  "🚨 BREAKING: Texas QB Quinn Ewers signs $2.3M NIL deal with Austin tech startup",
-                  "🏈 FINAL: #3 Oregon defeats USC 42-28, Dillon Gabriel throws for 394 yards",
-                  "📈 RANKING ALERT: Miami jumps 4 spots to #12 after upset victory over Clemson",
-                  "💰 NIL NEWS: Stanford basketball star Haley Jones partners with Nike for exclusive line",
-                  "⚡ UPSET: Unranked Vanderbilt stuns #9 Alabama 40-35 in overtime thriller",
-                  "🏀 TRENDING: UConn's Paige Bueckers leads comeback with 31 points against South Carolina",
-                  "💎 NIL DEAL: Duke freshman Cooper Flagg signs multi-year agreement with Jordan Brand",
-                  "🔥 LIVE: #1 Texas leads Oklahoma 21-14 at halftime in Red River Showdown",
-                  "📊 STAT WATCH: LSU's Jayden Daniels becomes first QB with 3,500 pass + 800 rush yards",
-                  "🏆 CHAMPIONSHIP: Michigan State wins Big Ten volleyball title, advances to Final Four",
-                  "💸 BREAKING: NCAA approves new NIL collective rules effective immediately",
-                  "⭐ RISING STAR: Colorado's Travis Hunter leads Heisman race with two-way dominance",
-                  "🚀 TRANSFER PORTAL: Top-rated RB commits to Florida State, bringing $500K NIL package",
-                  "🎯 RECORD BROKEN: Tennessee's Dylan Sampson rushes for 285 yards, breaks school record",
-                  "💪 COMEBACK: UCF rallies from 21-point deficit to beat Cincinnati 38-35"
+                  "💰 WNBA: Star players launch crowdfunding campaigns to supplement league salaries",
+                  "⚽ BREAKTHROUGH: USWNT equal pay victory inspires global women's sports movement",
+                  "🏃 OLYMPICS: Track athletes gain million+ followers but struggle with financial support",
+                  "🏀 PAY GAP: WNBA All-Star earns less in full season than NBA player makes in single game",
+                  "🏊 SWIMMING: Olympic champion works part-time job to fund training between Games",
+                  "⚽ MLS: Young American talents choosing European clubs over domestic opportunities", 
+                  "🤸 GYMNASTICS: Elite gymnasts petition for better financial support after Olympic success",
+                  "🎾 TENNIS: Lower-ranked players struggle as tour expenses exceed prize money",
+                  "🏃 VIRAL: Track star's TikTok about athlete struggles reaches 10M views in 24 hours",
+                  "⚽ WOMEN'S SOCCER: NWSL attendance up 300% but player salaries lag far behind men",
+                  "🏊 FUNDING: Olympic swimmer launches Patreon to crowdfund training expenses",
+                  "🏀 G-LEAGUE: Developmental players work multiple jobs while chasing NBA dreams",
+                  "🏃 DIAMOND LEAGUE: Track stars gain social media fame but need financial stability",
+                  "⚽ USWNT: World Cup champions advocate for better youth soccer funding nationwide",
+                  "💪 CHANGE: Athletes turn to fan-funding platforms to bridge income gaps across sports"
                 ].map((story, index) => (
                   <div key={index} className="flex items-center space-x-4">
                     <span className="text-white font-medium">{story}</span>
@@ -223,10 +224,6 @@ export default function Alerts() {
                   </div>
                 ))}
               </motion.div>
-            </div>
-          ) : (
-            <div className="p-4 text-center">
-              <span className="text-gray-400 font-medium">📡 NCAA data temporarily unavailable</span>
             </div>
           )}
         </motion.div>
@@ -248,27 +245,33 @@ export default function Alerts() {
               </div>
             )) : [
               {
-                topic: 'College Football Playoff',
+                topic: 'WNBA Pay Equity Movement',
+                virality_score: 0.96,
+                tweet_count: 35420,
+                sentiment: 'positive'
+              },
+              {
+                topic: 'USWNT Equal Pay Victory',
                 virality_score: 0.94,
-                tweet_count: 25420,
+                tweet_count: 28934,
                 sentiment: 'positive'
               },
               {
-                topic: 'NIL Deals',
+                topic: 'Olympic Trials 2025',
                 virality_score: 0.89,
-                tweet_count: 18934,
+                tweet_count: 22156,
                 sentiment: 'positive'
               },
               {
-                topic: 'Transfer Portal',
-                virality_score: 0.83,
-                tweet_count: 15056,
-                sentiment: 'neutral'
+                topic: 'MLS Rising Stars',
+                virality_score: 0.84,
+                tweet_count: 18203,
+                sentiment: 'positive'
               },
               {
-                topic: 'March Madness',
-                virality_score: 0.78,
-                tweet_count: 12203,
+                topic: 'Track Athletes Go Viral',
+                virality_score: 0.81,
+                tweet_count: 15876,
                 sentiment: 'positive'
               }
             ].map((topic, index) => (
@@ -500,6 +503,16 @@ export default function Alerts() {
           className="max-w-5xl mx-auto mt-12"
         >
           <FlowActions userAddress={userAddress} showAchievements={true} />
+        </motion.div>
+
+        {/* Personalized Ads */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="max-w-md mx-auto mt-8"
+        >
+          <PersonalizedAds supportedAthletes={['1', '2']} maxAds={2} />
         </motion.div>
 
       </div>
