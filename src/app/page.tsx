@@ -69,7 +69,7 @@ export default function Home() {
                 className="text-8xl md:text-9xl font-black mb-8 leading-none tracking-tight"
               >
                 <span className="block text-white drop-shadow-2xl mb-4">
-                  FUEL
+                  FUEL THE FUTURE
                 </span>
                 <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
@@ -78,7 +78,7 @@ export default function Home() {
                   className="block bg-gradient-to-r from-[#f59e0b] to-[#ef4444] bg-clip-text text-transparent drop-shadow-xl"
                 >
                   <TypewriterText 
-                    words={['GREATNESS', 'LEGENDS', 'REVOLUTION', 'CHAMPIONS', 'DOMINANCE']}
+                    words={['OF SPORTS', 'OF ATHLETES', 'OF FANDOM']}
                     className=""
                   />
                 </motion.div>
@@ -90,7 +90,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 1.5 }}
                 className="text-2xl md:text-3xl text-white/90 mb-8 max-w-4xl mx-auto font-light leading-tight drop-shadow-lg tracking-wide"
               >
-                The revolution starts with your next purchase.
+                Turn your everyday spending into direct support for your favorite athletes.
               </motion.p>
               <motion.p 
                 initial={{ y: 50, opacity: 0 }}
@@ -298,8 +298,8 @@ export default function Home() {
                         <span className="text-9xl drop-shadow-2xl">🏆</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">Choose Your Champions</h4>
-                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Discover hidden gems and rising stars who deserve your support. <span className="text-[#f59e0b] font-bold">Your choice. Your impact. Your legacy.</span></p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">1. Choose Your Champion</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Discover and support underrepresented athletes.</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -318,8 +318,8 @@ export default function Home() {
                         <span className="text-9xl drop-shadow-2xl">💳</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">Transform Spending</h4>
-                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Every coffee, every meal, every purchase becomes a precision strike for athlete support. <span className="text-[#10b981] font-bold">Normal life, extraordinary impact.</span></p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">2. Fuel Their Journey</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Your everyday purchases send direct support.</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -338,8 +338,8 @@ export default function Home() {
                         <span className="text-9xl drop-shadow-2xl">⚡</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">⚡ Instant Impact</h4>
-                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Blockchain-powered splits happen in milliseconds. <span className="text-[#10b981] font-bold">Zero friction. Maximum velocity. Pure athlete fuel.</span></p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">3. See Your Impact</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Track your contributions and see the difference you're making.</p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -358,8 +358,8 @@ export default function Home() {
                         <span className="text-9xl drop-shadow-2xl">💪</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">💪 Battle Intelligence</h4>
-                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Fuelie's AI engine detects career-defining moments – championships, injuries, breakthroughs. <span className="text-[#ef4444] font-bold">Strike when it matters most.</span></p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">4. Unlock Rewards</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Earn exclusive NFTs and rewards for your support.</p>
                   </motion.div>
                 </div>
               </motion.div>

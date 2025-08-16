@@ -1,35 +1,35 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { demoAthletes } from '../../../data/demo-athletes';
 import { demoCommentary } from '../../../data/demo-commentary';
+import FlowActions from '../../components/FlowActions';
+import { triggerAthleteSupport, triggerViralReaction, executeActionRewards } from '../../lib/flow-actions';
 
 export default function Alerts() {
   const [fuelieState, setFuelieState] = useState('waving')
-  const [ncaaData, setNcaaData] = useState({ rankings: [], games: [] })
+    const [ncaaData, setNcaaData] = useState({ rankings: [], games: [], trending_topics: [] })
   const [loading, setLoading] = useState(true)
   const [commentary, setCommentary] = useState([])
+  const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
 
   useEffect(() => {
     const fetchNCAAData = async () => {
       try {
-        const [rankingsRes, gamesRes] = await Promise.all([
+        const [rankingsRes, gamesRes, trendingRes] = await Promise.all([
           fetch('https://ncaa-api.henrygd.me/rankings/football/fbs/associated-press'),
-          fetch('https://ncaa-api.henrygd.me/scoreboard/football/fbs/2025/1')
+          fetch('https://ncaa-api.henrygd.me/scoreboard/football/fbs/2025/1'),
+          fetch('/api/trending'),
         ])
         
         const rankingsData = await rankingsRes.json()
         const gamesData = await gamesRes.json()
-        
-        console.log('Rankings Data:', rankingsData)
-        console.log('Games Data:', gamesData)
+        const trendingData = await trendingRes.json()
         
         setNcaaData({
           rankings: rankingsData.data || [],
-          games: gamesData.games || []
+          games: gamesData.games || [],
+          trending_topics: trendingData || [],
         })
         
-        console.log('Final NCAA Data:', {
-          rankings: rankingsData.data || [],
-          games: gamesData.games || []
-        })
       } catch (error) {
         console.error('Error fetching NCAA data:', error)
       } finally {
@@ -72,15 +72,49 @@ export default function Alerts() {
     }
   }
 
-  const handleSupportAthlete = (athleteId, amount) => {
+  const handleSupportAthlete = useCallback(async (athleteId, amount, viralityScore = 0.5) => {
     setFuelieState('eyes-closed')
     
-    // Simulate processing
-    setTimeout(() => {
+    try {
+      // Get athlete info
+      const athlete = demoAthletes.find(a => a.id === athleteId)
+      
+      // Trigger Flow Actions for athlete support
+      const triggeredActions = await triggerAthleteSupport(
+        userAddress,
+        athleteId,
+        athlete?.name || 'Unknown Athlete',
+        amount,
+        viralityScore
+      )
+
+      // Check for viral reaction triggers if virality score is high
+      if (viralityScore >= 0.8) {
+        const viralActions = await triggerViralReaction(
+          userAddress,
+          viralityScore,
+          athleteId
+        )
+        triggeredActions.push(...viralActions)
+      }
+
+      // Execute rewards for triggered actions
+      if (triggeredActions.length > 0) {
+        await executeActionRewards(userAddress, triggeredActions, {
+          athleteId,
+          athleteName: athlete?.name,
+          reactionAmount: amount,
+          viralityScore
+        })
+      }
+      
       setFuelieState('sitting')
-      alert(`Successfully sent $${amount} support to athlete!`)
-    }, 2000)
-  }
+      alert(`🏆 Successfully sent $${amount} support to ${athlete?.name}!\n${triggeredActions.length > 0 ? `\n🎉 ${triggeredActions.length} Flow Action(s) triggered on Flow EVM!` : ''}`)
+    } catch (error) {
+      setFuelieState('waving')
+      alert(`❌ Failed to support athlete: ${error.message}`)
+    }
+  }, [userAddress, demoAthletes])
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
@@ -188,6 +222,24 @@ export default function Alerts() {
           )}
         </motion.div>
 
+        {/* Trending Topics */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50 max-w-5xl mx-auto mb-12"
+        >
+          <h2 className="text-3xl font-black text-white uppercase tracking-wider mb-6 text-center">🔥 Trending Topics</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {ncaaData.trending_topics?.map((topic, index) => (
+              <div key={index} className="bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
+                <p className="text-lg font-semibold text-white">{topic.topic}</p>
+                <p className="text-sm text-gray-400">Virality Score: {topic.virality_score}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* NCAA Games */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -290,7 +342,7 @@ export default function Alerts() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSupportAthlete(comment.athlete_id, 2)}
+                        onClick={() => handleSupportAthlete(comment.athlete_id, 2, comment.virality_score)}
                         className={`bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 2 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         👏 Clap $2
@@ -298,7 +350,7 @@ export default function Alerts() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSupportAthlete(comment.athlete_id, 5)}
+                        onClick={() => handleSupportAthlete(comment.athlete_id, 5, comment.virality_score)}
                         className={`bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 5 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         🔥 Fire $5
@@ -306,7 +358,7 @@ export default function Alerts() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSupportAthlete(comment.athlete_id, 10)}
+                        onClick={() => handleSupportAthlete(comment.athlete_id, 10, comment.virality_score)}
                         className={`bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 10 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         💎 Gem $10
@@ -316,7 +368,7 @@ export default function Alerts() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSupportAthlete(comment.athlete_id, 15)}
+                        onClick={() => handleSupportAthlete(comment.athlete_id, 15, comment.virality_score)}
                         className={`bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 15 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         💪 Strong $15
@@ -324,7 +376,7 @@ export default function Alerts() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSupportAthlete(comment.athlete_id, 25)}
+                        onClick={() => handleSupportAthlete(comment.athlete_id, 25, comment.virality_score)}
                         className={`bg-gradient-to-r from-yellow-600 to-yellow-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 25 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         🏆 Legend $25
@@ -332,7 +384,7 @@ export default function Alerts() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => handleSupportAthlete(comment.athlete_id, 50)}
+                        onClick={() => handleSupportAthlete(comment.athlete_id, 50, comment.virality_score)}
                         className={`bg-gradient-to-r from-pink-600 to-pink-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 50 ? 'ring-2 ring-yellow-400' : ''}`}
                       >
                         👑 King $50
@@ -361,6 +413,17 @@ export default function Alerts() {
           </div>
 
         </motion.div>
+
+        {/* Flow Actions Integration */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="max-w-5xl mx-auto mt-12"
+        >
+          <FlowActions userAddress={userAddress} showAchievements={true} />
+        </motion.div>
+
       </div>
     </div>
   )

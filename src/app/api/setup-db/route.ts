@@ -55,6 +55,13 @@ CREATE TABLE IF NOT EXISTS commentary_reactions (
   amount DECIMAL NOT NULL,
   created_at TIMESTAMP DEFAULT NOW()
 );
+
+-- Trending topics cache table
+CREATE TABLE IF NOT EXISTS trending_cache (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  topics JSONB NOT NULL,
+  cached_at TIMESTAMP DEFAULT NOW()
+);
 `
 
 export async function POST() {

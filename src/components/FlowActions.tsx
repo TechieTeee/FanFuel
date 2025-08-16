@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { flowActionsService, type FlowAction, executeActionRewards } from '../lib/flow-actions'
 
@@ -21,7 +21,7 @@ export default function FlowActions({ userAddress, showAchievements = true }: Fl
     }
   }, [userAddress])
 
-  const loadUserActions = () => {
+  const loadUserActions = useCallback(() => {
     if (!userAddress) return
 
     const available = flowActionsService.getAvailableActions(userAddress)
@@ -29,10 +29,10 @@ export default function FlowActions({ userAddress, showAchievements = true }: Fl
     
     setAvailableActions(available)
     setCompletedActions(completed)
-  }
+  }, [userAddress])
 
   // Handle action completion and reward distribution
-  const handleActionCompleted = async (
+  const handleActionCompleted = useCallback(async (
     action: FlowAction,
     context: any
   ) => {
@@ -52,9 +52,9 @@ export default function FlowActions({ userAddress, showAchievements = true }: Fl
     } catch (error) {
       console.error('Action reward failed:', error)
     }
-  }
+  }, [userAddress, loadUserActions])
 
-  const getActionIcon = (type: string) => {
+  const getActionIcon = useMemo(() => (type: string) => {
     switch (type) {
       case 'champion_support': return '🏆'
       case 'viral_reaction': return '🔥'
@@ -62,16 +62,16 @@ export default function FlowActions({ userAddress, showAchievements = true }: Fl
       case 'community_rally': return '🚀'
       default: return '⚡'
     }
-  }
+  }, [])
 
-  const getRarityColor = (rarity: string) => {
+  const getRarityColor = useMemo(() => (rarity: string) => {
     switch (rarity) {
       case 'Legendary': return 'from-yellow-500 to-amber-600'
       case 'Epic': return 'from-purple-500 to-indigo-600'
       case 'Rare': return 'from-blue-500 to-cyan-600'
       default: return 'from-gray-500 to-gray-600'
     }
-  }
+  }, [])
 
   return (
     <div className="space-y-6">

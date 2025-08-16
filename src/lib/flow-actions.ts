@@ -59,7 +59,8 @@ export const FLOW_ACTIONS: FlowAction[] = [
     },
     chainRewards: {
       88882: { rewardType: 'CHZ_BONUS', amount: '5.0' }, // Chiliz
-      1: { rewardType: 'ETH_REBATE', amount: '0.001' }   // Ethereum
+      1: { rewardType: 'ETH_REBATE', amount: '0.001' },   // Ethereum
+      747: { rewardType: 'FLOW_EVM_ACHIEVEMENT', amount: '1.0' } // Flow EVM Testnet
     }
   },
   {
@@ -87,7 +88,8 @@ export const FLOW_ACTIONS: FlowAction[] = [
     },
     chainRewards: {
       88882: { rewardType: 'CHZ_MULTIPLIER', amount: '2x' },
-      10: { rewardType: 'OP_REWARD', amount: '10.0' }
+      10: { rewardType: 'OP_REWARD', amount: '10.0' },
+      747: { rewardType: 'FLOW_EVM_VIRAL', amount: '5.0' } // Flow EVM Testnet
     }
   },
   {
@@ -116,7 +118,8 @@ export const FLOW_ACTIONS: FlowAction[] = [
     chainRewards: {
       88882: { rewardType: 'CHZ_PREMIUM', amount: '25.0' },
       137: { rewardType: 'MATIC_BONUS', amount: '100.0' },
-      8453: { rewardType: 'BASE_REWARD', amount: '0.01' }
+      8453: { rewardType: 'BASE_REWARD', amount: '0.01' },
+      747: { rewardType: 'FLOW_EVM_KING', amount: '10.0' } // Flow EVM Testnet
     }
   },
   {
@@ -144,7 +147,8 @@ export const FLOW_ACTIONS: FlowAction[] = [
     },
     chainRewards: {
       88882: { rewardType: 'CHZ_COMMUNITY', amount: '15.0' },
-      1: { rewardType: 'ETH_LEADERSHIP', amount: '0.005' }
+      1: { rewardType: 'ETH_LEADERSHIP', amount: '0.005' },
+      747: { rewardType: 'FLOW_EVM_RALLY', amount: '7.5' } // Flow EVM Testnet
     }
   }
 ]
@@ -214,18 +218,21 @@ export class FlowActionsService {
     try {
       console.log('Executing Flow Action:', action.title)
 
-      // 1. Mint NFT on Flow
+      // 1. Mint NFT on Flow EVM
       const nftResult = await fetch('/api/flow', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'mint_reaction_nft',
+          action: 'mint_achievement_nft',
+          network: 'flow-evm', // Use Flow EVM instead of Cadence
+          contractAddress: '0x' + Math.random().toString(16).substr(2, 40), // Mock EVM contract
           athleteId: context.athleteId || 'achievement',
           athleteName: context.athleteName || 'Achievement',
-          reactionType: action.title,
-          reactionAmount: 0, // Achievement NFTs are free
-          commentaryText: action.description,
-          sentimentScore: 1.0, // Positive achievement
+          achievementType: action.type,
+          rewardMetadata: action.rewards.nftMetadata,
+          userAddress: userAddress,
+          chainId: 747, // Flow EVM Testnet
+          sentimentScore: 1.0,
           viralityScore: context.viralityScore || 0.5
         })
       })

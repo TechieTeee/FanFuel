@@ -1,12 +1,16 @@
+import React, { useState, useCallback, useMemo } from 'react';
 import { demoAthletes } from '../../../data/demo-athletes';
 import { demoTransactions } from '../../../data/demo-transactions';
+import FlowActions from '../../components/FlowActions';
+import { triggerAthleteSupport, executeActionRewards } from '../../lib/flow-actions';
 
 export default function Spending() {
   const [fuelieState, setFuelieState] = useState('waving')
   const [showTransactionFlow, setShowTransactionFlow] = useState(false)
   const [currentTransaction, setCurrentTransaction] = useState(null)
+  const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
 
-  const getFuelieImage = () => {
+  const getFuelieImage = useMemo(() => {
     switch(fuelieState) {
       case 'eyes-closed':
         return '/fuelie-eyes-closed.png'
@@ -15,12 +19,9 @@ export default function Spending() {
       default:
         return '/fuelie-waving.png'
     }
-  }
+  }, [fuelieState])
 
-  const handleSupportAthlete = async (athleteId, amount) => {
-    // For demo purposes, simulate wallet connection check
-    const mockAddress = '0x1234567890123456789012345678901234567890'
-
+  const handleSupportAthlete = useCallback(async (athleteId, amount) => {
     setFuelieState('eyes-closed')
     
     try {
@@ -34,7 +35,7 @@ export default function Spending() {
           action: 'support_athlete',
           athleteId,
           amount: amount.toString(),
-          fanAddress: mockAddress
+          fanAddress: userAddress
         })
       })
 
@@ -42,7 +43,28 @@ export default function Spending() {
 
       if (result.success) {
         setFuelieState('sitting')
-        alert(`🏆 Successfully sent ${result.athleteShare} CHZ to athlete!\nTx: ${result.transactionHash?.slice(0, 10)}...`)
+        
+        // Trigger Flow Actions for athlete support
+        const athlete = demoAthletes.find(a => a.id === athleteId)
+        const triggeredActions = await triggerAthleteSupport(
+          userAddress,
+          athleteId,
+          athlete?.name || 'Unknown Athlete',
+          amount,
+          0.5 // Default virality score
+        )
+
+        // Execute rewards for triggered actions
+        if (triggeredActions.length > 0) {
+          await executeActionRewards(userAddress, triggeredActions, {
+            athleteId,
+            athleteName: athlete?.name,
+            reactionAmount: amount,
+            viralityScore: 0.5
+          })
+        }
+        
+        alert(`🏆 Successfully sent ${result.athleteShare} CHZ to athlete!\nTx: ${result.transactionHash?.slice(0, 10)}...\n${triggeredActions.length > 0 ? `\n🎉 ${triggeredActions.length} Flow Action(s) triggered!` : ''}`)
       } else {
         throw new Error(result.error || 'Transaction failed')
       }
@@ -50,7 +72,7 @@ export default function Spending() {
       setFuelieState('waving')
       alert(`❌ Failed to support athlete: ${error.message}`)
     }
-  }
+  }, [userAddress, demoAthletes])
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
@@ -435,6 +457,16 @@ export default function Spending() {
             </div>
           </motion.div>
         </div>
+
+        {/* Flow Actions Integration */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="max-w-6xl mx-auto mt-12"
+        >
+          <FlowActions userAddress={userAddress} showAchievements={true} />
+        </motion.div>
 
         {/* Crypto Rewards Section */}
         <motion.div 
