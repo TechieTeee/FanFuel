@@ -8,6 +8,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import AnimatedBackground from '../../components/AnimatedBackground'
 import CustomCursor from '../../components/CustomCursor'
 import HoverNavigation from '../../components/HoverNavigation'
+import ChilizWallet from '../../components/web3/ChilizWallet'
 
 export default function Spending() {
   const [fuelieState, setFuelieState] = useState('waving')
@@ -562,6 +563,16 @@ export default function Spending() {
               🏆 Claim Rewards
             </motion.button>
           </div>
+        </motion.div>
+
+        {/* Chiliz SportFi Integration */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="max-w-md mx-auto mt-12"
+        >
+          <ChilizWallet onSupportAthlete={handleSupportAthlete} />
         </motion.div>
 
       </div>
