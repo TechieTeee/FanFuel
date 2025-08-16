@@ -70,12 +70,12 @@ contract ReactionNFT is ERC721, ERC721URIStorage, Ownable, ReentrancyGuard, Paus
         baseMetadataURI = _baseMetadataURI;
         
         // Initialize reaction rarities with catchy names
-        reactionRarities[ReactionType.CLAP] = ReactionRarity("Clap", 2 ether, 1, "👏");
-        reactionRarities[ReactionType.FIRE] = ReactionRarity("Fire", 5 ether, 2, "🔥");
-        reactionRarities[ReactionType.GEM] = ReactionRarity("Gem", 10 ether, 3, "💎");
-        reactionRarities[ReactionType.STRONG] = ReactionRarity("Strong", 15 ether, 4, "💪");
-        reactionRarities[ReactionType.LEGEND] = ReactionRarity("Legend", 25 ether, 5, "🏆");
-        reactionRarities[ReactionType.KING] = ReactionRarity("King", 50 ether, 10, "👑");
+        reactionRarities[ReactionType.CLAP] = ReactionRarity("Clap", 2 ether, 1, "CLAP");
+        reactionRarities[ReactionType.FIRE] = ReactionRarity("Fire", 5 ether, 2, "FIRE");
+        reactionRarities[ReactionType.GEM] = ReactionRarity("Gem", 10 ether, 3, "GEM");
+        reactionRarities[ReactionType.STRONG] = ReactionRarity("Strong", 15 ether, 4, "STRONG");
+        reactionRarities[ReactionType.LEGEND] = ReactionRarity("Legend", 25 ether, 5, "LEGEND");
+        reactionRarities[ReactionType.KING] = ReactionRarity("King", 50 ether, 10, "KING");
     }
     
     /**
