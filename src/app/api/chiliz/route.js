@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { 
   supportAthleteOnChiliz, 
   createAthleteToken, 
@@ -7,18 +7,12 @@ import {
 } from '@/lib/chiliz'
 
 // POST /api/chiliz - Handle Chiliz Chain operations
-export async function POST(request: NextRequest) {
+export async function POST(request) {
   try {
     const { action, ...params } = await request.json()
 
     // Initialize Chiliz provider
-    const initResult = initializeChilizProvider()
-    if (!initResult.success) {
-      return NextResponse.json(
-        { error: 'Failed to initialize Chiliz provider' },
-        { status: 500 }
-      )
-    }
+    const provider = initializeChilizProvider()
 
     switch (action) {
       case 'support_athlete':

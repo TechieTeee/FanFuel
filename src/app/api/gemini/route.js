@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server'
 
-export async function POST(request: Request) {
+export async function POST(request) {
   const { text } = await request.json()
 
   // In a real application, you would use a sentiment analysis model here.
