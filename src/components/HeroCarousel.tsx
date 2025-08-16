@@ -8,32 +8,52 @@ const heroImages = [
   {
     src: '/pexels-cottonbro-5740517.jpg',
     alt: 'Athletic Training',
-    caption: 'Supporting Athletes'
+    caption: '⚡ Igniting Champions'
   },
   {
     src: '/pexels-pixabay-163439.jpg', 
     alt: 'Team Sports',
-    caption: 'Building Champions'
+    caption: '🔥 Building Legends'
   },
   {
     src: '/pexels-football-wife-577822-1618169.jpg',
     alt: 'Competition',
-    caption: 'Fueling Dreams'
+    caption: '💪 Fueling Greatness'
   },
   {
     src: '/pexels-cottonbro-5740794.jpg',
     alt: 'Victory Moment',
-    caption: 'Celebrating Success'
+    caption: '🏆 Championship Moments'
   },
   {
     src: '/pexels-ketut-subiyanto-4720517.jpg',
     alt: 'Athletic Focus',
-    caption: 'Determined Spirit'
+    caption: '🎯 Unstoppable Focus'
   },
   {
     src: '/pexels-tima-miroshnichenko-5750821.jpg',
     alt: 'Team Unity',
-    caption: 'Stronger Together'
+    caption: '⭐ Legendary Unity'
+  },
+  {
+    src: '/pexels-nappy-935948.jpg',
+    alt: 'Athletic Power',
+    caption: '💥 Pure Power'
+  },
+  {
+    src: '/pexels-yankrukov-8199172.jpg',
+    alt: 'Training Intensity',
+    caption: '🚀 Elite Performance'
+  },
+  {
+    src: '/pexels-mikhail-nilov-6620724.jpg',
+    alt: 'Victory Celebration',
+    caption: '🔥 Victory Fuel'
+  },
+  {
+    src: '/pexels-george-pak-7972525.jpg',
+    alt: 'Athletic Excellence',
+    caption: '⚡ Excellence Unleashed'
   }
 ]
 
@@ -43,7 +63,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroImages.length)
-    }, 6000)
+    }, 4000)
 
     return () => clearInterval(interval)
   }, [])
@@ -53,10 +73,10 @@ export default function HeroCarousel() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 0.8, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 2, ease: 'easeInOut' }}
+          initial={{ opacity: 0, scale: 1.1, rotateY: 5 }}
+          animate={{ opacity: 0.9, scale: 1, rotateY: 0 }}
+          exit={{ opacity: 0, scale: 0.95, rotateY: -5 }}
+          transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="absolute inset-0"
         >
           <Image
@@ -66,24 +86,11 @@ export default function HeroCarousel() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40" />
+          
         </motion.div>
       </AnimatePresence>
 
-      {/* Carousel indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-        {heroImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex 
-                ? 'bg-orange-500 w-8' 
-                : 'bg-white/50 hover:bg-white/80'
-            }`}
-          />
-        ))}
-      </div>
     </div>
   )
 }

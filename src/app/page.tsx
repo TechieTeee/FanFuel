@@ -5,8 +5,6 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { TrendingUp, Smartphone, RotateCcw, BellRing, Cpu, Network, Sparkles } from 'lucide-react'
-import { IconProps } from 'lucide-react'
 import AnimatedBackground from '../components/AnimatedBackground'
 import HeroCarousel from '../components/HeroCarousel'
 import TypewriterText from '../components/TypewriterText'
@@ -40,39 +38,6 @@ export default function Home() {
         <CustomCursor />
         <AnimatedBackground />
         
-        {/* Floating Header */}
-        <motion.header 
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-8 py-4 bg-black/80 backdrop-blur-md border border-gray-800/50 rounded-xl shadow-2xl"
-        >
-          <div className="flex items-center justify-between space-x-8">
-            <div className="flex items-center space-x-3">
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Image
-                  src="/fanfuel-logo.png"
-                  alt="FanFuel Logo"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-              </motion.div>
-              <span className="text-2xl font-bold text-white">
-                FanFuel
-              </span>
-            </div>
-            <MagneticButton 
-              href="/dashboard"
-              className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              Launch App
-            </MagneticButton>
-          </div>
-        </motion.header>
 
         {/* Hero Section */}
         <main className="relative min-h-screen">
@@ -97,10 +62,10 @@ export default function Home() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 1.2 }}
-                  className="block bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-xl"
+                  className="block bg-gradient-to-r from-[#f59e0b] to-[#ef4444] bg-clip-text text-transparent drop-shadow-xl"
                 >
                   <TypewriterText 
-                    words={['GREATNESS', 'DREAMS', 'CHAMPIONS', 'VICTORY', 'PASSION']}
+                    words={['GREATNESS', 'LEGENDS', 'REVOLUTION', 'CHAMPIONS', 'DOMINANCE']}
                     className=""
                   />
                 </motion.div>
@@ -110,9 +75,17 @@ export default function Home() {
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, delay: 1.5 }}
-                className="text-2xl md:text-3xl text-white/90 mb-12 max-w-4xl mx-auto font-light leading-tight drop-shadow-lg tracking-wide"
+                className="text-2xl md:text-3xl text-white/90 mb-8 max-w-4xl mx-auto font-light leading-tight drop-shadow-lg tracking-wide"
               >
-                Every purchase. Every moment. Every athlete.
+                The revolution starts with your next purchase.
+              </motion.p>
+              <motion.p 
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 1.7 }}
+                className="text-lg md:text-xl text-[#f59e0b]/90 mb-12 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg"
+              >
+                Transform every coffee, every meal, every transaction into direct support for underrepresented athletes. This is how legends are born.
               </motion.p>
 
               <motion.div 
@@ -123,9 +96,9 @@ export default function Home() {
               >
                 <MagneticButton 
                   href="/dashboard"
-                  className="bg-white text-black px-12 py-6 rounded-none text-xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 uppercase tracking-wider"
+                  className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-16 py-6 rounded-xl text-xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 uppercase tracking-wider border-2 border-[#f59e0b] hover:border-white"
                 >
-                  FUEL NOW
+                  ⚡ IGNITE GREATNESS
                 </MagneticButton>
               </motion.div>
             </div>
@@ -163,18 +136,34 @@ export default function Home() {
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="text-4xl font-bold text-white mb-4"
+                  className="text-5xl md:text-6xl font-black text-white mb-6 uppercase tracking-wider"
                 >
-                  Meet Fuelie
+                  🤖 Meet Fuelie
                 </motion.h2>
                 <motion.p 
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
-                  className="text-xl text-gray-300 max-w-2xl mx-auto"
+                  className="text-xl md:text-2xl text-orange-300 max-w-4xl mx-auto mb-6 font-semibold"
                 >
-                  Your guide to seamless athlete support
+                  Your AI-powered champion for athlete empowerment
                 </motion.p>
+                <motion.div 
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                  className="max-w-5xl mx-auto space-y-4"
+                >
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    Fuelie isn't just an AI assistant – he's a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in underrepresented champions.
+                  </p>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when your favorite athletes need support most. He doesn't just process payments – he orchestrates a movement that turns everyday fans into kingmakers.
+                  </p>
+                  <p className="text-lg text-orange-300/90 font-medium">
+                    "Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker." - Fuelie
+                  </p>
+                </motion.div>
               </motion.div>
             </div>
           </section>
@@ -191,10 +180,18 @@ export default function Home() {
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="text-5xl md:text-6xl font-black text-center mb-16 text-white uppercase tracking-wider"
+                className="text-5xl md:text-7xl font-black text-center mb-8 text-white uppercase tracking-wider"
               >
-                THE REALITY
+                🔥 THE BROKEN SYSTEM
               </motion.h2>
+              <motion.p 
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl md:text-2xl text-[#ef4444] text-center mb-16 max-w-4xl mx-auto font-semibold"
+              >
+                While billions flow through sports, the athletes who give everything get nothing.
+              </motion.p>
               <div className="grid md:grid-cols-3 gap-8">
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -205,17 +202,11 @@ export default function Home() {
                 >
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src="/icons/chart.png"
-                        alt="Growth Chart 3D Icon"
-                        width={80}
-                        height={80}
-                        className="drop-shadow-2xl"
-                      />
+                      <span className="text-8xl drop-shadow-2xl">📈</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">$1.7B NIL Market</h3>
-                  <p className="text-gray-300 leading-relaxed">Concentrated among 2% of elite athletes, leaving 798,000+ underrepresented student-athletes with minimal NIL revenue.</p>
+                  <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">📈 $1.7B Monopolized</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">A massive market completely dominated by 2% of elite athletes. Meanwhile, 798,000+ talented student-athletes fight for scraps. <span className="text-red-400 font-bold">This ends now.</span></p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -226,17 +217,11 @@ export default function Home() {
                 >
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src="/icons/mobile.png"
-                        alt="Mobile Phone 3D Icon"
-                        width={80}
-                        height={80}
-                        className="drop-shadow-2xl"
-                      />
+                      <span className="text-8xl drop-shadow-2xl">💰</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">$7T Daily Spending</h3>
-                  <p className="text-gray-300 leading-relaxed">Fans spend trillions on everyday purchases but none of this supports their favorite athletes directly.</p>
+                  <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">💰 $7T Wasted Power</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">Every single day, passionate fans spend TRILLIONS on coffee, gas, groceries, and life. <span className="text-orange-400 font-bold">None of it reaches the athletes they love.</span> Pure wasted potential.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -247,17 +232,11 @@ export default function Home() {
                 >
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src="/icons/bell.png"
-                        alt="Notification Bell 3D Icon"
-                        width={80}
-                        height={80}
-                        className="drop-shadow-2xl"
-                      />
+                      <span className="text-8xl drop-shadow-2xl">😤</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Fan Frustration</h3>
-                  <p className="text-gray-300 leading-relaxed">Fans want to financially support athletes but current methods are complex, limited, and disconnected from daily life.</p>
+                  <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">😤 Fan Rage</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">Millions of fans are screaming to support their heroes but are trapped in a system designed to exclude them. <span className="text-yellow-400 font-bold">Donations are awkward. Merchandise barely helps. The connection is broken.</span></p>
                 </motion.div>
               </div>
             </motion.div>
@@ -276,10 +255,18 @@ export default function Home() {
                   initial={{ y: 50, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8 }}
-                  className="text-5xl md:text-6xl font-black text-center mb-16 text-white uppercase tracking-wider"
+                  className="text-5xl md:text-7xl font-black text-center mb-8 text-white uppercase tracking-wider"
                 >
-                  PURE PERFORMANCE
+                  ⚡ THE FANFUEL WAY
                 </motion.h2>
+                <motion.p 
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-xl md:text-2xl text-[#f59e0b] text-center mb-16 max-w-4xl mx-auto font-semibold"
+                >
+                  Four unstoppable steps to athlete revolution
+                </motion.p>
                 <div className="grid md:grid-cols-4 gap-10">
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -295,17 +282,11 @@ export default function Home() {
                         className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
                         style={{ transformStyle: 'preserve-3d' }}
                       >
-                        <Image
-                          src="/icons/magic.png"
-                          alt="Magic 3D Icon"
-                          width={96}
-                          height={96}
-                          className="drop-shadow-2xl"
-                        />
+                        <span className="text-9xl drop-shadow-2xl">🏆</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-white">Choose Athletes</h4>
-                    <p className="text-gray-300 leading-relaxed">Select underrepresented athletes to support through everyday spending</p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">Choose Your Champions</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Discover hidden gems and rising stars who deserve your support. <span className="text-[#f59e0b] font-bold">Your choice. Your impact. Your legacy.</span></p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -321,17 +302,11 @@ export default function Home() {
                         className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
                         style={{ transformStyle: 'preserve-3d' }}
                       >
-                        <Image
-                          src="/icons/mobile.png"
-                          alt="Mobile Payment 3D Icon"
-                          width={96}
-                          height={96}
-                          className="drop-shadow-2xl"
-                        />
+                        <span className="text-9xl drop-shadow-2xl">💳</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-white">Tap-to-Pay</h4>
-                    <p className="text-gray-300 leading-relaxed">Use FanFuel for everyday purchases - coffee, gas, groceries, anything</p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">Transform Spending</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Every coffee, every meal, every purchase becomes a precision strike for athlete support. <span className="text-[#10b981] font-bold">Normal life, extraordinary impact.</span></p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -347,17 +322,11 @@ export default function Home() {
                         className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
                         style={{ transformStyle: 'preserve-3d' }}
                       >
-                        <Image
-                          src="/icons/cube.png"
-                          alt="Automation Cube 3D Icon"
-                          width={96}
-                          height={96}
-                          className="drop-shadow-2xl"
-                        />
+                        <span className="text-9xl drop-shadow-2xl">⚡</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-white">Auto-Split</h4>
-                    <p className="text-gray-300 leading-relaxed">Percentage of every purchase automatically goes to your athletes via blockchain</p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">⚡ Instant Impact</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Blockchain-powered splits happen in milliseconds. <span className="text-[#10b981] font-bold">Zero friction. Maximum velocity. Pure athlete fuel.</span></p>
                   </motion.div>
                   <motion.div 
                     initial={{ y: 100, opacity: 0 }}
@@ -373,17 +342,11 @@ export default function Home() {
                         className="w-24 h-24 flex items-center justify-center mx-auto mb-4"
                         style={{ transformStyle: 'preserve-3d' }}
                       >
-                        <Image
-                          src="/icons/bell.png"
-                          alt="Alert Bell 3D Icon"
-                          width={96}
-                          height={96}
-                          className="drop-shadow-2xl"
-                        />
+                        <span className="text-9xl drop-shadow-2xl">💪</span>
                       </motion.div>
                     </div>
-                    <h4 className="text-xl font-bold mb-4 text-white">Smart Alerts</h4>
-                    <p className="text-gray-300 leading-relaxed">AI detects critical moments and suggests extra support opportunities</p>
+                    <h4 className="text-2xl font-black mb-4 text-white uppercase tracking-wide">💪 Battle Intelligence</h4>
+                    <p className="text-gray-200 leading-relaxed text-lg font-medium">Fuelie's AI engine detects career-defining moments – championships, injuries, breakthroughs. <span className="text-[#ef4444] font-bold">Strike when it matters most.</span></p>
                   </motion.div>
                 </div>
               </motion.div>
@@ -397,10 +360,18 @@ export default function Home() {
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="text-4xl font-black mb-12 text-center text-white uppercase tracking-wider"
+                className="text-5xl md:text-6xl font-black mb-8 text-center text-white uppercase tracking-wider"
               >
-                POWERED BY CHAMPIONS
+                🏆 BUILT FOR DOMINANCE
               </motion.h2>
+              <motion.p 
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg md:text-xl text-[#f59e0b] text-center mb-16 max-w-3xl mx-auto font-medium"
+              >
+                Elite-grade infrastructure meets championship-level execution
+              </motion.p>
               <div className="grid md:grid-cols-3 gap-10">
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -411,17 +382,11 @@ export default function Home() {
                 >
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src="/icons/computer.png"
-                        alt="Computer 3D Icon"
-                        width={80}
-                        height={80}
-                        className="drop-shadow-2xl"
-                      />
+                      <span className="text-8xl drop-shadow-2xl">⛓️</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Chiliz Chain</h3>
-                  <p className="text-gray-300 leading-relaxed">SportFi foundation with 2M+ sports fans and EVM compatibility</p>
+                  <h3 className="text-2xl font-black mb-4 text-white uppercase">⛓️ Chiliz Chain</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg">The ultimate SportFi battleground. <span className="text-red-400 font-bold">2M+ sports fans</span> already locked and loaded with EVM precision.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -432,17 +397,11 @@ export default function Home() {
                 >
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src="/icons/wifi.png"
-                        alt="Network 3D Icon"
-                        width={80}
-                        height={80}
-                        className="drop-shadow-2xl"
-                      />
+                      <span className="text-8xl drop-shadow-2xl">🌐</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">LayerZero</h3>
-                  <p className="text-gray-300 leading-relaxed">Omnichain infrastructure enabling cross-chain NFT bridging</p>
+                  <h3 className="text-2xl font-black mb-4 text-white uppercase">🌐 LayerZero</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg">Omnichain warfare technology. <span className="text-blue-400 font-bold">Cross-chain NFT bridging</span> that breaks down every barrier between fans and athletes.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}
@@ -453,17 +412,11 @@ export default function Home() {
                 >
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                      <Image
-                        src="/icons/cube.png"
-                        alt="Flow Cube 3D Icon"
-                        width={80}
-                        height={80}
-                        className="drop-shadow-2xl"
-                      />
+                      <span className="text-8xl drop-shadow-2xl">⚡</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">Flow</h3>
-                  <p className="text-gray-300 leading-relaxed">Consumer-grade UX with mainstream adoption focus</p>
+                  <h3 className="text-2xl font-black mb-4 text-white uppercase">⚡ Flow Protocol</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg">Consumer-grade simplicity meets <span className="text-green-400 font-bold">mainstream domination.</span> Built for the masses, optimized for impact.</p>
                 </motion.div>
               </div>
             </div>
@@ -495,7 +448,7 @@ export default function Home() {
                   className="rounded-full drop-shadow-xl"
                 />
               </motion.div>
-              <span className="text-4xl font-bold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
+              <span className="text-4xl font-bold bg-gradient-to-r from-[#f59e0b] to-white bg-clip-text text-transparent">
                 FanFuel
               </span>
             </motion.div>
@@ -503,17 +456,17 @@ export default function Home() {
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              className="text-2xl md:text-3xl text-[#f59e0b] mb-8 max-w-4xl mx-auto font-bold text-center"
             >
-              Transforming Everyday Purchases into Athlete Revenue
+              🚀 Where Every Purchase Becomes a Championship Moment
             </motion.p>
             <motion.p 
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-sm text-gray-400"
+              className="text-lg text-gray-300 font-medium"
             >
-              Built for Fans, and those who build the future
+              🏆 Built for the fans fueling the future
             </motion.p>
           </div>
         </footer>
