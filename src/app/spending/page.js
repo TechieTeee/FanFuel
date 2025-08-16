@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from 'framer-motion'
@@ -12,31 +12,33 @@ import HoverNavigation from '../../components/HoverNavigation'
 export default function Spending() {
   const [fuelieState, setFuelieState] = useState('waving')
   
-  // Mock data for demo
+  // Enhanced mock data with real school references
   const mockAthletes = [
     {
       id: '1',
       name: 'Sarah Johnson',
       sport: 'Basketball',
-      university: 'State University',
+      university: 'University of Alabama',
       position: 'Point Guard',
       year: 'Junior',
       background: 'First-generation college student, pre-med',
       total_earnings: 15.50,
       fan_count: 8,
-      monthly_from_purchases: 12.30
+      monthly_from_purchases: 12.30,
+      recent_performance: { points: 18, assists: 7, rebounds: 5 }
     },
     {
       id: '2', 
       name: 'Marcus Williams',
       sport: 'Football',
-      university: 'Tech College',
+      university: 'University of Oregon',
       position: 'Wide Receiver',
       year: 'Sophomore',
       background: 'From underserved community, business major',
       total_earnings: 287.50,
       fan_count: 45,
-      monthly_from_purchases: 245.20
+      monthly_from_purchases: 245.20,
+      recent_performance: { receptions: 8, yards: 127, touchdowns: 2 }
     }
   ]
 
@@ -377,7 +379,45 @@ export default function Spending() {
                       <p className="text-xs text-[#f59e0b] font-bold">${athlete.monthly_from_purchases}/mo fuel</p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-300 mb-4 leading-relaxed">{athlete.background}</p>
+                  <p className="text-sm text-gray-300 mb-3 leading-relaxed">{athlete.background}</p>
+                  
+                  {/* Performance Stats */}
+                  <div className="bg-gray-800/50 rounded-lg p-3 mb-4 border border-gray-600/30">
+                    <p className="text-xs text-gray-400 font-bold mb-2 uppercase tracking-wide">📊 Recent Performance</p>
+                    <div className="grid grid-cols-3 gap-3 text-center">
+                      {athlete.sport === 'Basketball' ? (
+                        <>
+                          <div>
+                            <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_performance.points}</p>
+                            <p className="text-xs text-gray-400">Points</p>
+                          </div>
+                          <div>
+                            <p className="text-lg font-black text-[#10b981]">{athlete.recent_performance.assists}</p>
+                            <p className="text-xs text-gray-400">Assists</p>
+                          </div>
+                          <div>
+                            <p className="text-lg font-black text-purple-400">{athlete.recent_performance.rebounds}</p>
+                            <p className="text-xs text-gray-400">Rebounds</p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div>
+                            <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_performance.receptions}</p>
+                            <p className="text-xs text-gray-400">Catches</p>
+                          </div>
+                          <div>
+                            <p className="text-lg font-black text-[#10b981]">{athlete.recent_performance.yards}</p>
+                            <p className="text-xs text-gray-400">Yards</p>
+                          </div>
+                          <div>
+                            <p className="text-lg font-black text-purple-400">{athlete.recent_performance.touchdowns}</p>
+                            <p className="text-xs text-gray-400">TDs</p>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
                   <div className="flex space-x-3">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
@@ -523,6 +563,7 @@ export default function Spending() {
             </motion.button>
           </div>
         </motion.div>
+
       </div>
     </div>
   )

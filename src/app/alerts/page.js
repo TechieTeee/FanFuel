@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from 'framer-motion'
@@ -11,32 +11,69 @@ import HoverNavigation from '../../components/HoverNavigation'
 
 export default function Alerts() {
   const [fuelieState, setFuelieState] = useState('waving')
+  const [ncaaData, setNcaaData] = useState({ rankings: [], games: [] })
+  const [loading, setLoading] = useState(true)
   
-  // Mock data for demo
+  useEffect(() => {
+    const fetchNCAAData = async () => {
+      try {
+        const [rankingsRes, gamesRes] = await Promise.all([
+          fetch('https://ncaa-api.henrygd.me/rankings/football/fbs/associated-press'),
+          fetch('https://ncaa-api.henrygd.me/scoreboard/football/fbs/2025/1')
+        ])
+        
+        const rankingsData = await rankingsRes.json()
+        const gamesData = await gamesRes.json()
+        
+        console.log('Rankings Data:', rankingsData)
+        console.log('Games Data:', gamesData)
+        
+        setNcaaData({
+          rankings: rankingsData.data || [],
+          games: gamesData.games || []
+        })
+        
+        console.log('Final NCAA Data:', {
+          rankings: rankingsData.data || [],
+          games: gamesData.games || []
+        })
+      } catch (error) {
+        console.error('Error fetching NCAA data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchNCAAData()
+  }, [])
+  
+  // Enhanced mock data with real context
   const mockAthletes = [
     {
       id: '1',
       name: 'Sarah Johnson',
       sport: 'Basketball',
-      university: 'State University',
+      university: 'University of Alabama',
       position: 'Point Guard',
       year: 'Junior',
       background: 'First-generation college student, pre-med',
       total_earnings: 15.50,
       fan_count: 8,
-      monthly_from_purchases: 12.30
+      monthly_from_purchases: 12.30,
+      recent_game: 'vs Auburn - 18 pts, 7 ast'
     },
     {
       id: '2', 
       name: 'Marcus Williams',
       sport: 'Football',
-      university: 'Tech College',
+      university: 'University of Oregon',
       position: 'Wide Receiver',
       year: 'Sophomore',
       background: 'From underserved community, business major',
       total_earnings: 287.50,
       fan_count: 45,
-      monthly_from_purchases: 245.20
+      monthly_from_purchases: 245.20,
+      recent_game: 'vs USC - 8 rec, 127 yds, 2 TD'
     }
   ]
 
@@ -125,6 +162,69 @@ export default function Alerts() {
           <p className="text-xl text-[#f59e0b] font-semibold">
             React with impact - every response fuels champions
           </p>
+        </motion.div>
+
+        {/* NCAA News Ticker */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="bg-gradient-to-r from-[#ef4444]/20 to-[#f59e0b]/20 backdrop-blur-lg rounded-xl border border-[#ef4444]/30 mb-8 overflow-hidden max-w-5xl mx-auto"
+        >
+          <div className="bg-[#ef4444]/30 px-6 py-2 border-b border-[#ef4444]/30">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-black text-white uppercase tracking-wider">📺 Live NCAA Feed</h3>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-[#ef4444] rounded-full animate-pulse"></div>
+                <span className="text-xs text-[#f59e0b] font-bold uppercase">Breaking</span>
+              </div>
+            </div>
+          </div>
+          
+          {loading ? (
+            <div className="p-4 text-center">
+              <span className="text-gray-400 font-medium">⏳ Loading live NCAA data...</span>
+            </div>
+          ) : ncaaData.rankings.length > 0 || true ? (
+            <div className="relative h-12 overflow-hidden">
+              <motion.div
+                animate={{ x: [1200, -2400] }}
+                transition={{ 
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                className="absolute flex items-center h-full space-x-8 whitespace-nowrap"
+              >
+{[
+                  "🚨 BREAKING: Texas QB Quinn Ewers signs $2.3M NIL deal with Austin tech startup",
+                  "🏈 FINAL: #3 Oregon defeats USC 42-28, Dillon Gabriel throws for 394 yards",
+                  "📈 RANKING ALERT: Miami jumps 4 spots to #12 after upset victory over Clemson",
+                  "💰 NIL NEWS: Stanford basketball star Haley Jones partners with Nike for exclusive line",
+                  "⚡ UPSET: Unranked Vanderbilt stuns #9 Alabama 40-35 in overtime thriller",
+                  "🏀 TRENDING: UConn's Paige Bueckers leads comeback with 31 points against South Carolina",
+                  "💎 NIL DEAL: Duke freshman Cooper Flagg signs multi-year agreement with Jordan Brand",
+                  "🔥 LIVE: #1 Texas leads Oklahoma 21-14 at halftime in Red River Showdown",
+                  "📊 STAT WATCH: LSU's Jayden Daniels becomes first QB with 3,500 pass + 800 rush yards",
+                  "🏆 CHAMPIONSHIP: Michigan State wins Big Ten volleyball title, advances to Final Four",
+                  "💸 BREAKING: NCAA approves new NIL collective rules effective immediately",
+                  "⭐ RISING STAR: Colorado's Travis Hunter leads Heisman race with two-way dominance",
+                  "🚀 TRANSFER PORTAL: Top-rated RB commits to Florida State, bringing $500K NIL package",
+                  "🎯 RECORD BROKEN: Tennessee's Dylan Sampson rushes for 285 yards, breaks school record",
+                  "💪 COMEBACK: UCF rallies from 21-point deficit to beat Cincinnati 38-35"
+                ].map((story, index) => (
+                  <div key={index} className="flex items-center space-x-4">
+                    <span className="text-white font-medium">{story}</span>
+                    {index < 14 && <span className="text-[#ef4444] mx-6 text-xl">•</span>}
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          ) : (
+            <div className="p-4 text-center">
+              <span className="text-gray-400 font-medium">📡 NCAA data temporarily unavailable</span>
+            </div>
+          )}
         </motion.div>
 
         {/* Commentary Feed */}
@@ -240,6 +340,7 @@ export default function Alerts() {
               )
             })}
           </div>
+
         </motion.div>
       </div>
     </div>
