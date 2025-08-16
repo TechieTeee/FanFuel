@@ -6,6 +6,11 @@ import Image from 'next/image'
 
 const heroImages = [
   {
+    src: '/pexels-football-wife-577822-1618169.jpg',
+    alt: 'Competition',
+    caption: '💪 Fueling Greatness'
+  },
+  {
     src: '/pexels-cottonbro-5740517.jpg',
     alt: 'Athletic Training',
     caption: '⚡ Igniting Champions'
@@ -14,11 +19,6 @@ const heroImages = [
     src: '/pexels-pixabay-163439.jpg', 
     alt: 'Team Sports',
     caption: '🔥 Building Legends'
-  },
-  {
-    src: '/pexels-football-wife-577822-1618169.jpg',
-    alt: 'Competition',
-    caption: '💪 Fueling Greatness'
   },
   {
     src: '/pexels-cottonbro-5740794.jpg',
