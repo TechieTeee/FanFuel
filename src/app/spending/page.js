@@ -9,7 +9,7 @@ import { useAccount } from 'wagmi'
 import AnimatedBackground from '../../components/AnimatedBackground'
 import CustomCursor from '../../components/CustomCursor'
 import HoverNavigation from '../../components/HoverNavigation'
-import ChilizWallet from '../../components/web3/ChilizWallet'
+import UnifiedWallet from '../../components/web3/UnifiedWallet'
 
 export default function Spending() {
   const { address, isConnected } = useAccount()
@@ -168,7 +168,7 @@ export default function Spending() {
           <Link href="/alerts" className="text-[#ef4444] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
             📺 FuelFeed
           </Link>
-          <ConnectButton />
+          <UnifiedWallet showBalance={true} showTokens={false} compact={true} />
         </div>
       </motion.header>
 
@@ -594,14 +594,19 @@ export default function Spending() {
           </div>
         </motion.div>
 
-        {/* Chiliz SportFi Integration */}
+        {/* Enhanced Wallet Integration */}
         <motion.div 
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.0 }}
           className="max-w-md mx-auto mt-12"
         >
-          <ChilizWallet onSupportAthlete={handleSupportAthlete} />
+          <div className="bg-gray-900/80 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50">
+            <h3 className="text-xl font-bold text-white mb-4 text-center">💰 SportFi Wallet</h3>
+            <div className="flex justify-center">
+              <UnifiedWallet showBalance={true} showTokens={true} compact={false} />
+            </div>
+          </div>
         </motion.div>
 
       </div>
