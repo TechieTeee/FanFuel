@@ -1,242 +1,41 @@
-# FanFuel .gitignore - Comprehensive Security & Development
-# ========================================================
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Environment variables (ALL variations)
-.env
-.env.local
-.env.production
-.env.development
-.env.test
-.env.*.local
-.env.backup
-.env.example.filled
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# API Keys and secrets (common naming patterns)
-**/secrets/**
-**/keys/**
-**/*secret*
-**/*key*
-**/*token*
-**/*password*
-**/*credential*
+# testing
+/coverage
 
-# Blockchain private keys (various formats)
-**/wallets/**
-**/*.key
-**/*.pem
-**/*.p12
-**/*.pfx
-**/mnemonic*
-**/seed*
-private-keys.json
-wallet-backup.json
-
-# Database credentials and backups
-**/db-credentials.json
-**/database.url
-**/connection-string.txt
-*.sql.backup
-*.db.backup
-
-# =============================================================================
-# NEXT.JS & REACT
-# =============================================================================
-
-# Next.js build outputs
+# next.js
 /.next/
 /out/
-next-env.d.ts
 
-# React/Node dependencies
-node_modules/
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+.pnpm-debug.log*
 
-# Package manager lock files (choose one, ignore others)
-# yarn.lock
-# pnpm-lock.yaml
-# package-lock.json
+# env files (can opt-in for committing if needed)
+.env*
 
-# =============================================================================
-# DEVELOPMENT TOOLS
-# =============================================================================
-
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# Logs and debugging
-*.log
-logs/
-debug.log
-error.log
-access.log
-
-# Testing outputs
-/coverage/
-/.nyc_output
-test-results/
-junit.xml
-
-# =============================================================================
-# WEB3 & BLOCKCHAIN SPECIFIC
-# =============================================================================
-
-# Smart contract artifacts (keep source, ignore builds)
-**/artifacts/
-**/cache/
-**/typechain/
-**/typechain-types/
-
-# Hardhat specific
-.hardhat/
-hardhat.config.local.js
-
-# Truffle specific
-/build/
-truffle-config.local.js
-
-# Blockchain network configurations (if they contain sensitive data)
-networks.json
-deployed-contracts.json
-
-# =============================================================================
-# AI & ML MODELS
-# =============================================================================
-
-# Large model files
-*.model
-*.pkl
-*.h5
-*.onnx
-models/
-checkpoints/
-
-# Training data and outputs
-**/training-data/**
-**/model-outputs/**
-predictions.json
-
-# =============================================================================
-# ASSETS & UPLOADS
-# =============================================================================
-
-# User uploaded content
-**/uploads/**
-**/user-content/**
-
-# Large asset files (consider using Git LFS instead)
-*.mp4
-*.mov
-*.avi
-*.mkv
-# *.png (commented out - we need Fuelie assets)
-# *.jpg (commented out - might need for demos)
-
-# Temporary files
-*.tmp
-*.temp
-temp/
-tmp/
-
-# =============================================================================
-# DEPLOYMENT & CI/CD
-# =============================================================================
-
-# Vercel
+# vercel
 .vercel
 
-# Docker
-.dockerignore
-Dockerfile.local
-docker-compose.override.yml
-
-# GitHub Actions (if using secrets in files)
-.github/secrets/
-
-# Build outputs
-dist/
-build/
-*.tgz
-*.tar.gz
-
-# =============================================================================
-# HACKATHON SPECIFIC
-# =============================================================================
-
-# Demo preparation files with real data
-demo-credentials.json
-judge-presentation-notes.md
-team-internal-notes.md
-
-# Backup files
-*.backup
-*.bak
-*-backup.*
-
-# Performance testing results
-performance-results/
-load-test-data/
-
-# Screenshots with sensitive data
-**/screenshots-with-keys/**
-sensitive-screenshots/
-
-# =============================================================================
-# PLATFORM SPECIFIC
-# =============================================================================
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Linux
-*~
-.nfs*
-
-# =============================================================================
-# ADDITIONAL SECURITY PATTERNS
-# =============================================================================
-
-# Common credential file patterns
-auth.json
-credentials.json
-service-account.json
-firebase-adminsdk*.json
-google-credentials.json
-aws-credentials.json
-
-# Common backup patterns
-*_backup
-*-backup
-backup-*
-*.orig
-
-# Development database files
-*.sqlite
-*.sqlite3
-*.db
-*.database
-
-# Cache directories
-.cache/
-.parcel-cache/
-.eslintcache
-.stylelintcache
-
-# Strategy Docs
-FanFuel_Grounding_Doc.md
-FanFuel_PRD.md
+# typescript
+*.tsbuildinfo
+next-env.d.ts
