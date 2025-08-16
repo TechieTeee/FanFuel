@@ -25,8 +25,8 @@ export default function UnifiedWallet({
   const { address, isConnected } = useAccount()
   const chainId = useChainId()
   const { switchChain } = useSwitchChain()
-  const [athleteTokens, setAthleteTokens] = useState<AthleteToken[]>([])
-  const [ecosystemInfo, setEcosystemInfo] = useState<unknown>(null)
+  const [athleteTokens, setAthleteTokens] = useState([])
+  const [ecosystemInfo, setEcosystemInfo] = useState(null)
   const [showChilizDetails, setShowChilizDetails] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -57,12 +57,12 @@ export default function UnifiedWallet({
         getEcosystemStats()
       ])
       
-      if (tokensResult.success && tokensResult.tokens) {
-        setAthleteTokens(tokensResult.tokens)
+      if (tokensResult) {
+        setAthleteTokens(tokensResult)
       }
       
-      if (ecosystemResult.success) {
-        setEcosystemInfo(ecosystemResult.info)
+      if (ecosystemResult) {
+        setEcosystemInfo(ecosystemResult)
       }
     } catch (error) {
       console.error('Failed to load Chiliz data:', error)
