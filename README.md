@@ -2,7 +2,7 @@
 
 **Transforming sports commentary into direct athlete revenue using Chiliz Chain, Flow, and LayerZero**
 
-## 🏆 Prize Eligibility - Chiliz Integration
+## 🏆 Prize Eligibility - Multi-Chain Integration
 
 ### ✅ Live Deployment on Chiliz Spicy Testnet
 
@@ -17,6 +17,23 @@
 - **ReactionNFT**: `0xD5aa426E4702860155bAa6E3173C010420fc6326`
 - **Sarah Johnson FanFuelToken**: `0xec39e94bb2BDDfba995DF9EB14356657604155E5`
 - **Marcus Williams FanFuelToken**: `0xb9b687Bb5447287A3b30b1EDB6c4be112A934073`
+
+### ✅ LayerZero V2 Integration - Sepolia Testnet
+
+**LayerZero V2 Contract Deployment:**
+- **Network**: Ethereum Sepolia Testnet (Chain ID: 11155111)
+- **Contract Address**: `0xD5aa426E4702860155bAa6E3173C010420fc6326`
+- **Token Name**: FanFuel Token (FUEL)
+- **LayerZero Endpoint**: `0x6EDCE65403992e310A62460808c4b910D972f10f`
+- **Initial Supply**: 10,000,000 FUEL tokens
+- **Explorer**: https://sepolia.etherscan.io/address/0xD5aa426E4702860155bAa6E3173C010420fc6326
+
+**LayerZero V2 Features:**
+- ✅ **Omnichain Fungible Token (OFT)** standard implementation
+- ✅ **Cross-chain messaging** for athlete support
+- ✅ **LayerZero V2 protocol** compliance for prize eligibility
+- ✅ **Athlete earnings tracking** across multiple chains
+- ✅ **Platform fee structure** (3% on all transactions)
 
 **Security Features (OpenZeppelin):**
 - ReentrancyGuard for safe transactions
