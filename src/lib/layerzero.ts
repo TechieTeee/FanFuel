@@ -1,26 +1,17 @@
 'use client'
 
 import { ethers } from 'ethers'
-import { LZ_MAINNET_ENDPOINTS, LZ_TESTNET_ENDPOINTS } from '@layerzerolabs/lz-v2-utilities'
-import { 
-  EndpointId, 
-  createGetHreByEid,
-  OmniTransaction,
-  OmniVector,
-  OmniPoint,
-  createOApp
-} from '@layerzerolabs/lz-evm-sdk-v2'
 
 // LayerZero V2 endpoint IDs for supported chains
 export const LAYERZERO_ENDPOINTS = {
-  ETHEREUM_MAINNET: EndpointId.ETHEREUM_V2_MAINNET,
-  ETHEREUM_SEPOLIA: EndpointId.ETHEREUM_V2_TESTNET,
-  POLYGON_MAINNET: EndpointId.POLYGON_V2_MAINNET,
-  ARBITRUM_MAINNET: EndpointId.ARBITRUM_V2_MAINNET,
-  OPTIMISM_MAINNET: EndpointId.OPTIMISM_V2_MAINNET,
-  BASE_MAINNET: EndpointId.BASE_V2_MAINNET,
-  FLOW_TESTNET: 181, // Flow testnet endpoint (if supported)
-  CHILIZ_TESTNET: 88882, // Custom Chiliz Spicy Testnet endpoint
+  ETHEREUM_MAINNET: 30101,
+  ETHEREUM_SEPOLIA: 40161,
+  POLYGON_MAINNET: 30109,
+  ARBITRUM_MAINNET: 30110,
+  OPTIMISM_MAINNET: 30111,
+  BASE_MAINNET: 30184,
+  FLOW_TESTNET: 181,
+  CHILIZ_TESTNET: 88882,
 } as const
 
 // LayerZero OFT (Omnichain Fungible Token) interface
