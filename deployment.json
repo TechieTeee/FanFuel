@@ -1,0 +1,12 @@
+{
+  "network": "Chiliz Spicy Testnet",
+  "chainId": 88882,
+  "explorer": "https://spicy-explorer.chiliz.com/",
+  "contracts": {
+    "reactionNFT": "0xD5aa426E4702860155bAa6E3173C010420fc6326",
+    "sarahToken": "0xec39e94bb2BDDfba995DF9EB14356657604155E5",
+    "marcusToken": "0xb9b687Bb5447287A3b30b1EDB6c4be112A934073"
+  },
+  "deployedAt": "2025-08-16T15:18:35.995Z",
+  "deployer": "0x0AD5C175820d6760996E9496379D83C336d560D1"
+}

@@ -249,7 +249,7 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-xl md:text-2xl text-[#ef4444] text-center mb-16 max-w-4xl mx-auto font-semibold"
               >
-                While billions flow through sports, the athletes who give everything get nothing.
+                While billions flow through collegiate sports, the student athletes who give everything get nothing.
               </motion.p>
               <div className="grid md:grid-cols-3 gap-8">
                 <motion.div 
@@ -280,7 +280,7 @@ export default function Home() {
                     </div>
                   </div>
                   <h3 className="text-3xl font-black mb-4 text-white uppercase tracking-wide">💰 $7T Wasted Power</h3>
-                  <p className="text-gray-200 leading-relaxed text-lg font-medium">Every single day, passionate fans spend TRILLIONS on coffee, gas, groceries, and life. <span className="text-orange-400 font-bold">None of it reaches the athletes they love.</span> Pure wasted potential.</p>
+                  <p className="text-gray-200 leading-relaxed text-lg font-medium">Every single day, passionate fans spend TRILLIONS on coffee, gas, groceries, and life. <span className="text-orange-400 font-bold">None of it reaches the student athletes they love.</span> Pure wasted potential.</p>
                 </motion.div>
                 <motion.div 
                   initial={{ y: 100, opacity: 0 }}

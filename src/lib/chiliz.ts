@@ -82,25 +82,40 @@ export const initializeChilizProvider = () => {
   }
 }
 
-// Athlete Token Contract ABI (simplified ERC-20 with sport features)
-const ATHLETE_TOKEN_ABI = [
+// FanFuelToken Contract ABI (OpenZeppelin-based with SportFi features)
+const FANFUEL_TOKEN_ABI = [
   'function name() view returns (string)',
   'function symbol() view returns (string)',
   'function totalSupply() view returns (uint256)',
   'function balanceOf(address) view returns (uint256)',
-  'function transfer(address to, uint256 amount) returns (bool)',
-  'function supportAthlete(uint256 amount) external payable',
-  'function getAthleteEarnings() view returns (uint256)',
-  'function athleteInfo() view returns (tuple(string name, string sport, string university))',
-  'event AthleteSupported(address indexed fan, uint256 amount, uint256 athleteShare)'
+  'function athleteInfo() view returns (tuple(string name, string sport, string university, string position, uint256 totalEarnings, uint256 fanCount, bool isActive))',
+  'function supportAthlete(string reactionType) payable',
+  'function getAthleteStats() view returns (uint256 totalEarnings, uint256 fanCount, uint256 totalSupported, uint256 transactionCount)',
+  'function getFanStats(address fan) view returns (uint256 totalContributed, uint256 tokensEarned, uint256 supportCount)',
+  'function getRecentSupport(uint256 count) view returns (tuple(address fan, uint256 amount, uint256 athleteShare, uint256 platformFee, uint256 timestamp, string reactionType)[])',
+  'event AthleteSupported(address indexed fan, uint256 amount, uint256 athleteShare, uint256 platformFee, string reactionType)',
+  'event TokensEarned(address indexed fan, uint256 tokensEarned, uint256 supportAmount)'
 ]
 
-// Simple Athlete Token Factory ABI
-const TOKEN_FACTORY_ABI = [
-  'function createAthleteToken(string memory name, string memory symbol, string memory sport, string memory university) returns (address)',
-  'function getAthleteToken(string memory athleteId) view returns (address)',
-  'event AthleteTokenCreated(string indexed athleteId, address indexed tokenAddress)'
+// ReactionNFT Contract ABI
+const REACTION_NFT_ABI = [
+  'function mintReaction(address fan, string athleteId, string athleteName, uint8 reactionType, uint256 supportAmount, string commentary, string metadataURI) returns (uint256)',
+  'function getFanReactions(address fan) view returns (uint256[])',
+  'function getAthleteReactions(string athleteId) view returns (uint256[])',
+  'function getReactionData(uint256 tokenId) view returns (tuple(address fan, string athleteId, string athleteName, uint8 reactionType, uint256 supportAmount, string commentary, uint256 timestamp, string metadataURI, bool isSpecial))',
+  'function getReactionTypeInfo(uint8 reactionType) view returns (string name, string emoji, uint256 minAmount)',
+  'event ReactionMinted(uint256 indexed tokenId, address indexed fan, string indexed athleteId, uint8 reactionType, uint256 supportAmount)'
 ]
+
+// REAL deployed contract addresses on Chiliz Spicy Testnet
+// Deployed: 2025-08-16T15:18:35.995Z
+// Deployer: 0x0AD5C175820d6760996E9496379D83C336d560D1
+// Test Transaction: 0xded631a7245d847f71f397963e4dcd33c293d6e03cab4d2f809d98347c889bf9
+const DEPLOYED_CONTRACTS = {
+  SARAH_TOKEN: '0xec39e94bb2BDDfba995DF9EB14356657604155E5',
+  MARCUS_TOKEN: '0xb9b687Bb5447287A3b30b1EDB6c4be112A934073',
+  REACTION_NFT: '0xD5aa426E4702860155bAa6E3173C010420fc6326'
+}
 
 // Deploy athlete token on Chiliz Chain
 export const createAthleteToken = async (athleteData: AthleteData): Promise<{
@@ -371,4 +386,65 @@ if (typeof window === 'undefined') {
   initializeChilizProvider()
 }
 
-export { chilizProvider, chilizWallet }
+// Get contract instance
+export const getFanFuelTokenContract = (athleteId: string) => {
+  if (!chilizProvider) {
+    initializeChilizProvider()
+  }
+  
+  const contractAddress = athleteId === '1' ? DEPLOYED_CONTRACTS.SARAH_TOKEN : DEPLOYED_CONTRACTS.MARCUS_TOKEN
+  return new ethers.Contract(contractAddress, FANFUEL_TOKEN_ABI, chilizProvider)
+}
+
+// Get ReactionNFT contract instance
+export const getReactionNFTContract = () => {
+  if (!chilizProvider) {
+    initializeChilizProvider()
+  }
+  
+  return new ethers.Contract(DEPLOYED_CONTRACTS.REACTION_NFT, REACTION_NFT_ABI, chilizProvider)
+}
+
+// Support athlete using deployed contract
+export const supportAthleteWithContract = async (
+  athleteId: string,
+  amount: string,
+  fanAddress: string,
+  reactionType: string
+): Promise<{
+  success: boolean
+  transactionHash?: string
+  error?: string
+}> => {
+  try {
+    if (!chilizWallet) {
+      throw new Error('Chiliz wallet not initialized')
+    }
+
+    const contract = getFanFuelTokenContract(athleteId)
+    const contractWithSigner = contract.connect(chilizWallet)
+    
+    const amountWei = ethers.parseEther(amount)
+    
+    // Call contract support function
+    const tx = await contractWithSigner.supportAthlete(reactionType, { 
+      value: amountWei,
+      gasLimit: 300000
+    })
+    
+    const receipt = await tx.wait()
+    
+    return {
+      success: true,
+      transactionHash: receipt.hash
+    }
+  } catch (error) {
+    console.error('Contract support failed:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Contract interaction failed'
+    }
+  }
+}
+
+export { chilizProvider, chilizWallet, FANFUEL_TOKEN_ABI, REACTION_NFT_ABI }
