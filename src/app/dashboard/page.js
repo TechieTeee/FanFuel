@@ -103,9 +103,9 @@ export default function Dashboard() {
             <Image
               src="/fanfuel-logo.png"
               alt="FanFuel Logo"
-              width={50}
-              height={50}
-              className="rounded-full drop-shadow-xl"
+              width={60}
+              height={60}
+              className="rounded-full drop-shadow-2xl border-2 border-[#f59e0b]/30"
             />
           </motion.div>
           <span className="text-3xl font-black text-white bg-gradient-to-r from-[#f59e0b] to-white bg-clip-text text-transparent">
@@ -114,29 +114,6 @@ export default function Dashboard() {
         </Link>
         <div className="flex items-center space-x-6">
           <ConnectButton />
-          <motion.div 
-            animate={{ 
-              y: [0, -8, 0]
-            }}
-            transition={{ 
-              duration: 3,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
-            className="flex items-center space-x-3 bg-black/80 backdrop-blur-md border border-[#f59e0b]/30 px-4 py-2 rounded-xl"
-          >
-            <Image
-              src={getFuelieImage()}
-              alt="Fuelie Mascot"
-              width={40}
-              height={40}
-              className="rounded-full drop-shadow-xl"
-            />
-            <span className="text-sm font-bold text-white">
-              {fuelieState === 'eyes-closed' ? '🔄 Processing...' : 
-               fuelieState === 'sitting' ? '✅ Success!' : '🚀 Ready to fuel!'}
-            </span>
-          </motion.div>
         </div>
       </motion.header>
 

@@ -491,23 +491,20 @@ export default function Home() {
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="flex items-center justify-center space-x-4 mb-8"
+              className="flex justify-center mb-8"
             >
               <motion.div
                 whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.6 }}
               >
                 <Image
-                  src="/fuelie-sitting.png"
-                  alt="Fuelie Sitting"
-                  width={80}
-                  height={80}
+                  src="/FanFuel_Logo.png"
+                  alt="FanFuel Logo"
+                  width={200}
+                  height={200}
                   className="rounded-full drop-shadow-xl"
                 />
               </motion.div>
-              <span className="text-4xl font-bold bg-gradient-to-r from-[#f59e0b] to-white bg-clip-text text-transparent">
-                FanFuel
-              </span>
             </motion.div>
             <motion.p 
               initial={{ y: 30, opacity: 0 }}
