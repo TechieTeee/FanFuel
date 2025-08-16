@@ -11,13 +11,13 @@ export default function HoverNavigation() {
 
   const navItems = [
     { href: '/', label: '🏠 Home', emoji: '🏠' },
-    { href: '/spending', label: '💳 Spending', emoji: '💳' },
-    { href: '/alerts', label: '🚨 Commentary', emoji: '🚨' }
+    { href: '/spending', label: '⛽ FuelStation', emoji: '⛽' },
+    { href: '/alerts', label: '📺 FuelFeed', emoji: '📺' }
   ]
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 h-16 z-50 flex justify-center"
+      className="fixed top-0 left-0 right-0 h-16 z-[60] flex justify-center"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
     >

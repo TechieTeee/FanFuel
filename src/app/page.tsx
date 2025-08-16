@@ -46,7 +46,7 @@ export default function Home() {
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="fixed top-6 right-6 z-50"
+          className="fixed top-6 right-6 z-40"
         >
           <ConnectButton.Custom>
             {({

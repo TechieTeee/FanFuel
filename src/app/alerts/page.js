@@ -95,7 +95,7 @@ export default function Alerts() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative z-50 px-6 py-6 flex items-center justify-between"
+        className="relative z-40 px-6 py-6 flex items-center justify-between"
       >
         <Link href="/" className="flex items-center space-x-3">
           <span className="text-3xl font-black text-white bg-gradient-to-r from-[#f59e0b] to-white bg-clip-text text-transparent">
@@ -104,7 +104,7 @@ export default function Alerts() {
         </Link>
         <div className="flex items-center space-x-6">
           <Link href="/spending" className="text-[#f59e0b] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
-            💳 Spending
+            ⛽ FuelStation
           </Link>
           <ConnectButton />
         </div>
@@ -120,10 +120,10 @@ export default function Alerts() {
           className="text-center mb-12"
         >
           <h1 className="text-5xl md:text-6xl font-black text-white uppercase tracking-wider mb-4">
-            🔥 Live Commentary
+            📺 FuelFeed
           </h1>
           <p className="text-xl text-[#f59e0b] font-semibold">
-            Support your champions with paid reactions
+            React with impact - every response fuels champions
           </p>
         </motion.div>
 
@@ -135,7 +135,7 @@ export default function Alerts() {
           className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50 max-w-5xl mx-auto"
         >
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-black text-white uppercase tracking-wider">💬 Live Commentary</h2>
+            <h2 className="text-3xl font-black text-white uppercase tracking-wider">📺 Live FuelFeed</h2>
             <div className="flex items-center space-x-3">
               <div className="w-4 h-4 bg-[#ef4444] rounded-full animate-pulse shadow-lg shadow-[#ef4444]/30"></div>
               <span className="text-sm text-[#f59e0b] font-bold uppercase tracking-wide">🤖 AI SCANNING</span>

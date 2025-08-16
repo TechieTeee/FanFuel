@@ -125,7 +125,7 @@ export default function Spending() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative z-50 px-6 py-6 flex items-center justify-between"
+        className="relative z-40 px-6 py-6 flex items-center justify-between"
       >
         <Link href="/" className="flex items-center space-x-3">
           <span className="text-3xl font-black text-white bg-gradient-to-r from-[#f59e0b] to-white bg-clip-text text-transparent">
@@ -134,7 +134,7 @@ export default function Spending() {
         </Link>
         <div className="flex items-center space-x-6">
           <Link href="/alerts" className="text-[#ef4444] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
-            🚨 Alerts
+            📺 FuelFeed
           </Link>
           <ConnectButton />
         </div>
@@ -150,10 +150,10 @@ export default function Spending() {
           className="text-center mb-12"
         >
           <h1 className="text-5xl md:text-6xl font-black text-white uppercase tracking-wider mb-4">
-            💳 Payment Engine
+            ⛽ FuelStation
           </h1>
           <p className="text-xl text-[#f59e0b] font-semibold">
-            Transform every purchase into athlete fuel
+            Where every purchase powers champions
           </p>
         </motion.div>
 
@@ -199,17 +199,10 @@ export default function Spending() {
               <Image
                 src={getFuelieImage()}
                 alt="Fuelie Mascot"
-                width={80}
-                height={80}
-                className="rounded-full mb-2"
+                width={120}
+                height={120}
+                className="rounded-full"
               />
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-[#10b981] px-6 py-3 rounded-xl font-black hover:bg-gray-100 shadow-xl uppercase tracking-wide"
-              >
-                📈 View Battle Log
-              </motion.button>
             </div>
           </div>
         </motion.div>
