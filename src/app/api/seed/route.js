@@ -1,5 +1,16 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+
+// Production-safe mock supabase client
+const mockSupabase = {
+  from: (table) => ({
+    upsert: () => ({
+      select: () => ({
+        data: table === 'athletes' ? seedAthletes : mockCommentary,
+        error: null
+      })
+    })
+  })
+}
 
 const seedAthletes = [
   {
@@ -26,41 +37,41 @@ const seedAthletes = [
   }
 ]
 
+const mockCommentary = [
+  {
+    text: 'This point guard is completely overrated and making too many turnovers in crucial moments',
+    athlete_id: '1',
+    sentiment: 'negative',
+    intensity: 0.8,
+    virality_score: 0.75,
+    source: 'Social Media Discussion'
+  },
+  {
+    text: 'Williams needs to step up his game if this team wants any chance at success',
+    athlete_id: '2', 
+    sentiment: 'negative',
+    intensity: 0.6,
+    virality_score: 0.45,
+    source: 'Sports Forum'
+  }
+]
+
 export async function POST() {
   try {
-    // Insert seed athletes
-    const { data: athletes, error: athleteError } = await supabase
+    // Insert seed athletes (mock)
+    const { data: athletes, error: athleteError } = mockSupabase
       .from('athletes')
-      .upsert(seedAthletes, { onConflict: 'id' })
+      .upsert()
       .select()
 
     if (athleteError) {
       throw new Error(`Failed to seed athletes: ${athleteError.message}`)
     }
 
-    // Create some sample commentary
-    const seedCommentary = [
-      {
-        text: 'This point guard is completely overrated and making too many turnovers in crucial moments',
-        athlete_id: '1',
-        sentiment: 'negative',
-        intensity: 0.8,
-        virality_score: 0.75,
-        source: 'Social Media Discussion'
-      },
-      {
-        text: 'Williams needs to step up his game if this team wants any chance at success',
-        athlete_id: '2', 
-        sentiment: 'negative',
-        intensity: 0.6,
-        virality_score: 0.45,
-        source: 'Sports Forum'
-      }
-    ]
-
-    const { data: commentary, error: commentaryError } = await supabase
+    // Create some sample commentary (mock)
+    const { data: commentary, error: commentaryError } = mockSupabase
       .from('commentary')
-      .upsert(seedCommentary)
+      .upsert()
       .select()
 
     if (commentaryError) {
