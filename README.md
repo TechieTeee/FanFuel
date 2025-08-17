@@ -486,16 +486,6 @@ We welcome contributions from developers who believe in athlete equity and Web3 
 
 ---
 
-## 🙏 Acknowledgments
-
-- **Chiliz** for building the sports blockchain that makes fan engagement possible
-- **LayerZero** for solving cross-chain interoperability with innovative messaging protocols
-- **Flow** for creating consumer-grade blockchain experiences
-- **OpenZeppelin** for battle-tested smart contract security standards
-- **The athletes** who inspired this platform through their dedication despite systemic inequities
-
----
-
 ## 📖 References
 
 1. Global Sports Market Size - [Statista Global Sports Market Report 2024](https://www.statista.com/outlook/amo/media/traditional-media/tv-video/sports/worldwide)
