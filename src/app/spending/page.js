@@ -16,6 +16,7 @@ import TransactionFlow from '../../components/TransactionFlow';
 import PersonalizedAds from '../../components/PersonalizedAds';
 import AthleteInsights from '../../components/AthleteInsights';
 import FuelClips from '../../components/FuelClips';
+import FueliChatBubble from '../../components/FueliChatBubble';
 import { triggerAthleteSupport, executeActionRewards } from '../../lib/flow-actions';
 
 export default function Spending() {
@@ -24,6 +25,20 @@ export default function Spending() {
   const [currentTransaction, setCurrentTransaction] = useState(null)
   const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
   const [aiAthleteContent, setAiAthleteContent] = useState([]);
+  const [fuelieMessages, setFuelieMessages] = useState([
+    {
+      text: "Welcome to your FuelStation! Every purchase automatically supports your champions. 🏆",
+      type: "guide"
+    },
+    {
+      text: "Tip: Connect multiple payment methods to maximize your athlete support! 💳", 
+      type: "tip"
+    },
+    {
+      text: "Your fuel impact is growing! You've supported 2 athletes this month. 🚀",
+      type: "celebration"
+    }
+  ]);
 
   // Use demo athletes as mock data
   const mockAthletes = demoAthletes
@@ -80,6 +95,19 @@ export default function Spending() {
       if (result.success) {
         setFuelieState('sitting')
         
+        // Update Fueli messages with success feedback
+        setFuelieMessages(prev => [
+          {
+            text: `Awesome! You just fueled ${demoAthletes.find(a => a.id === athleteId)?.name} with $${amount}! 🎆`,
+            type: "celebration"
+          },
+          {
+            text: "Your impact is making a real difference in athlete's lives! Keep it up! 👏",
+            type: "encourage"
+          },
+          ...prev.slice(0, 1) // Keep original welcome message
+        ]);
+        
         // Trigger Flow Actions for athlete support
         const athlete = demoAthletes.find(a => a.id === athleteId)
         const triggeredActions = await triggerAthleteSupport(
@@ -106,6 +134,20 @@ export default function Spending() {
       }
     } catch (error) {
       setFuelieState('waving')
+      
+      // Update Fueli messages with helpful guidance on error
+      setFuelieMessages(prev => [
+        {
+          text: "Oops! Something went wrong. Try checking your wallet connection. 🔧",
+          type: "warning"
+        },
+        {
+          text: "Don't worry! Your previous fuel contributions are still active. 💪",
+          type: "encourage"
+        },
+        ...prev.slice(0, 1)
+      ]);
+      
       alert(`❌ Failed to support athlete: ${error.message}`)
     }
   }, [userAddress, demoAthletes])
