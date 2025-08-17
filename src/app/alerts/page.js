@@ -167,19 +167,28 @@ ${triggeredActions.length > 0 ? `
         {/* Cinematic Athlete Carousel with Newspaper Frame */}
         <FeaturedAthleteCarousel />
 
-        {/* Live Sports News Ticker */}
+        {/* Live Sports News Ticker - Enhanced */}
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="bg-gradient-to-r from-[#ef4444]/20 to-[#f59e0b]/20 backdrop-blur-lg rounded-xl border border-[#ef4444]/30 mb-8 overflow-hidden max-w-5xl mx-auto"
+          whileHover={{ scale: 1.02, y: -5 }}
+          className="relative overflow-hidden bg-gradient-to-br from-[#ef4444]/15 via-[#f59e0b]/10 to-transparent backdrop-blur-xl rounded-2xl border border-[#ef4444]/20 mb-8 max-w-5xl mx-auto shadow-2xl group"
         >
-          <div className="bg-[#ef4444]/30 px-6 py-2 border-b border-[#ef4444]/30">
+          {/* Animated Glow Effects */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#ef4444]/10 to-[#f59e0b]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#ef4444]/20 rounded-full blur-2xl animate-pulse" />
+          <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-[#f59e0b]/15 rounded-full blur-2xl animate-pulse delay-1000" />
+          <div className="relative z-10 bg-gradient-to-r from-[#ef4444]/20 to-[#f59e0b]/20 backdrop-blur-sm px-6 py-3 border-b border-[#ef4444]/20">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-black text-white uppercase tracking-wider">📺 Live Sports Feed</h3>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-[#ef4444] rounded-full animate-pulse"></div>
-                <span className="text-xs text-[#f59e0b] font-bold uppercase">Breaking</span>
+              <h3 className="text-lg font-black text-white uppercase tracking-wider filter drop-shadow-md">📺 Live Sports Feed</h3>
+              <div className="flex items-center space-x-3">
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1], opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-3 h-3 bg-[#ef4444] rounded-full shadow-lg shadow-[#ef4444]/50"
+                ></motion.div>
+                <span className="text-xs text-[#f59e0b] font-bold uppercase tracking-wider filter drop-shadow-sm">Breaking</span>
               </div>
             </div>
           </div>
@@ -226,21 +235,35 @@ ${triggeredActions.length > 0 ? `
           )}
         </motion.div>
 
-        {/* Trending Topics */}
+        {/* Trending Topics - Enhanced */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-700/50 max-w-5xl mx-auto mb-12"
+          whileHover={{ scale: 1.02, y: -10 }}
+          className="relative overflow-hidden bg-gradient-to-br from-gray-900/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-gray-700/30 max-w-5xl mx-auto mb-12 group"
         >
-          <h2 className="text-3xl font-black text-white uppercase tracking-wider mb-6 text-center">🔥 Trending Topics</h2>
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Background Glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/5 to-[#ef4444]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#f59e0b]/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-[#ef4444]/10 rounded-full blur-3xl animate-pulse delay-1000" />
+          <h2 className="relative z-10 text-3xl font-black text-white uppercase tracking-wider mb-6 text-center filter drop-shadow-md">🔥 Trending Topics</h2>
+          <div className="relative z-10 flex flex-wrap justify-center gap-6">
             {ncaaData.trending_topics?.length > 0 ? ncaaData.trending_topics.map((topic, index) => (
-              <div key={index} className="bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
-                <p className="text-lg font-semibold text-white">{topic.topic}</p>
-                <p className="text-sm text-gray-400">Virality Score: {(topic.virality_score || 0).toFixed(2)}</p>
-                <p className="text-xs text-gray-500">{topic.tweet_count || 0} tweets</p>
-              </div>
+              <motion.div 
+                key={index} 
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 * index, duration: 0.6 }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                className="relative group bg-gradient-to-br from-gray-800/70 via-gray-700/60 to-gray-800/70 backdrop-blur-lg p-6 rounded-2xl border border-gray-600/40 shadow-lg hover:shadow-2xl hover:border-[#f59e0b]/40 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <p className="relative z-10 text-lg font-bold text-white mb-2 filter drop-shadow-sm">{topic.topic}</p>
+                <p className="relative z-10 text-sm text-gray-300 font-medium">Virality Score: {(topic.virality_score || 0).toFixed(2)}</p>
+                <p className="relative z-10 text-xs text-gray-400 font-medium">{topic.tweet_count || 0} tweets</p>
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#f59e0b]/20 rounded-full blur-lg" />
+              </motion.div>
             )) : [
               {
                 topic: 'WNBA Pay Equity Movement',
@@ -273,11 +296,20 @@ ${triggeredActions.length > 0 ? `
                 sentiment: 'positive'
               }
             ].map((topic, index) => (
-              <div key={index} className="bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
-                <p className="text-lg font-semibold text-white">{topic.topic}</p>
-                <p className="text-sm text-gray-400">Virality Score: {topic.virality_score}</p>
-                <p className="text-xs text-gray-500">{topic.tweet_count} tweets</p>
-              </div>
+              <motion.div 
+                key={index} 
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 * index, duration: 0.6 }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                className="relative group bg-gradient-to-br from-gray-800/70 via-gray-700/60 to-gray-800/70 backdrop-blur-lg p-6 rounded-2xl border border-gray-600/40 shadow-lg hover:shadow-2xl hover:border-[#f59e0b]/40 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <p className="relative z-10 text-lg font-bold text-white mb-2 filter drop-shadow-sm">{topic.topic}</p>
+                <p className="relative z-10 text-sm text-gray-300 font-medium">Virality Score: {topic.virality_score}</p>
+                <p className="relative z-10 text-xs text-gray-400 font-medium">{topic.tweet_count} tweets</p>
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#f59e0b]/20 rounded-full blur-lg" />
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -426,57 +458,63 @@ ${triggeredActions.length > 0 ? `
                   
                   {/* Paid Reactions */}
                   <div className="border-t border-gray-600/50 pt-6 mt-6">
-                    <h4 className="font-black mb-4 text-white uppercase tracking-wide">💰 PAID REACTIONS: {athlete?.name}</h4>
-                    <div className="grid grid-cols-3 gap-3 mb-4">
+                    <h4 className="font-black mb-4 text-white uppercase tracking-wide filter drop-shadow-md">💰 PAID REACTIONS: {athlete?.name}</h4>
+                    <div className="grid grid-cols-3 gap-4 mb-4">
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -3, rotateZ: 2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 2, comment.virality_score)}
-                        className={`bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 2 ? 'ring-2 ring-yellow-400' : ''}`}
+                        className={`relative overflow-hidden bg-gradient-to-br from-[#10b981] via-[#10b981] to-[#059669] text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-[#10b981]/25 transition-all duration-300 font-bold text-sm border border-[#10b981]/30 group ${comment.suggested_reaction === 2 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
-                        👏 Clap $2
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">👏 Clap $2</span>
                       </motion.button>
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -3, rotateZ: -2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 5, comment.virality_score)}
-                        className={`bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 5 ? 'ring-2 ring-yellow-400' : ''}`}
+                        className={`relative overflow-hidden bg-gradient-to-br from-[#f59e0b] via-[#f59e0b] to-[#ef4444] text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-[#f59e0b]/25 transition-all duration-300 font-bold text-sm border border-[#f59e0b]/30 group ${comment.suggested_reaction === 5 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
-                        🔥 Fire $5
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">🔥 Fire $5</span>
                       </motion.button>
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -3, rotateZ: 1 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 10, comment.virality_score)}
-                        className={`bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 10 ? 'ring-2 ring-yellow-400' : ''}`}
+                        className={`relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-600 to-purple-800 text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 font-bold text-sm border border-purple-500/30 group ${comment.suggested_reaction === 10 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
-                        💎 Gem $10
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">💎 Gem $10</span>
                       </motion.button>
                     </div>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-3 gap-4">
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -3, rotateZ: -1 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 15, comment.virality_score)}
-                        className={`bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 15 ? 'ring-2 ring-yellow-400' : ''}`}
+                        className={`relative overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-blue-800 text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 font-bold text-sm border border-blue-500/30 group ${comment.suggested_reaction === 15 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
-                        💪 Strong $15
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">💪 Strong $15</span>
                       </motion.button>
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -3, rotateZ: 2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 25, comment.virality_score)}
-                        className={`bg-gradient-to-r from-yellow-600 to-yellow-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 25 ? 'ring-2 ring-yellow-400' : ''}`}
+                        className={`relative overflow-hidden bg-gradient-to-br from-yellow-500 via-yellow-600 to-yellow-800 text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 font-bold text-sm border border-yellow-500/30 group ${comment.suggested_reaction === 25 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
-                        🏆 Legend $25
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">🏆 Legend $25</span>
                       </motion.button>
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.08, y: -3, rotateZ: -1.5 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 50, comment.virality_score)}
-                        className={`bg-gradient-to-r from-pink-600 to-pink-700 text-white px-4 py-3 rounded-xl hover:shadow-xl transition-all duration-300 font-bold text-sm ${comment.suggested_reaction === 50 ? 'ring-2 ring-yellow-400' : ''}`}
+                        className={`relative overflow-hidden bg-gradient-to-br from-pink-500 via-pink-600 to-pink-800 text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 font-bold text-sm border border-pink-500/30 group ${comment.suggested_reaction === 50 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
-                        👑 King $50
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="relative z-10">👑 King $50</span>
                       </motion.button>
                     </div>
                     <p className="text-xs text-gray-400 mt-3 font-medium">
