@@ -3,7 +3,7 @@
 import { createConfig, http } from 'wagmi'
 import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains'
 import { defineChain } from 'viem'
-import { injected, metaMask, coinbaseWallet } from 'wagmi/connectors'
+import { injected, metaMask, coinbaseWallet, walletConnect } from 'wagmi/connectors'
 
 // Define Chiliz Chain configuration
 export const chilizChain = defineChain({
@@ -35,6 +35,9 @@ export const config = createConfig({
     injected(),
     metaMask(),
     coinbaseWallet({ appName: 'FanFuel' }),
+    walletConnect({ 
+      projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID 
+    }),
   ],
   transports: {
     [mainnet.id]: http(),
