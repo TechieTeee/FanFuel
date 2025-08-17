@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { demoAthletes } from '../../../data/demo-athletes';
 import { demoCommentary } from '../../../data/demo-commentary';
 import FlowActions from '../../components/FlowActions';
@@ -19,7 +18,7 @@ export default function Alerts() {
     const [ncaaData, setNcaaData] = useState({ rankings: [], games: [], trending_topics: [] })
   const [loading, setLoading] = useState(true)
   const [commentary, setCommentary] = useState([])
-  const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
+  const [userAddress] = useState('0x1234567890123456789012345678901234567890')
 
   useEffect(() => {
     const fetchNCAAData = async () => {
@@ -71,17 +70,6 @@ export default function Alerts() {
     fetchCommentary()
   }, [])
 
-  const getFuelieImage = () => {
-    switch(fuelieState) {
-      case 'eyes-closed':
-        return '/fuelie-eyes-closed.png'
-      case 'sitting':
-        return '/fuelie-sitting.png'
-      default:
-        return '/fuelie-waving.png'
-    }
-  }
-
   const handleSupportAthlete = useCallback(async (athleteId, amount, viralityScore = 0.5) => {
     setFuelieState('eyes-closed')
     
@@ -119,12 +107,15 @@ export default function Alerts() {
       }
       
       setFuelieState('sitting')
-      alert(`🏆 Successfully sent $${amount} support to ${athlete?.name}!\n${triggeredActions.length > 0 ? `\n🎉 ${triggeredActions.length} Flow Action(s) triggered on Flow EVM!` : ''}`)
+      alert(`🏆 Successfully sent ${amount} support to ${athlete?.name}!
+${triggeredActions.length > 0 ? `
+🎉 ${triggeredActions.length} Flow Action(s) triggered on Flow EVM!` : ''}`)
     } catch (error) {
       setFuelieState('waving')
       alert(`❌ Failed to support athlete: ${error.message}`)
     }
-  }, [userAddress, demoAthletes])
+  }, [userAddress])
+
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
