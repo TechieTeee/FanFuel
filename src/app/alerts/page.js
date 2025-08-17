@@ -21,9 +21,9 @@ export default function Alerts() {
     const [ncaaData, setNcaaData] = useState({ rankings: [], games: [], trending_topics: [] })
   const [loading, setLoading] = useState(true)
   const [commentary, setCommentary] = useState([])
+  const [isClient, setIsClient] = useState(false)
   const [userAddress] = useState('0x1234567890123456789012345678901234567890')
   const [fanHistory] = useState({ totalSpent: 125, reactions: 15 })
-  const [aiCommentaryExamplesData, setAiCommentaryExamplesData] = useState([]);
   const [fuelieMessages, setFuelieMessages] = useState([
     {
       text: "Welcome to FuelFeed! I'll help you find the best ways to support athletes. 🏅",
@@ -44,6 +44,12 @@ export default function Alerts() {
   ]);
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
+    
     const fetchNCAAData = async () => {
       try {
         const [rankingsRes, gamesRes, trendingRes] = await Promise.all([
@@ -70,7 +76,7 @@ export default function Alerts() {
     }
     
     fetchNCAAData()
-  }, [])
+  }, [isClient])
 
   useEffect(() => {
     const getCommentary = async () => {
@@ -91,7 +97,7 @@ export default function Alerts() {
     }
 
     getCommentary()
-  }, [fanHistory])
+  }, [fanHistory, isClient])
   
   // Contextual Fueli message triggers for FuelFeed
   const showContextualTip = (context, data = {}) => {
@@ -101,7 +107,7 @@ export default function Alerts() {
         type: "encourage"
       },
       'viral-content': {
-        text: `High virality alert! Your reaction here will reach ${Math.round(data.viralityScore * 1000)}+ people! 🚀`,
+        text: `High virality alert! Your reaction here will reach ${isClient ? Math.round(data.viralityScore * 1000) : '1000'}+ people! 🚀`,
         type: "tip"
       },
       'trending-hover': {
@@ -115,7 +121,7 @@ export default function Alerts() {
     };
     
     if (contextMessages[context]) {
-      setFuelieMessages(prev => [contextMessages[context], ...prev.slice(0, 2)]);
+      setFuelieMessages(current => [contextMessages[context], ...current.slice(0, 2)]);
     }
   };
 
@@ -158,7 +164,7 @@ export default function Alerts() {
       setFuelieState('sitting')
       
       // Update Fueli messages with reaction feedback
-      setFuelieMessages(prev => [
+      setFuelieMessages(current => [
         {
           text: `Amazing! You just sent $${amount} to support ${athlete?.name}! 🎆`,
           type: "celebration"
@@ -182,7 +188,7 @@ ${triggeredActions.length > 0 ? `
       setFuelieState('waving')
       
       // Update Fueli messages with helpful error guidance
-      setFuelieMessages(prev => [
+      setFuelieMessages(current => [
         {
           text: "Hmm, something went wrong with that reaction. Let's try again! 🔄",
           type: "warning"
@@ -201,6 +207,18 @@ ${triggeredActions.length > 0 ? `
     }
   }, [userAddress])
 
+
+  // Prevent hydration mismatch by not rendering until client-side
+  if (!isClient) {
+    return (
+      <div className="relative min-h-screen bg-black text-white overflow-hidden flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#f59e0b] mx-auto mb-4"></div>
+          <p className="text-xl text-gray-300">Loading FuelFeed...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
@@ -503,7 +521,7 @@ ${triggeredActions.length > 0 ? `
           </div>
           
           <div className="space-y-6">
-            {commentary.map((comment, index) => {
+            {commentary && commentary.length > 0 ? commentary.map((comment, index) => {
               const athlete = demoAthletes.find(a => a.id === comment.athlete_id)
               return (
                 <motion.div 
@@ -529,10 +547,10 @@ ${triggeredActions.length > 0 ? `
                     </div>
                     <div className="text-right space-y-2">
                       <div className="bg-[#ef4444]/20 text-[#ef4444] px-3 py-1 rounded-full text-sm font-black border border-[#ef4444]/30">
-                        🔥 {Math.round(comment.intensity * 100)}% Intensity
+                        🔥 {isClient ? Math.round(comment.intensity * 100) : '85'}% Intensity
                       </div>
                       <div className="bg-[#f59e0b]/20 text-[#f59e0b] px-3 py-1 rounded-full text-sm font-black border border-[#f59e0b]/30">
-                        🚀 {Math.round(comment.virality_score * 100)}% Viral
+                        🚀 {isClient ? Math.round(comment.virality_score * 100) : '75'}% Viral
                       </div>
                     </div>
                   </div>
@@ -613,7 +631,7 @@ ${triggeredActions.length > 0 ? `
                   <div className="border-t border-gray-600/50 pt-6 mt-6">
                     <h4 className="font-black mb-4 text-white uppercase tracking-wide">🔥 You might also like:</h4>
                     <div className="grid grid-cols-2 gap-4">
-                      {demoAthletes.filter(a => a.sport === athlete?.sport && a.id !== athlete?.id).map(recommendedAthlete => (
+                      {demoAthletes && athlete && demoAthletes.filter(a => a.sport === athlete?.sport && a.id !== athlete?.id).map(recommendedAthlete => (
                         <div key={recommendedAthlete.id} className="bg-gray-800/60 p-4 rounded-xl border border-gray-700/50">
                           <p className="font-bold text-white">{recommendedAthlete.name}</p>
                           <p className="text-sm text-gray-400">{recommendedAthlete.sport} - {recommendedAthlete.university}</p>
@@ -623,7 +641,12 @@ ${triggeredActions.length > 0 ? `
                   </div>
                 </motion.div>
               )
-            })}
+            }) : (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f59e0b] mx-auto mb-4"></div>
+                <p className="text-gray-400 text-lg">Loading athlete commentary...</p>
+              </div>
+            )}
           </div>
 
         </motion.div>

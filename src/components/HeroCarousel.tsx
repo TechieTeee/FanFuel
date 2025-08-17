@@ -7,53 +7,63 @@ import Image from 'next/image'
 const heroImages = [
   {
     src: '/pexels-football-wife-577822-1618169.jpg',
-    alt: 'Competition',
-    caption: '💪 Fueling Greatness'
-  },
-  {
-    src: '/pexels-cottonbro-5740517.jpg',
-    alt: 'Athletic Training',
-    caption: '⚡ Igniting Champions'
-  },
-  {
-    src: '/pexels-pixabay-163439.jpg', 
-    alt: 'Team Sports',
-    caption: '🔥 Building Legends'
+    alt: 'Football Player Victory Roar',
+    caption: '🔥 Victory Unleashed'
   },
   {
     src: '/pexels-cottonbro-5740794.jpg',
-    alt: 'Victory Moment',
-    caption: '🏆 Championship Moments'
+    alt: 'Boxer Focused Intensity',
+    caption: '🥊 Fighting Spirit'
   },
   {
-    src: '/pexels-ketut-subiyanto-4720517.jpg',
-    alt: 'Athletic Focus',
-    caption: '🎯 Unstoppable Focus'
+    src: '/pexels-football-wife-577822-1428647.jpg',
+    alt: 'Determined College Football Player',
+    caption: '💪 Raw Determination'
   },
   {
-    src: '/pexels-tima-miroshnichenko-5750821.jpg',
-    alt: 'Team Unity',
-    caption: '⭐ Legendary Unity'
+    src: '/pexels-alesiakozik-7290328.jpg',
+    alt: 'Basketball Player Portrait',
+    caption: '🏀 Championship Mindset'
   },
   {
-    src: '/pexels-nappy-935948.jpg',
-    alt: 'Athletic Power',
-    caption: '💥 Pure Power'
+    src: '/pexels-david-morris-1149400-15729335.jpg',
+    alt: 'Live Basketball Action',
+    caption: '⚡ Game-Winning Moments'
   },
   {
-    src: '/pexels-yankrukov-8199172.jpg',
-    alt: 'Training Intensity',
-    caption: '🚀 Elite Performance'
+    src: '/pexels-tony-schnagl-6468956.jpg',
+    alt: 'Hockey Goalie Intensity',
+    caption: '🥅 Unbreakable Focus'
   },
   {
-    src: '/pexels-mikhail-nilov-6620724.jpg',
-    alt: 'Victory Celebration',
-    caption: '🔥 Victory Fuel'
+    src: '/pexels-pixabay-159564.jpg',
+    alt: 'Lacrosse Victory Celebration',
+    caption: '🏆 Pure Triumph'
   },
   {
-    src: '/pexels-george-pak-7972525.jpg',
-    alt: 'Athletic Excellence',
-    caption: '⚡ Excellence Unleashed'
+    src: '/pexels-david-morris-1149400-2190115.jpg',
+    alt: 'Passionate College Crowd',
+    caption: '🔥 Fan Power Unleashed'
+  },
+  {
+    src: '/pexels-cottonbro-10350369.jpg',
+    alt: 'Volleyball Athletic Precision',
+    caption: '🏹 Precision Excellence'
+  },
+  {
+    src: '/pexels-football-wife-577822-1369501.jpg',
+    alt: 'College Football Brotherhood',
+    caption: '🚀 Champions Together'
+  },
+  {
+    src: '/pexels-cottonbro-6764359.jpg',
+    alt: 'Female Basketball Team Unity',
+    caption: '⭐ Team Strength'
+  },
+  {
+    src: '/pexels-wesleydavi-33417687.jpg',
+    alt: 'Athletes in Motion',
+    caption: '🏃 Relentless Drive'
   }
 ]
 

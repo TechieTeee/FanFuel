@@ -139,7 +139,7 @@ Transform every coffee, every meal, every transaction into direct support for at
                 >
                   <Image
                     src="/fuelie-waving.png"
-                    alt="Meet Fuelie"
+                    alt="Meet Fueli"
                     width={150}
                     height={150}
                     className="drop-shadow-2xl opacity-90"
@@ -151,7 +151,7 @@ Transform every coffee, every meal, every transaction into direct support for at
                   transition={{ duration: 0.8, delay: 0.3 }}
                   className="text-5xl md:text-6xl font-black text-white mb-6 uppercase tracking-wider"
                 >
-                  🤖 Meet Fuelie
+                  🤖 Meet Fueli
                 </motion.h2>
                 <motion.p 
                   initial={{ y: 30, opacity: 0 }}
