@@ -358,7 +358,7 @@ Unlike traditional sports platforms that rely on advertising or merchandise:
 ## 🚀 Live Deployment & Verification
 
 ### Production Environment
-**Live App**: [FanFuel on Vercel](https://fanfuel.vercel.app) - Fully functional with all blockchain integrations
+**Live App**: [FanFuel on Vercel](https://fanfuel-xyz.vercel.app/) - Fully functional with all blockchain integrations
 
 ### Multi-Chain Contract Deployments
 
