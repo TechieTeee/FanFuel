@@ -42,6 +42,32 @@ export default function Spending() {
 
   // Use demo athletes as mock data
   const mockAthletes = demoAthletes
+  
+  // Contextual Fueli message triggers
+  const showTipMessage = (messageType) => {
+    const tipMessages = {
+      'wallet-hover': {
+        text: "Pro tip: Connect your wallet to unlock automatic athlete funding with every purchase! 💳",
+        type: "tip"
+      },
+      'stats-hover': {
+        text: "Impressive stats! You're in the top 10% of supporters this month! 🏆",
+        type: "celebration"
+      },
+      'athlete-hover': {
+        text: "Click 'Set as Main' to automatically fund this athlete with every purchase! ⚡",
+        type: "guide"
+      },
+      'chart-hover': {
+        text: "Your fuel impact is growing steadily! Consistency is key to helping athletes. 📈",
+        type: "encourage"
+      }
+    };
+    
+    if (tipMessages[messageType]) {
+      setFuelieMessages(prev => [tipMessages[messageType], ...prev.slice(0, 2)]);
+    }
+  };
 
   const executeTransaction = useCallback(async (transaction) => {
     console.log('Executing transaction:', transaction)
@@ -629,6 +655,7 @@ export default function Spending() {
                         whileHover={{ scale: 1.08, y: -3 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(athlete.id, 5)}
+                        onMouseEnter={() => showTipMessage('athlete-hover')}
                         className="relative overflow-hidden flex-1 bg-gradient-to-br from-[#10b981] via-[#10b981] to-[#059669] text-white py-4 rounded-xl hover:shadow-2xl hover:shadow-[#10b981]/25 transition-all duration-500 text-sm font-bold uppercase tracking-wide border border-[#10b981]/30 group"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -813,6 +840,14 @@ export default function Spending() {
           onClose={() => setShowTransactionFlow(false)}
           transaction={currentTransaction}
           onConfirm={executeTransaction}
+        />
+
+        {/* Fueli Chat Guide */}
+        <FueliChatBubble 
+          messages={fuelieMessages}
+          fuelieState={fuelieState}
+          position="bottom-right"
+          autoRotate={true}
         />
 
       </div>

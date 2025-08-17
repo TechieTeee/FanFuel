@@ -14,6 +14,7 @@ import MinimalWallet from '../../components/web3/MinimalWallet';
 import { triggerAthleteSupport, triggerViralReaction, executeActionRewards } from '../../lib/flow-actions';
 import PersonalizedAds from '../../components/PersonalizedAds';
 import FeaturedAthleteCarousel from '../../components/FeaturedAthleteCarousel';
+import FueliChatBubble from '../../components/FueliChatBubble';
 
 export default function Alerts() {
   const [fuelieState, setFuelieState] = useState('waving')
@@ -23,6 +24,24 @@ export default function Alerts() {
   const [userAddress] = useState('0x1234567890123456789012345678901234567890')
   const [fanHistory] = useState({ totalSpent: 125, reactions: 15 })
   const [aiCommentaryExamplesData, setAiCommentaryExamplesData] = useState([]);
+  const [fuelieMessages, setFuelieMessages] = useState([
+    {
+      text: "Welcome to FuelFeed! I'll help you find the best ways to support athletes. 🏅",
+      type: "guide"
+    },
+    {
+      text: "See those negative comments? Your reactions can turn the tide for these athletes! 💪",
+      type: "encourage"
+    },
+    {
+      text: "Tip: Higher virality scores mean your support will have maximum impact! 🚀",
+      type: "tip"
+    },
+    {
+      text: "AI suggests the most effective reaction amounts based on your history. 🤖",
+      type: "guide"
+    }
+  ]);
 
   useEffect(() => {
     const fetchNCAAData = async () => {
@@ -111,11 +130,47 @@ export default function Alerts() {
       }
       
       setFuelieState('sitting')
+      
+      // Update Fueli messages with reaction feedback
+      setFuelieMessages(prev => [
+        {
+          text: `Amazing! You just sent $${amount} to support ${athlete?.name}! 🎆`,
+          type: "celebration"
+        },
+        {
+          text: `Your reaction is now live and helping counter negative sentiment! 🛡️`,
+          type: "encourage"
+        },
+        {
+          text: triggeredActions.length > 0 
+            ? `Bonus: ${triggeredActions.length} Flow Action(s) triggered! Extra rewards coming your way! 🎁`
+            : "Keep supporting athletes to unlock Flow Action rewards! 🎯",
+          type: triggeredActions.length > 0 ? "celebration" : "tip"
+        }
+      ]);
+      
       alert(`🏆 Successfully sent ${amount} support to ${athlete?.name}!
 ${triggeredActions.length > 0 ? `
 🎉 ${triggeredActions.length} Flow Action(s) triggered on Flow EVM!` : ''}`)
     } catch (error) {
       setFuelieState('waving')
+      
+      // Update Fueli messages with helpful error guidance
+      setFuelieMessages(prev => [
+        {
+          text: "Hmm, something went wrong with that reaction. Let's try again! 🔄",
+          type: "warning"
+        },
+        {
+          text: "Don't give up! These athletes really need your support right now. 🙏",
+          type: "encourage"
+        },
+        {
+          text: "Check your wallet connection and try a smaller amount first. 🔧",
+          type: "tip"
+        }
+      ]);
+      
       alert(`❌ Failed to support athlete: ${error.message}`)
     }
   }, [userAddress])
@@ -551,6 +606,13 @@ ${triggeredActions.length > 0 ? `
           <FlowActions userAddress={userAddress} showAchievements={true} />
         </motion.div>
 
+        {/* Fueli Chat Guide */}
+        <FueliChatBubble 
+          messages={fuelieMessages}
+          fuelieState={fuelieState}
+          position="bottom-left"
+          autoRotate={true}
+        />
 
       </div>
     </div>
