@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { demoAthletes } from '../../../data/demo-athletes';
-import { aiCommentaryExamples } from '../../../data/ai-commentary-examples';
-import { getReactionSuggestion } from '../../../lib/ai-reaction-suggestions';
+
+import { getReactionSuggestion } from '../../../lib/ai-reaction-suggestions.ts';
 import FlowActions from '../../components/FlowActions';
 import CustomCursor from '../../components/CustomCursor';
 import AnimatedBackground from '../../components/AnimatedBackground';
@@ -21,6 +21,7 @@ export default function Alerts() {
   const [commentary, setCommentary] = useState([])
   const [userAddress] = useState('0x1234567890123456789012345678901234567890')
   const [fanHistory] = useState({ totalSpent: 125, reactions: 15 })
+  const [aiCommentaryExamplesData, setAiCommentaryExamplesData] = useState([]);
 
   useEffect(() => {
     const fetchNCAAData = async () => {
@@ -53,14 +54,20 @@ export default function Alerts() {
 
   useEffect(() => {
     const getCommentary = async () => {
-      const commentaryWithSuggestions = await Promise.all(
-        aiCommentaryExamples.map(async (comment) => {
-          const athlete = demoAthletes.find(a => a.id === comment.athlete_id)
-          const suggested_reaction = await getReactionSuggestion(athlete, comment, fanHistory)
-          return { ...comment, suggested_reaction }
-        })
-      )
-      setCommentary(commentaryWithSuggestions)
+      try {
+        const response = await fetch('/api/ai-commentary-examples');
+        const data = await response.json();
+        const commentaryWithSuggestions = await Promise.all(
+          data.map(async (comment) => {
+            const athlete = demoAthletes.find(a => a.id === comment.athlete_id)
+            const suggested_reaction = await getReactionSuggestion(athlete, comment, fanHistory)
+            return { ...comment, suggested_reaction }
+          })
+        )
+        setCommentary(commentaryWithSuggestions)
+      } catch (error) {
+        console.error('Error fetching AI commentary examples:', error);
+      }
     }
 
     getCommentary()

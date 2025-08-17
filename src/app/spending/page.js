@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { demoAthletes } from '../../../data/demo-athletes';
-import { aiAthleteContent } from '../../../data/ai-athlete-content';
+
 import { demoTransactions } from '../../../data/demo-transactions';
 import FlowActions from '../../components/FlowActions';
 import CustomCursor from '../../components/CustomCursor';
@@ -23,6 +23,7 @@ export default function Spending() {
   const [showTransactionFlow, setShowTransactionFlow] = useState(false)
   const [currentTransaction, setCurrentTransaction] = useState(null)
   const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
+  const [aiAthleteContent, setAiAthleteContent] = useState([]);
 
   // Use demo athletes as mock data
   const mockAthletes = demoAthletes
@@ -31,6 +32,19 @@ export default function Spending() {
     console.log('Executing transaction:', transaction)
     setShowTransactionFlow(false)
   }, [])
+
+  useEffect(() => {
+    const fetchAiAthleteContent = async () => {
+      try {
+        const response = await fetch('/api/ai-athlete-content');
+        const data = await response.json();
+        setAiAthleteContent(data);
+      } catch (error) {
+        console.error('Error fetching AI athlete content:', error);
+      }
+    };
+    fetchAiAthleteContent();
+  }, []);
 
   const getFuelieImage = useMemo(() => {
     switch(fuelieState) {

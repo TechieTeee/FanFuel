@@ -1,6 +1,6 @@
 
 import { NextResponse } from 'next/server'
-import { analyzeCommentary } from '../../../../lib/gemini-analysis'
+import { analyzeCommentary } from '../../../../lib/gemini-analysis.ts'
 
 export async function POST(request) {
   const { text } = await request.json()

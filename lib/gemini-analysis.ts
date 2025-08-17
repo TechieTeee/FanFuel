@@ -1,9 +1,9 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-export async function analyzeCommentary(text) {
+export async function analyzeCommentary(text: string) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   const prompt = `

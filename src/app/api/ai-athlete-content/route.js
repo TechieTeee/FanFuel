@@ -1,6 +1,7 @@
 
+import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { demoAthletes } from "./demo-athletes";
+import { demoAthletes } from '../../../../data/demo-athletes';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -30,12 +31,20 @@ async function generateAthleteContent(athlete) {
   }
 }
 
-export const aiAthleteContent = await Promise.all(
-  demoAthletes.map(async (athlete) => {
-    const ai_content = await generateAthleteContent(athlete);
-    return {
-      athlete_id: athlete.id,
-      ai_content,
-    };
-  })
-);
+export async function GET() {
+  try {
+    const aiAthleteContent = await Promise.all(
+      demoAthletes.map(async (athlete) => {
+        const ai_content = await generateAthleteContent(athlete);
+        return {
+          athlete_id: athlete.id,
+          ai_content,
+        };
+      })
+    );
+    return NextResponse.json(aiAthleteContent);
+  } catch (error) {
+    console.error("Error fetching AI athlete content:", error);
+    return NextResponse.json({ error: "Failed to fetch AI athlete content" }, { status: 500 });
+  }
+}

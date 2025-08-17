@@ -1,9 +1,12 @@
 
+import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-export async function getReactionSuggestion(athlete, commentary, fanHistory) {
+export async function POST(request) {
+  const { athlete, commentary, fanHistory } = await request.json();
+
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   const prompt = `
@@ -22,10 +25,10 @@ export async function getReactionSuggestion(athlete, commentary, fanHistory) {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const suggestion = parseInt(response.text().trim(), 10);
-    return suggestion;
+    return NextResponse.json(suggestion);
   } catch (error) {
     console.error("Error getting reaction suggestion:", error);
     // Return a default suggestion in case of an error
-    return 5;
+    return NextResponse.json(5, { status: 500 });
   }
 }
