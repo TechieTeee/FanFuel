@@ -90,7 +90,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 1.5 }}
                 className="text-2xl md:text-3xl text-white/90 mb-8 max-w-4xl mx-auto font-light leading-tight drop-shadow-lg tracking-wide"
               >
-                Turn your everyday spending into direct support for your favorite athletes.
+                Every coffee purchase. Every gas fill-up. Every meal. Fuels the future of sports.
               </motion.p>
               <motion.p 
                 initial={{ y: 50, opacity: 0 }}
@@ -98,7 +98,6 @@ export default function Home() {
                 transition={{ duration: 1, delay: 1.7 }}
                 className="text-lg md:text-xl text-[#f59e0b]/90 mb-12 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg"
               >
-Transform every coffee, every meal, every transaction into direct support for athletes who need it most - from Olympic hopefuls to rising MLS stars to track champions. This is how legends are born.
               </motion.p>
 
               <motion.div 
