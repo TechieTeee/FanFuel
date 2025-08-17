@@ -2215,6 +2215,46 @@
       "artifacts": [
         "Pausable"
       ]
+    },
+    "/workspace/FanFuel/contracts/FanFuelFlowNFT.sol": {
+      "lastModificationDate": 1755389788188,
+      "contentHash": "c9f1fcb18241f75a2b4549e05301c98a",
+      "sourceName": "contracts/FanFuelFlowNFT.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.22"
+      ],
+      "artifacts": [
+        "FanFuelFlowNFT"
+      ]
     }
   }
 }

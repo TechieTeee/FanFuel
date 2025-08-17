@@ -37,6 +37,12 @@ module.exports = {
       chainId: 84532,
       gasPrice: 'auto'
     },
+    flowEVM: {
+      url: "https://testnet.evm.nodes.onflow.org",
+      accounts: process.env.CHILIZ_PRIVATE_KEY ? [process.env.CHILIZ_PRIVATE_KEY] : [],
+      chainId: 545,
+      gasPrice: 'auto'
+    },
     hardhat: {
       chainId: 1337
     }

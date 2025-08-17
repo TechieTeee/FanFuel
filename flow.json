@@ -1,0 +1,21 @@
+{
+  "contracts": {
+    "FanFuelNFT": "./cadence/contracts/FanFuelNFT.cdc"
+  },
+  "networks": {
+    "testnet": "access.devnet.nodes.onflow.org:9000",
+    "sandboxnet": "access.sandboxnet.nodes.onflow.org:9000",
+    "mainnet": "access.mainnet.nodes.onflow.org:9000"
+  },
+  "accounts": {
+    "testnet-account": {
+      "address": "f8d6e0586b0a20c7",
+      "key": "..."
+    }
+  },
+  "deployments": {
+    "testnet": {
+      "testnet-account": ["FanFuelNFT"]
+    }
+  }
+}
