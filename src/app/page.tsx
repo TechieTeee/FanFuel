@@ -157,25 +157,28 @@ Transform every coffee, every meal, every transaction into direct support for at
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
-                  className="text-xl md:text-2xl text-orange-300 max-w-4xl mx-auto mb-6 font-semibold"
+                  className="text-xl md:text-2xl text-orange-300 max-w-4xl mx-auto mb-8 font-semibold"
                 >
-                  Your AI-powered champion for athlete empowerment
+                  Your intelligent guide to transforming everyday spending into athlete empowerment
                 </motion.p>
                 <motion.div 
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
-                  className="max-w-5xl mx-auto space-y-4"
+                  className="max-w-5xl mx-auto space-y-6"
                 >
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    Fuelie isn&apos;t just an AI assistant – he&apos;s a revolutionary force that transforms ordinary spending into extraordinary athlete support. Every tap of your card becomes a declaration of belief in emerging champions across Olympic sports, professional leagues, collegiate athletics, and individual disciplines.
+                  <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-medium">
+                    Meet the game-changer who turns your coffee runs, grocery trips, and daily purchases into direct support for athletes who need it most. Fueli understands that behind every Olympic dream, every rising MLS star, and every WNBA champion is a story of financial struggle that fans like you can help rewrite.
                   </p>
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    With advanced blockchain intelligence and real-time sports analytics, Fuelie identifies critical moments when athletes need support most. From Olympic trials to MLS seasons to March Madness to track meets, he doesn&apos;t just process payments – he provides athletes with unprecedented fan data and revenue streams.
+                  <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                    Using cutting-edge AI and real-time sports analytics, Fueli spots the perfect moments when your support can make the biggest difference. Whether it's funding training camp for a track star, helping a soccer player through the off-season, or giving a basketball player the financial freedom to focus purely on their game – Fueli connects your spending power directly to their dreams.
                   </p>
-                  <p className="text-lg text-orange-300/90 font-medium">
-                    &quot;Every purchase is a vote. Every transaction is a statement. Every fan becomes a champion maker. Every athlete gets the data they need to build their brand.&quot; - Fuelie
-                  </p>
+                  <div className="bg-gradient-to-r from-orange-900/30 via-yellow-900/20 to-orange-900/30 backdrop-blur-sm rounded-2xl p-6 border border-orange-500/20">
+                    <p className="text-xl md:text-2xl text-orange-200 font-bold text-center italic leading-relaxed">
+                      "I don&apos;t just process transactions – I turn every dollar into a stepping stone toward athletic greatness. Together, we&apos;re not just supporting athletes; we&apos;re building the future of sports." 
+                      <span className="block mt-2 text-orange-400 text-lg font-semibold">– Fueli</span>
+                    </p>
+                  </div>
                 </motion.div>
               </motion.div>
             </div>

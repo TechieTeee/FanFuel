@@ -92,6 +92,32 @@ export default function Alerts() {
 
     getCommentary()
   }, [fanHistory])
+  
+  // Contextual Fueli message triggers for FuelFeed
+  const showContextualTip = (context, data = {}) => {
+    const contextMessages = {
+      'reaction-hover': {
+        text: `This ${data.amount > 25 ? 'premium' : 'standard'} reaction will boost ${data.athleteName}'s morale! 💪`,
+        type: "encourage"
+      },
+      'viral-content': {
+        text: `High virality alert! Your reaction here will reach ${Math.round(data.viralityScore * 1000)}+ people! 🚀`,
+        type: "tip"
+      },
+      'trending-hover': {
+        text: "These trending topics show what fans care about most right now! 🔥",
+        type: "guide"
+      },
+      'ai-suggestion': {
+        text: "The highlighted reaction is AI-optimized for maximum impact based on your history! 🤖",
+        type: "tip"
+      }
+    };
+    
+    if (contextMessages[context]) {
+      setFuelieMessages(prev => [contextMessages[context], ...prev.slice(0, 2)]);
+    }
+  };
 
   const handleSupportAthlete = useCallback(async (athleteId, amount, viralityScore = 0.5) => {
     setFuelieState('eyes-closed')
@@ -519,6 +545,12 @@ ${triggeredActions.length > 0 ? `
                         whileHover={{ scale: 1.08, y: -3, rotateZ: 2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSupportAthlete(comment.athlete_id, 2, comment.virality_score)}
+                        onMouseEnter={() => {
+                          showContextualTip('reaction-hover', { amount: 2, athleteName: athlete?.name });
+                          if (comment.suggested_reaction === 2) {
+                            showContextualTip('ai-suggestion');
+                          }
+                        }}
                         className={`relative overflow-hidden bg-gradient-to-br from-[#10b981] via-[#10b981] to-[#059669] text-white px-4 py-3 rounded-xl hover:shadow-2xl hover:shadow-[#10b981]/25 transition-all duration-300 font-bold text-sm border border-[#10b981]/30 group ${comment.suggested_reaction === 2 ? 'ring-2 ring-yellow-400 shadow-lg shadow-yellow-400/25' : ''}`}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

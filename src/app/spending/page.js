@@ -200,7 +200,9 @@ export default function Spending() {
           <Link href="/alerts" className="text-[#ef4444] hover:text-white transition-colors duration-300 font-bold uppercase tracking-wide">
             📺 FuelFeed
           </Link>
-<MinimalWallet />
+          <div onMouseEnter={() => showTipMessage('wallet-hover')}>
+            <MinimalWallet />
+          </div>
         </div>
       </motion.header>
 
