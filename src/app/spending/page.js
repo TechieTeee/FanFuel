@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { demoAthletes } from '../../../data/demo-athletes';
+import { aiAthleteContent } from '../../../data/ai-athlete-content';
 import { demoTransactions } from '../../../data/demo-transactions';
 import FlowActions from '../../components/FlowActions';
 import CustomCursor from '../../components/CustomCursor';
@@ -337,56 +338,60 @@ export default function Spending() {
           >
             <h2 className="text-3xl font-black mb-8 text-white uppercase tracking-wider text-center">🏆 Your Champions</h2>
             <div className="space-y-6">
-              {mockAthletes.map((athlete, index) => (
-                <motion.div 
-                  key={athlete.id} 
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="bg-black/50 border border-gray-700/50 rounded-xl p-6 hover:shadow-2xl transition-all duration-300 hover:border-[#f59e0b]/50"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3 className="font-black text-xl text-white mb-1">{athlete.name}</h3>
-                      <p className="text-[#f59e0b] font-semibold">{athlete.sport} • {athlete.university}</p>
-                      <p className="text-sm text-gray-300">{athlete.position} • {athlete.year}</p>
+              {mockAthletes.map((athlete, index) => {
+                const aiContent = aiAthleteContent.find(c => c.athlete_id === athlete.id);
+                return (
+                  <motion.div 
+                    key={athlete.id} 
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.1 * index }}
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    className="bg-black/50 border border-gray-700/50 rounded-xl p-6 hover:shadow-2xl transition-all duration-300 hover:border-[#f59e0b]/50"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h3 className="font-black text-xl text-white mb-1">{athlete.name}</h3>
+                        <p className="text-[#f59e0b] font-semibold">{athlete.sport} • {athlete.university}</p>
+                        <p className="text-sm text-gray-300">{athlete.position} • {athlete.year}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-black text-2xl text-[#10b981]">${athlete.total_earnings}</p>
+                        <p className="text-xs text-gray-400 font-medium">🔥 {athlete.fan_count} fans</p>
+                        <p className="text-xs text-[#f59e0b] font-bold">${athlete.monthly_from_purchases}/mo fuel</p>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <p className="font-black text-2xl text-[#10b981]">${athlete.total_earnings}</p>
-                      <p className="text-xs text-gray-400 font-medium">🔥 {athlete.fan_count} fans</p>
-                      <p className="text-xs text-[#f59e0b] font-bold">${athlete.monthly_from_purchases}/mo fuel</p>
+                    <p className="text-sm text-gray-300 mb-3 leading-relaxed">{athlete.background}</p>
+                    {aiContent && <p className="text-sm text-gray-400 italic mt-2">{aiContent.ai_content}</p>}
+                    
+                    {/* Performance Stats */}
+                    <div className="bg-gray-800/50 rounded-lg p-3 mb-4 border border-gray-600/30">
+                      <p className="text-xs text-gray-400 font-bold mb-2 uppercase tracking-wide">📊 Recent Performance</p>
+                      <div className="text-center">
+                        <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_game}</p>
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-sm text-gray-300 mb-3 leading-relaxed">{athlete.background}</p>
-                  
-                  {/* Performance Stats */}
-                  <div className="bg-gray-800/50 rounded-lg p-3 mb-4 border border-gray-600/30">
-                    <p className="text-xs text-gray-400 font-bold mb-2 uppercase tracking-wide">📊 Recent Performance</p>
-                    <div className="text-center">
-                      <p className="text-lg font-black text-[#f59e0b]">{athlete.recent_game}</p>
+                    <div className="flex space-x-3">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => handleSupportAthlete(athlete.id, 5)}
+                        className="flex-1 bg-gradient-to-r from-[#10b981] to-[#059669] text-white py-3 rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold uppercase tracking-wide"
+                      >
+                        💳 Set as Main
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => handleSupportAthlete(athlete.id, 10)}
+                        className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-6 py-3 rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold"
+                      >
+                        ⚡ +$10
+                      </motion.button>
                     </div>
-                  </div>
-                  <div className="flex space-x-3">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleSupportAthlete(athlete.id, 5)}
-                      className="flex-1 bg-gradient-to-r from-[#10b981] to-[#059669] text-white py-3 rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold uppercase tracking-wide"
-                    >
-                      💳 Set as Main
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleSupportAthlete(athlete.id, 10)}
-                      className="bg-gradient-to-r from-[#f59e0b] to-[#ef4444] text-white px-6 py-3 rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold"
-                    >
-                      ⚡ +$10
-                    </motion.button>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                )
+              })}
             </div>
           </motion.div>
 

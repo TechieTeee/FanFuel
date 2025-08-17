@@ -1,5 +1,7 @@
 'use client'
 
+import { generateNFTMetadata } from './nft-metadata-ai';
+
 // Flow Actions - Meaningful user actions that create NFT rewards and cross-chain value
 
 // Demo flow actions for user engagement
@@ -110,10 +112,13 @@ export class FlowActionManager {
         throw new Error('Action not found')
       }
 
+      const nftMetadata = await generateNFTMetadata(actionId, context);
+
       // Simulate execution
       const result = {
         success: true,
         nftId: `nft_${actionId}_${Date.now()}`,
+        nftMetadata,
         crossChainRewards: action.rewards.crossChainRewards.map(reward => ({
           chain: reward.chain,
           txHash: `0x${Math.random().toString(16).slice(2, 18)}`
