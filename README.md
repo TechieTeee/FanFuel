@@ -35,6 +35,31 @@
 - ✅ **Athlete earnings tracking** across multiple chains
 - ✅ **Platform fee structure** (3% on all transactions)
 
+### ✅ Flow EVM Integration - Flow EVM Testnet
+
+**Flow EVM Contract Deployment:**
+- **Network**: Flow EVM Testnet (Chain ID: 545)
+- **Contract Address**: `0xD5aa426E4702860155bAa6E3173C010420fc6326`
+- **Token Name**: FanFuel Reaction NFTs (FFNFT)
+- **RPC Endpoint**: https://testnet.evm.nodes.onflow.org
+- **Explorer**: https://evm-testnet.flowscan.io/address/0xD5aa426E4702860155bAa6E3173C010420fc6326
+
+**Flow EVM Features:**
+- ✅ **Consumer-friendly NFT experience** for mainstream adoption
+- ✅ **ERC721 standard compliance** with rich metadata
+- ✅ **Reaction-based minting** with dynamic pricing tiers
+- ✅ **Gas-efficient operations** optimized for Flow EVM
+- ✅ **Payable NFT system** with native FLOW token support
+- ✅ **Athlete attribution** and support tracking
+
+**NFT Reaction Pricing:**
+- 👏 Clap: 0.01 FLOW (~$2 equivalent)
+- 🔥 Fire: 0.025 FLOW (~$5 equivalent)
+- 💎 Gem: 0.05 FLOW (~$10 equivalent)
+- 💪 Strong: 0.075 FLOW (~$15 equivalent)
+- 🏆 Legend: 0.125 FLOW (~$25 equivalent)
+- 👑 King: 0.25 FLOW (~$50 equivalent)
+
 **Security Features (OpenZeppelin):**
 - ReentrancyGuard for safe transactions
 - Pausable for emergency controls
