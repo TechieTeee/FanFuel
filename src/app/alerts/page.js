@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { demoAthletes } from '../../../data/demo-athletes';
-import { demoCommentary } from '../../../data/demo-commentary';
+import { aiCommentaryExamples } from '../../../data/ai-commentary-examples';
 import FlowActions from '../../components/FlowActions';
 import CustomCursor from '../../components/CustomCursor';
 import AnimatedBackground from '../../components/AnimatedBackground';
@@ -50,24 +50,7 @@ export default function Alerts() {
   }, [])
 
   useEffect(() => {
-    const fetchCommentary = async () => {
-      const analyzedCommentary = await Promise.all(
-        demoCommentary.map(async (comment) => {
-          const response = await fetch('/api/gemini', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text: comment.text }),
-          })
-          const analysis = await response.json()
-          return { ...comment, ...analysis }
-        })
-      )
-      setCommentary(analyzedCommentary)
-    }
-
-    fetchCommentary()
+    setCommentary(aiCommentaryExamples)
   }, [])
 
   const handleSupportAthlete = useCallback(async (athleteId, amount, viralityScore = 0.5) => {
