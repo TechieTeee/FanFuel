@@ -121,7 +121,7 @@ export default function Alerts() {
     };
     
     if (contextMessages[context]) {
-      setFuelieMessages(current => [contextMessages[context], ...current.slice(0, 2)]);
+      setFuelieMessages(() => [contextMessages[context], ...current.slice(0, 2)]);
     }
   };
 
@@ -164,7 +164,7 @@ export default function Alerts() {
       setFuelieState('sitting')
       
       // Update Fueli messages with reaction feedback
-      setFuelieMessages(current => [
+      setFuelieMessages(() => [
         {
           text: `Amazing! You just sent $${amount} to support ${athlete?.name}! 🎆`,
           type: "celebration"
@@ -188,7 +188,7 @@ ${triggeredActions.length > 0 ? `
       setFuelieState('waving')
       
       // Update Fueli messages with helpful error guidance
-      setFuelieMessages(current => [
+      setFuelieMessages(() => [
         {
           text: "Hmm, something went wrong with that reaction. Let's try again! 🔄",
           type: "warning"

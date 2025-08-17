@@ -3,7 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { demoAds, getRelevantAds } from '../../data/demo-ads.js'
-import { demoAthletes } from '../../data/demo-athletes'
+// import { demoAthletes } from '../../data/demo-athletes' // Unused
 
 interface PersonalizedAdsProps {
   supportedAthletes?: string[]

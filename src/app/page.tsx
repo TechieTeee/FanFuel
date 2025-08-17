@@ -5,7 +5,7 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+// import { ConnectButton } from '@rainbow-me/rainbowkit' // Unused
 import BasicButton from '../components/web3/BasicButton'
 import AnimatedBackground from '../components/AnimatedBackground'
 import HeroCarousel from '../components/HeroCarousel'
@@ -171,11 +171,11 @@ Transform every coffee, every meal, every transaction into direct support for at
                     Meet the game-changer who turns your coffee runs, grocery trips, and daily purchases into direct support for athletes who need it most. Fueli understands that behind every Olympic dream, every rising MLS star, and every WNBA champion is a story of financial struggle that fans like you can help rewrite.
                   </p>
                   <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                    Using cutting-edge AI and real-time sports analytics, Fueli spots the perfect moments when your support can make the biggest difference. Whether it's funding training camp for a track star, helping a soccer player through the off-season, or giving a basketball player the financial freedom to focus purely on their game – Fueli connects your spending power directly to their dreams.
+                    Using cutting-edge AI and real-time sports analytics, Fueli spots the perfect moments when your support can make the biggest difference. Whether it&apos;s funding training camp for a track star, helping a soccer player through the off-season, or giving a basketball player the financial freedom to focus purely on their game – Fueli connects your spending power directly to their dreams.
                   </p>
                   <div className="bg-gradient-to-r from-orange-900/30 via-yellow-900/20 to-orange-900/30 backdrop-blur-sm rounded-2xl p-6 border border-orange-500/20">
                     <p className="text-xl md:text-2xl text-orange-200 font-bold text-center italic leading-relaxed">
-                      "I don&apos;t just process transactions – I turn every dollar into a stepping stone toward athletic greatness. Together, we&apos;re not just supporting athletes; we&apos;re building the future of sports." 
+                      &ldquo;I don&apos;t just process transactions – I turn every dollar into a stepping stone toward athletic greatness. Together, we&apos;re not just supporting athletes; we&apos;re building the future of sports.&rdquo; 
                       <span className="block mt-2 text-orange-400 text-lg font-semibold">– Fueli</span>
                     </p>
                   </div>

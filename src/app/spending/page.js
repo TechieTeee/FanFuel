@@ -14,7 +14,7 @@ import HoverNavigation from '../../components/HoverNavigation.js';
 import MinimalWallet from '../../components/web3/MinimalWallet';
 import TransactionFlow from '../../components/TransactionFlow';
 import PersonalizedAds from '../../components/PersonalizedAds';
-import AthleteInsights from '../../components/AthleteInsights';
+// import AthleteInsights from '../../components/AthleteInsights'; // Unused
 import FuelClips from '../../components/FuelClips';
 import FueliChatBubble from '../../components/FueliChatBubble';
 import { triggerAthleteSupport, executeActionRewards } from '../../lib/flow-actions';
@@ -22,8 +22,8 @@ import { triggerAthleteSupport, executeActionRewards } from '../../lib/flow-acti
 export default function Spending() {
   const [fuelieState, setFuelieState] = useState('waving')
   const [showTransactionFlow, setShowTransactionFlow] = useState(false)
-  const [currentTransaction, setCurrentTransaction] = useState(null)
-  const [userAddress, setUserAddress] = useState('0x1234567890123456789012345678901234567890')
+  const [currentTransaction] = useState(null) // setCurrentTransaction unused
+  const [userAddress] = useState('0x1234567890123456789012345678901234567890') // setUserAddress unused
   const [aiAthleteContent, setAiAthleteContent] = useState([]);
   const [fuelieMessages, setFuelieMessages] = useState([
     {
@@ -176,7 +176,7 @@ export default function Spending() {
       
       alert(`❌ Failed to support athlete: ${error.message}`)
     }
-  }, [userAddress, demoAthletes])
+  }, [userAddress]) // demoAthletes is imported constant, doesn't need to be in deps
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
