@@ -163,6 +163,23 @@ ${triggeredActions.length > 0 ? `
           </p>
         </motion.div>
 
+        {/* Sports Newspaper Image */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex justify-center mb-12"
+        >
+          <div className="relative max-w-2xl mx-auto">
+            <img
+              src="/Sports_Newspaper_Frame_Background_Layer.png"
+              alt="Sports Page Newspaper"
+              className="w-full h-auto rounded-lg shadow-2xl opacity-90 hover:opacity-100 transition-opacity duration-300"
+              style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}
+            />
+          </div>
+        </motion.div>
+
         {/* Live Sports News Ticker */}
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
