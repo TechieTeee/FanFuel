@@ -282,6 +282,16 @@ ${triggeredActions.length > 0 ? `
           </div>
         </motion.div>
 
+        {/* Strategic Ad Placement */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="max-w-5xl mx-auto mb-12 flex justify-center"
+        >
+          <PersonalizedAds supportedAthletes={['1', '2']} maxAds={1} />
+        </motion.div>
+
         {/* NCAA Games */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -503,15 +513,6 @@ ${triggeredActions.length > 0 ? `
           <FlowActions userAddress={userAddress} showAchievements={true} />
         </motion.div>
 
-        {/* Personalized Ads */}
-        <motion.div 
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="max-w-md mx-auto mt-8"
-        >
-          <PersonalizedAds supportedAthletes={['1', '2']} maxAds={2} />
-        </motion.div>
 
       </div>
     </div>
